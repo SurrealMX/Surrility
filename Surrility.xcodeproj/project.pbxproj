@@ -1,0 +1,580 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C360B1C8203FC97800802AED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B1C7203FC97800802AED /* AppDelegate.swift */; };
+		C360B1CA203FC97800802AED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B1C9203FC97800802AED /* ViewController.swift */; };
+		C360B1CD203FC97800802AED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C360B1CB203FC97800802AED /* Main.storyboard */; };
+		C360B1D0203FC97800802AED /* Surrility.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C360B1CE203FC97800802AED /* Surrility.xcdatamodeld */; };
+		C360B1D2203FC97800802AED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C360B1D1203FC97800802AED /* Assets.xcassets */; };
+		C360B1D5203FC97800802AED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C360B1D3203FC97800802AED /* LaunchScreen.storyboard */; };
+		C360B1E0203FC97800802AED /* SurrilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B1DF203FC97800802AED /* SurrilityTests.swift */; };
+		C360B1EB203FC97800802AED /* SurrilityUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B1EA203FC97800802AED /* SurrilityUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C360B1DC203FC97800802AED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C360B1BC203FC97800802AED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C360B1C3203FC97800802AED;
+			remoteInfo = Surrility;
+		};
+		C360B1E7203FC97800802AED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C360B1BC203FC97800802AED /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C360B1C3203FC97800802AED;
+			remoteInfo = Surrility;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C360B1C4203FC97800802AED /* Surrility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Surrility.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C360B1C7203FC97800802AED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C360B1C9203FC97800802AED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C360B1CC203FC97800802AED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C360B1CF203FC97800802AED /* Surrility.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Surrility.xcdatamodel; sourceTree = "<group>"; };
+		C360B1D1203FC97800802AED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C360B1D4203FC97800802AED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C360B1D6203FC97800802AED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C360B1DB203FC97800802AED /* SurrilityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SurrilityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C360B1DF203FC97800802AED /* SurrilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurrilityTests.swift; sourceTree = "<group>"; };
+		C360B1E1203FC97800802AED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C360B1E6203FC97800802AED /* SurrilityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SurrilityUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C360B1EA203FC97800802AED /* SurrilityUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurrilityUITests.swift; sourceTree = "<group>"; };
+		C360B1EC203FC97800802AED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C360B1C1203FC97800802AED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C360B1D8203FC97800802AED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C360B1E3203FC97800802AED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C360B1BB203FC97800802AED = {
+			isa = PBXGroup;
+			children = (
+				C360B1C6203FC97800802AED /* Surrility */,
+				C360B1DE203FC97800802AED /* SurrilityTests */,
+				C360B1E9203FC97800802AED /* SurrilityUITests */,
+				C360B1C5203FC97800802AED /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C360B1C5203FC97800802AED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C360B1C4203FC97800802AED /* Surrility.app */,
+				C360B1DB203FC97800802AED /* SurrilityTests.xctest */,
+				C360B1E6203FC97800802AED /* SurrilityUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C360B1C6203FC97800802AED /* Surrility */ = {
+			isa = PBXGroup;
+			children = (
+				C360B1C7203FC97800802AED /* AppDelegate.swift */,
+				C360B1C9203FC97800802AED /* ViewController.swift */,
+				C360B1CB203FC97800802AED /* Main.storyboard */,
+				C360B1D1203FC97800802AED /* Assets.xcassets */,
+				C360B1D3203FC97800802AED /* LaunchScreen.storyboard */,
+				C360B1D6203FC97800802AED /* Info.plist */,
+				C360B1CE203FC97800802AED /* Surrility.xcdatamodeld */,
+			);
+			path = Surrility;
+			sourceTree = "<group>";
+		};
+		C360B1DE203FC97800802AED /* SurrilityTests */ = {
+			isa = PBXGroup;
+			children = (
+				C360B1DF203FC97800802AED /* SurrilityTests.swift */,
+				C360B1E1203FC97800802AED /* Info.plist */,
+			);
+			path = SurrilityTests;
+			sourceTree = "<group>";
+		};
+		C360B1E9203FC97800802AED /* SurrilityUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C360B1EA203FC97800802AED /* SurrilityUITests.swift */,
+				C360B1EC203FC97800802AED /* Info.plist */,
+			);
+			path = SurrilityUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C360B1C3203FC97800802AED /* Surrility */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C360B1EF203FC97800802AED /* Build configuration list for PBXNativeTarget "Surrility" */;
+			buildPhases = (
+				C360B1C0203FC97800802AED /* Sources */,
+				C360B1C1203FC97800802AED /* Frameworks */,
+				C360B1C2203FC97800802AED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Surrility;
+			productName = Surrility;
+			productReference = C360B1C4203FC97800802AED /* Surrility.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C360B1DA203FC97800802AED /* SurrilityTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C360B1F2203FC97800802AED /* Build configuration list for PBXNativeTarget "SurrilityTests" */;
+			buildPhases = (
+				C360B1D7203FC97800802AED /* Sources */,
+				C360B1D8203FC97800802AED /* Frameworks */,
+				C360B1D9203FC97800802AED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C360B1DD203FC97800802AED /* PBXTargetDependency */,
+			);
+			name = SurrilityTests;
+			productName = SurrilityTests;
+			productReference = C360B1DB203FC97800802AED /* SurrilityTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C360B1E5203FC97800802AED /* SurrilityUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C360B1F5203FC97800802AED /* Build configuration list for PBXNativeTarget "SurrilityUITests" */;
+			buildPhases = (
+				C360B1E2203FC97800802AED /* Sources */,
+				C360B1E3203FC97800802AED /* Frameworks */,
+				C360B1E4203FC97800802AED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C360B1E8203FC97800802AED /* PBXTargetDependency */,
+			);
+			name = SurrilityUITests;
+			productName = SurrilityUITests;
+			productReference = C360B1E6203FC97800802AED /* SurrilityUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C360B1BC203FC97800802AED /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = SurrealMX;
+				TargetAttributes = {
+					C360B1C3203FC97800802AED = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					C360B1DA203FC97800802AED = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = C360B1C3203FC97800802AED;
+					};
+					C360B1E5203FC97800802AED = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = C360B1C3203FC97800802AED;
+					};
+				};
+			};
+			buildConfigurationList = C360B1BF203FC97800802AED /* Build configuration list for PBXProject "Surrility" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C360B1BB203FC97800802AED;
+			productRefGroup = C360B1C5203FC97800802AED /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C360B1C3203FC97800802AED /* Surrility */,
+				C360B1DA203FC97800802AED /* SurrilityTests */,
+				C360B1E5203FC97800802AED /* SurrilityUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C360B1C2203FC97800802AED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C360B1D5203FC97800802AED /* LaunchScreen.storyboard in Resources */,
+				C360B1D2203FC97800802AED /* Assets.xcassets in Resources */,
+				C360B1CD203FC97800802AED /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C360B1D9203FC97800802AED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C360B1E4203FC97800802AED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C360B1C0203FC97800802AED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C360B1D0203FC97800802AED /* Surrility.xcdatamodeld in Sources */,
+				C360B1CA203FC97800802AED /* ViewController.swift in Sources */,
+				C360B1C8203FC97800802AED /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C360B1D7203FC97800802AED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C360B1E0203FC97800802AED /* SurrilityTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C360B1E2203FC97800802AED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C360B1EB203FC97800802AED /* SurrilityUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C360B1DD203FC97800802AED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C360B1C3203FC97800802AED /* Surrility */;
+			targetProxy = C360B1DC203FC97800802AED /* PBXContainerItemProxy */;
+		};
+		C360B1E8203FC97800802AED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C360B1C3203FC97800802AED /* Surrility */;
+			targetProxy = C360B1E7203FC97800802AED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C360B1CB203FC97800802AED /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C360B1CC203FC97800802AED /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C360B1D3203FC97800802AED /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C360B1D4203FC97800802AED /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C360B1ED203FC97800802AED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C360B1EE203FC97800802AED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C360B1F0203FC97800802AED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NFKZ37HH3Y;
+				INFOPLIST_FILE = Surrility/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = SMX.Surrility;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C360B1F1203FC97800802AED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NFKZ37HH3Y;
+				INFOPLIST_FILE = Surrility/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = SMX.Surrility;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C360B1F3203FC97800802AED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NFKZ37HH3Y;
+				INFOPLIST_FILE = SurrilityTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = SMX.SurrilityTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Surrility.app/Surrility";
+			};
+			name = Debug;
+		};
+		C360B1F4203FC97800802AED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NFKZ37HH3Y;
+				INFOPLIST_FILE = SurrilityTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = SMX.SurrilityTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Surrility.app/Surrility";
+			};
+			name = Release;
+		};
+		C360B1F6203FC97800802AED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NFKZ37HH3Y;
+				INFOPLIST_FILE = SurrilityUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = SMX.SurrilityUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Surrility;
+			};
+			name = Debug;
+		};
+		C360B1F7203FC97800802AED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NFKZ37HH3Y;
+				INFOPLIST_FILE = SurrilityUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = SMX.SurrilityUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Surrility;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C360B1BF203FC97800802AED /* Build configuration list for PBXProject "Surrility" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C360B1ED203FC97800802AED /* Debug */,
+				C360B1EE203FC97800802AED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C360B1EF203FC97800802AED /* Build configuration list for PBXNativeTarget "Surrility" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C360B1F0203FC97800802AED /* Debug */,
+				C360B1F1203FC97800802AED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C360B1F2203FC97800802AED /* Build configuration list for PBXNativeTarget "SurrilityTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C360B1F3203FC97800802AED /* Debug */,
+				C360B1F4203FC97800802AED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C360B1F5203FC97800802AED /* Build configuration list for PBXNativeTarget "SurrilityUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C360B1F6203FC97800802AED /* Debug */,
+				C360B1F7203FC97800802AED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C360B1CE203FC97800802AED /* Surrility.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C360B1CF203FC97800802AED /* Surrility.xcdatamodel */,
+			);
+			currentVersion = C360B1CF203FC97800802AED /* Surrility.xcdatamodel */;
+			path = Surrility.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = C360B1BC203FC97800802AED /* Project object */;
+}
