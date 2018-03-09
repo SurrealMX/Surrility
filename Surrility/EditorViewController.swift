@@ -109,11 +109,15 @@ class EditorViewController: UIViewController {
     }
 
     @IBAction func SliderA_ValueChanged(_ sender: UISlider) {
-        updateImageView()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.updateImageView()
+        }
     }
     
     @IBAction func SliderB_ValueChanged(_ sender: UISlider) {
-        updateImageView()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.updateImageView()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -137,9 +141,11 @@ extension EditorViewController {
     // MARK: Helper Functions
     
     func updateSliders(status: Bool){
-        SliderA.isHidden = status ? false:true
-        SliderB.isHidden = status ? false:true
-        progressView.isHidden = status ? true:false;
+        DispatchQueue.main.async {
+            self.SliderA.isHidden = status ? false:true
+            self.SliderB.isHidden = status ? false:true
+            self.progressView.isHidden = status ? true:false;
+        }
     }
     
     func updateUserRecord(fileName: String){
@@ -212,9 +218,6 @@ extension EditorViewController {
         //create the filtered image = this is the one we are gonna change
         filterImage = CIImage(image: origImage)
         
-        //empty the current image view
-        picView.image = nil
-        
         //convert depth image to ciimage
         guard let depthImage = depthDataMapImage?.ciImage else {
             return
@@ -238,8 +241,12 @@ extension EditorViewController {
         //case .blur:
         finalImage = depthFilter?.blur(image: filterImage, mask: mask, orientation: orientation)
         
-        //update imageView with the filtered image
-        picView.image = finalImage
-        picView.contentMode = .scaleAspectFill
+        DispatchQueue.main.async {
+            //empty the current image view
+            self.picView.image = nil
+            //update imageView with the filtered image
+            self.picView.image = finalImage
+            self.picView.contentMode = .scaleAspectFill
+        }
     }
 }
