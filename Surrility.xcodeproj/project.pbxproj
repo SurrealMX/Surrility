@@ -178,7 +178,6 @@
 				C360B1D1203FC97800802AED /* Assets.xcassets */,
 				C360B1CE203FC97800802AED /* Surrility.xcdatamodeld */,
 				C360B208203FCA0700802AED /* CameraViewController.swift */,
-				C31A03CC204AB5EF003CDFEC /* DepthImageFilters.swift */,
 				C360B209203FCA0700802AED /* EditorViewController.swift */,
 				C360B20B203FCA0700802AED /* Info.plist */,
 				C360B20D203FCA0700802AED /* LaunchScreen.storyboard */,
@@ -225,6 +224,7 @@
 		C360B201203FC9A600802AED /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C31A03CC204AB5EF003CDFEC /* DepthImageFilters.swift */,
 				C360B202203FC9A600802AED /* CloudFrame.swift */,
 				C360B203203FC9A600802AED /* SimpleVector.swift */,
 				C360B204203FC9A600802AED /* tools.swift */,
