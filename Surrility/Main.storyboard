@@ -133,22 +133,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tsk-dl-hmC">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
+                                <rect key="frame" x="0.0" y="30" width="375" height="694"/>
                             </imageView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="OSa-fe-5oa">
+                                <rect key="frame" x="12" y="506" width="351" height="16"/>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="GHA-pW-1AL"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="SliderA_ValueChanged:" destination="q9U-AM-Yk1" eventType="valueChanged" id="7so-4L-3W2"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="rAf-68-pc5">
+                                <rect key="frame" x="12" y="538" width="351" height="46"/>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="w8F-EB-ajo"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="SliderB_ValueChanged:" destination="q9U-AM-Yk1" eventType="valueChanged" id="b4u-gl-UTJ"/>
+                                </connections>
+                            </slider>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="suZ-HC-mt1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Color Highlight"/>
+                                </segments>
+                            </segmentedControl>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XWh-7q-b2u">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="2"/>
                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="375" id="44q-xK-kX0"/>
-                                    <constraint firstAttribute="height" constant="2" id="GSz-S4-Nl2"/>
-                                </constraints>
                                 <color key="progressTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9AW-hx-ZPd">
-                                <rect key="frame" x="135" y="30" width="105" height="32"/>
+                                <rect key="frame" x="135" y="60" width="105" height="32"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="FLy-Ft-EoE"/>
+                                    <constraint firstAttribute="height" constant="32" id="87A-vo-QYR"/>
                                 </constraints>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -166,46 +189,29 @@
                                     <action selector="extractButton:" destination="q9U-AM-Yk1" eventType="touchUpInside" id="QYl-O5-AfJ"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="OSa-fe-5oa">
-                                <rect key="frame" x="12" y="506" width="351" height="16"/>
-                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="WRO-kt-dJ8"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="SliderA_ValueChanged:" destination="q9U-AM-Yk1" eventType="valueChanged" id="7so-4L-3W2"/>
-                                </connections>
-                            </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="rAf-68-pc5">
-                                <rect key="frame" x="12" y="538" width="351" height="46"/>
-                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="zzI-2c-1mH"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="SliderB_ValueChanged:" destination="q9U-AM-Yk1" eventType="valueChanged" id="b4u-gl-UTJ"/>
-                                </connections>
-                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Tsk-dl-hmC" firstAttribute="leading" secondItem="XWh-7q-b2u" secondAttribute="leading" id="3o6-aQ-ne6"/>
-                            <constraint firstAttribute="trailing" secondItem="XWh-7q-b2u" secondAttribute="trailing" id="DNK-fH-Jhv"/>
-                            <constraint firstAttribute="bottom" secondItem="Tsk-dl-hmC" secondAttribute="bottom" id="Ej6-4y-CJb"/>
-                            <constraint firstItem="F1F-I7-dx5" firstAttribute="bottom" secondItem="rAf-68-pc5" secondAttribute="bottom" constant="107" id="KC5-gf-20d"/>
-                            <constraint firstItem="9AW-hx-ZPd" firstAttribute="centerX" secondItem="XWh-7q-b2u" secondAttribute="centerX" id="LOt-SK-q6C"/>
-                            <constraint firstItem="9AW-hx-ZPd" firstAttribute="top" secondItem="XWh-7q-b2u" secondAttribute="bottom" constant="28" id="RnV-NO-qwA"/>
-                            <constraint firstItem="Tsk-dl-hmC" firstAttribute="trailing" secondItem="XWh-7q-b2u" secondAttribute="trailing" id="WyE-M4-4JS"/>
-                            <constraint firstItem="OSa-fe-5oa" firstAttribute="leading" secondItem="rAf-68-pc5" secondAttribute="leading" id="bhb-5o-53A"/>
-                            <constraint firstItem="XWh-7q-b2u" firstAttribute="leading" secondItem="Uo0-YZ-9An" secondAttribute="leading" id="cBN-9R-x4B"/>
-                            <constraint firstItem="rAf-68-pc5" firstAttribute="top" secondItem="OSa-fe-5oa" secondAttribute="bottom" constant="17" id="fps-jK-3xi"/>
-                            <constraint firstItem="Tsk-dl-hmC" firstAttribute="top" secondItem="F1F-I7-dx5" secondAttribute="top" id="g8z-Uy-h94"/>
-                            <constraint firstItem="OSa-fe-5oa" firstAttribute="leading" secondItem="F1F-I7-dx5" secondAttribute="leading" constant="14" id="mcj-KH-sRc"/>
-                            <constraint firstItem="9AW-hx-ZPd" firstAttribute="centerX" secondItem="OSa-fe-5oa" secondAttribute="centerX" id="qUe-6I-mEP"/>
-                            <constraint firstItem="9AW-hx-ZPd" firstAttribute="leading" secondItem="F1F-I7-dx5" secondAttribute="leading" constant="135" id="qus-No-g3Y"/>
-                            <constraint firstItem="OSa-fe-5oa" firstAttribute="trailing" secondItem="rAf-68-pc5" secondAttribute="trailing" id="u0O-ka-XBj"/>
-                            <constraint firstItem="XWh-7q-b2u" firstAttribute="top" secondItem="F1F-I7-dx5" secondAttribute="top" id="xDD-Sx-qgF"/>
+                            <constraint firstItem="9AW-hx-ZPd" firstAttribute="top" secondItem="suZ-HC-mt1" secondAttribute="bottom" constant="32" id="9yW-0i-Bax"/>
+                            <constraint firstAttribute="trailing" secondItem="suZ-HC-mt1" secondAttribute="trailing" id="AYh-zY-FWX"/>
+                            <constraint firstItem="suZ-HC-mt1" firstAttribute="top" secondItem="XWh-7q-b2u" secondAttribute="top" id="GTL-am-SAb"/>
+                            <constraint firstItem="9AW-hx-ZPd" firstAttribute="centerX" secondItem="suZ-HC-mt1" secondAttribute="centerX" id="Gup-od-E81"/>
+                            <constraint firstAttribute="bottom" secondItem="Tsk-dl-hmC" secondAttribute="bottom" id="OYc-pa-Oxx"/>
+                            <constraint firstItem="Tsk-dl-hmC" firstAttribute="trailing" secondItem="suZ-HC-mt1" secondAttribute="trailing" id="RfQ-Ez-DQ6"/>
+                            <constraint firstItem="OSa-fe-5oa" firstAttribute="centerX" secondItem="9AW-hx-ZPd" secondAttribute="centerX" id="TNz-tC-NU9"/>
+                            <constraint firstItem="OSa-fe-5oa" firstAttribute="leading" secondItem="F1F-I7-dx5" secondAttribute="leading" constant="14" id="gST-KW-Nkx"/>
+                            <constraint firstItem="Tsk-dl-hmC" firstAttribute="leading" secondItem="suZ-HC-mt1" secondAttribute="leading" id="gZ2-H9-DbO"/>
+                            <constraint firstItem="rAf-68-pc5" firstAttribute="leading" secondItem="OSa-fe-5oa" secondAttribute="leading" id="gcQ-Er-2M2"/>
+                            <constraint firstItem="suZ-HC-mt1" firstAttribute="leading" secondItem="Uo0-YZ-9An" secondAttribute="leading" id="hIA-83-gTb"/>
+                            <constraint firstItem="rAf-68-pc5" firstAttribute="top" secondItem="OSa-fe-5oa" secondAttribute="bottom" constant="17" id="i1l-Xd-UJL"/>
+                            <constraint firstItem="F1F-I7-dx5" firstAttribute="bottom" secondItem="rAf-68-pc5" secondAttribute="bottom" constant="107" id="jGi-bM-BAZ"/>
+                            <constraint firstItem="Tsk-dl-hmC" firstAttribute="top" secondItem="suZ-HC-mt1" secondAttribute="bottom" constant="2" id="jlN-ew-dr7"/>
+                            <constraint firstItem="9AW-hx-ZPd" firstAttribute="leading" secondItem="F1F-I7-dx5" secondAttribute="leading" constant="135" id="w7M-84-bfy"/>
+                            <constraint firstItem="XWh-7q-b2u" firstAttribute="top" secondItem="F1F-I7-dx5" secondAttribute="top" id="wao-2a-z9K"/>
+                            <constraint firstItem="suZ-HC-mt1" firstAttribute="leading" secondItem="XWh-7q-b2u" secondAttribute="leading" id="xFw-aG-ZCw"/>
+                            <constraint firstItem="rAf-68-pc5" firstAttribute="trailing" secondItem="OSa-fe-5oa" secondAttribute="trailing" id="yk2-Jc-1XD"/>
+                            <constraint firstItem="suZ-HC-mt1" firstAttribute="trailing" secondItem="XWh-7q-b2u" secondAttribute="trailing" id="zkD-Gk-LfS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="F1F-I7-dx5"/>
                     </view>
@@ -225,6 +231,7 @@
                     <connections>
                         <outlet property="SliderA" destination="OSa-fe-5oa" id="5K2-1a-fad"/>
                         <outlet property="SliderB" destination="rAf-68-pc5" id="AQd-Ye-yYX"/>
+                        <outlet property="UISelector" destination="suZ-HC-mt1" id="ZUH-93-OQz"/>
                         <outlet property="extractButton" destination="9AW-hx-ZPd" id="cnk-oZ-7yp"/>
                         <outlet property="picView" destination="Tsk-dl-hmC" id="qJg-gt-isa"/>
                         <outlet property="progressView" destination="XWh-7q-b2u" id="BOf-KE-RXS"/>

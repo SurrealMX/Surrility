@@ -20,6 +20,7 @@ class EditorViewController: UIViewController {
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var picView: UIImageView!
     @IBOutlet weak var extractButton: UIButton!
+    @IBOutlet weak var UISelector: UISegmentedControl!
     
     //segue variables
     var capturedPhoto: AVCapturePhoto?
