@@ -59,6 +59,10 @@ class EditorViewController: UIViewController {
         }
     }
     
+    @IBAction func saveTapped(_ sender: Any) {
+        UIImageWriteToSavedPhotosAlbum(picView.image!, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
     @IBAction func cancelTapped(_ sender: Any) {
         moveAction()
     }
@@ -139,6 +143,20 @@ class EditorViewController: UIViewController {
 }
 extension EditorViewController {
     // MARK: Helper Functions
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            
+            let ac = UIAlertController(title: "Saved!", message: "The screenshot has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+    }
     
     func updateSliders(status: Bool){
         DispatchQueue.main.async {
