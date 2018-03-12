@@ -214,6 +214,7 @@
                                 <action selector="cancelTapped:" destination="q9U-AM-Yk1" id="1gU-Mc-g9h"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="QLb-DY-oIe"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
