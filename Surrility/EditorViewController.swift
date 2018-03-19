@@ -60,6 +60,12 @@ class EditorViewController: UIViewController {
         }
     }
     
+    @IBAction func UISelectedChanged(_ sender: Any) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.updateImageView()
+        }
+    }
+    
     @IBAction func saveTapped(_ sender: Any) {
         UIImageWriteToSavedPhotosAlbum(picView.image!, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
@@ -111,6 +117,12 @@ class EditorViewController: UIViewController {
     
         //show the sliders
         self.updateSliders(status: true)
+        
+        // Set the segmented control to point to the original image
+        UISelector.selectedSegmentIndex = 0 //0 is blur, 1 is color highlight
+        
+        //update the current view
+        self.updateImageView()
     }
 
     @IBAction func SliderA_ValueChanged(_ sender: UISlider) {
@@ -234,6 +246,8 @@ extension EditorViewController {
     func updateImageView() {
         updateSliders(status: true) //hide the sliders
         
+        let selectedFilter = UISelector.selectedSegmentIndex
+        
         //create the filtered image = this is the one we are gonna change
         filterImage = CIImage(image: origImage)
         
@@ -257,8 +271,17 @@ extension EditorViewController {
         //set the final image
         let finalImage: UIImage?
         
-        //case .blur:
-        finalImage = depthFilter?.blur(image: filterImage, mask: mask, orientation: orientation)
+        switch selectedFilter {
+        case 0:
+            //case .blur:
+            finalImage = depthFilter?.blur(image: filterImage, mask: mask, orientation: orientation)
+        case 1:
+            //case .color
+            finalImage = depthFilter?.colorHighlight(image: filterImage, mask: mask, orientation: orientation)
+        default:
+            return
+        }
+        
         
         DispatchQueue.main.async {
             //empty the current image view
