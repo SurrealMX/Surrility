@@ -274,10 +274,16 @@ extension EditorViewController {
         switch selectedFilter {
         case 0:
             //case .blur:
+            self.updateSliders(status: true)  //show the sliders
             finalImage = depthFilter?.blur(image: filterImage, mask: mask, orientation: orientation)
         case 1:
-            //case .color
-            finalImage = depthFilter?.colorHighlight(image: filterImage, mask: mask, orientation: orientation)
+            //case depth map
+            self.updateSliders(status: false)  //hide the sliders
+            guard let cgImage = context.createCGImage(mask, from: mask.extent),
+                let origImage = origImage else {
+                    return
+            }
+            finalImage = UIImage(cgImage: cgImage, scale: 1.0, orientation: origImage.imageOrientation)
         default:
             return
         }
