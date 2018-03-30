@@ -27,6 +27,7 @@ class EditorViewController: UIViewController {
     
     //internal variables
     var depthDataMap: CVPixelBuffer?
+    var colorDataMap: CVPixelBuffer?
     var depthFilter: DepthImageFilters?
     var origImage: UIImage?
     var filterImage: CIImage?
@@ -45,7 +46,10 @@ class EditorViewController: UIViewController {
         extractButton.isEnabled = false
         
         //filter the depthDataMap baed on the user selected bounds
-        depthDataMap?.filterDepthData(with: SliderA.value, and: SliderB.value)
+        depthDataMap?.filterMapData(with: SliderA.value, and: SliderB.value)
+        
+        //filter the colorDataMap based on the slider value in preparation for the cloudFrame
+        colorDataMap?.filterMapData(with: SliderA.value, and: SliderB.value)
     
         //let cameraCalibrationData = capturedPhoto?.cameraCalibrationData
         //print(cameraCalibrationData as Any)
@@ -53,9 +57,13 @@ class EditorViewController: UIViewController {
         print(pSize)
         
         DispatchQueue.global(qos: .userInitiated).async {
-            let frame: CloudFrame = CloudFrame.compileFrame(CVBuffer: self.depthDataMap!, time: 0.0, pixelSize: pSize)!
-            //add the frame to the cloud
+            //get the frame
+            guard let frame: CloudFrame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorBuffer: self.colorDataMap!, time: 0.0, pixelSize: pSize) else {
+            print("couldn't create frame... upload failed")
+            return
+            }
             
+            //add the frame to the cloud
             self.addPCM(frame: frame)
         }
     }
@@ -85,6 +93,14 @@ class EditorViewController: UIViewController {
         self.depthDataMap?.normalize()
     }
     
+    func grabColorData(image: UIImage){
+        guard let colorData = image.ciImage?.pixelBuffer else {
+            print("unable to get the pixelBuffer")
+            return
+        }
+        colorDataMap = colorData
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -99,7 +115,6 @@ class EditorViewController: UIViewController {
         // Do any additional setup after loading the view.
         let imageData = capturedPhoto?.fileDataRepresentation()
         origImage = UIImage(data: imageData!)!
-        
         
         //let cgImage = context.createCGImage(ciImage, from: ciImage.extent)
         
@@ -264,7 +279,8 @@ extension EditorViewController {
         
         guard let mask = depthFilter?.createMask(for: depthImage, withFocus: CGFloat(SliderA.value), andWithFocus: CGFloat(SliderB.value), andScale: scale),
             let filterImage = filterImage,
-            let orientation = origImage?.imageOrientation else {
+            let orientation = origImage?.imageOrientation 
+            else {
                 return
         }
         
@@ -276,9 +292,11 @@ extension EditorViewController {
             //case .blur:
             self.updateSliders(status: true)  //show the sliders
             finalImage = depthFilter?.blur(image: filterImage, mask: mask, orientation: orientation)
+            grabColorData(image: finalImage!)
         case 1:
             //case depth map
             self.updateSliders(status: false)  //hide the sliders
+            self.extractButton.isHidden = true //hide the extract button
             guard let cgImage = context.createCGImage(mask, from: mask.extent),
                 let origImage = origImage else {
                     return
