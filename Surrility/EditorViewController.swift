@@ -93,12 +93,11 @@ class EditorViewController: UIViewController {
         self.depthDataMap?.normalize()
     }
     
-    func grabColorData(image: UIImage){
-        guard let colorData = image.ciImage?.pixelBuffer else {
-            print("unable to get the pixelBuffer")
-            return
-        }
-        colorDataMap = colorData
+    func grabColorData(depthImage: CIImage, scale: Float){
+        let scaledDepthMap = depthImage.applyingFilter("CIBicubicScaleTransform", parameters: ["inputScale": scale])
+        scaledDepthMap.pixelBuffer
+        
+        depthImage.depthData
     }
     
     override func viewDidLoad() {
@@ -271,7 +270,7 @@ extension EditorViewController {
             return
         }
         
-        //scale the image
+        //we need to scale the depth map because the depth map is not the same size as the image
         let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
         let maxFromDim = max((depthDataMapImage?.size.width ?? 1.0), (depthDataMapImage?.size.height ?? 1.0))
         
@@ -292,7 +291,6 @@ extension EditorViewController {
             //case .blur:
             self.updateSliders(status: true)  //show the sliders
             finalImage = depthFilter?.blur(image: filterImage, mask: mask, orientation: orientation)
-            grabColorData(image: finalImage!)
         case 1:
             //case depth map
             self.updateSliders(status: false)  //hide the sliders
