@@ -68,7 +68,7 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate, AVCaptureDepthDa
             print("Error capturing photo: \(error)")
         } else {
             let capturedPhoto = photo
-            //photoData = photo.fileDataRepresentation()
+            photoData = photo.fileDataRepresentation()
             
             //now move to the next view for exit and store
             let vc = initialView?.storyboard?.instantiateViewController(withIdentifier: "Editor") as! EditorViewController
