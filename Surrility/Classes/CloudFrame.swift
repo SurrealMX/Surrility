@@ -42,7 +42,7 @@ extension CloudFrame {
             let height = depthHeight
             let width = depthWidth
             var vals: [Double] = []
-            
+            var i = 0;
             for y in 0 ..< height {
                 for x in 0 ..< width {
                     let idx = y * width + x
@@ -55,9 +55,14 @@ extension CloudFrame {
                     }
                     
                     let aVal: Double = Double(aDepthVals)!
-                    vals.append(Double(aVal))
+                    if(aVal != 0.0){
+                        i = i + 1
+                    }
+                    vals.append(aVal)
+                    
                 }
             }
+            print(i)
             return CloudFrame(time: time, vals: vals, height: height, width: width, pSize: pixelSize)
         } else {
             return nil

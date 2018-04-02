@@ -34,7 +34,7 @@ class EditorViewController: UIViewController {
     var depthDataMapImage: UIImage?
     let context = CIContext()
 
-    var ref: DatabaseReference?
+    var ref: DatabaseReference!
     let storage = Storage.storage()
     
     @IBAction func extractButton(_ sender: UIButton) {
@@ -59,12 +59,13 @@ class EditorViewController: UIViewController {
         DispatchQueue.global(qos: .userInitiated).async {
             //get the frame
             guard let frame: CloudFrame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorBuffer: self.colorDataMap!, time: 0.0, pixelSize: pSize) else {
-            print("couldn't create frame... upload failed")
-            return
+                    print("couldn't create frame... upload failed")
+                    return
             }
             
             //add the frame to the cloud
-            self.addPCM(frame: frame)
+            self.addPCMJSON(frame: frame)
+            //self.addPCM(frame: frame)
         }
     }
     
@@ -80,24 +81,6 @@ class EditorViewController: UIViewController {
     
     @IBAction func cancelTapped(_ sender: Any) {
         moveAction()
-    }
-    
-    func grabDepthData(){
-        //let photoData = photo.fileDataRepresentation()
-        let depthData = (capturedPhoto?.depthData as AVDepthData!).converting(toDepthDataType: kCVPixelFormatType_DepthFloat32)
-        
-        //this depthDataMap is the one that is the depth data associated with the image
-        self.depthDataMap = depthData.depthDataMap //AVDepthData -> CVPixelBuffer
-        
-        //normalize the depth datamap -- this depth datamap is only used for filtering the image
-        self.depthDataMap?.normalize()
-    }
-    
-    func grabColorData(depthImage: CIImage, scale: Float){
-        let scaledDepthMap = depthImage.applyingFilter("CIBicubicScaleTransform", parameters: ["inputScale": scale])
-        scaledDepthMap.pixelBuffer
-        
-        depthImage.depthData
     }
     
     override func viewDidLoad() {
@@ -125,6 +108,9 @@ class EditorViewController: UIViewController {
         depthDataMapImage = UIImage(ciImage: ciDepthDataMapImage) //UIImage(ciImage: imageData)
         picView.image = UIImage(data: imageData!, scale: 1.0)//UIImage(ciImage: depthMapImage, scale: 1.0, orientation: orientation!)  //UIImage(ciImage: depthDataMapImage)
         picView.contentMode = .scaleAspectFill
+        
+        depthDataMap = upSampleDepthMap()
+        colorDataMap = grabColorData()
         
         //set the filtered image
         filterImage = CIImage(image: origImage)
@@ -171,6 +157,79 @@ class EditorViewController: UIViewController {
 extension EditorViewController {
     // MARK: Helper Functions
     
+    func grabDepthData(){
+        //let photoData = photo.fileDataRepresentation()
+        let depthData = (capturedPhoto?.depthData as AVDepthData!).converting(toDepthDataType: kCVPixelFormatType_DepthFloat32)
+        
+        //this depthDataMap is the one that is the depth data associated with the image
+        self.depthDataMap = depthData.depthDataMap //AVDepthData -> CVPixelBuffer
+        
+        //normalize the depth datamap -- this depth datamap is only used for filtering the image
+        self.depthDataMap?.normalize()
+    }
+    
+    func grabColorData() -> CVPixelBuffer? {
+        guard let ciOrigImage = CIImage(image: origImage) else{
+            return nil
+        }
+        let cgOrigImage = tools.convertCIImageToCGImage(inputImage: ciOrigImage)
+        
+        //guard let colorMap = downSampleColorMapimage(image: cgOrigImage!) else {
+          //  return nil
+        //}
+        return cgOrigImage?.pixelBuffer()
+    }
+    
+    func downSampleColorMapimage(image: CGImage) -> CVPixelBuffer?{
+
+        //we need to scale the depth map because the depth map is not the same size as the image
+        let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
+        let maxFromDim = max((depthDataMapImage?.size.width ?? 1.0), (depthDataMapImage?.size.height ?? 1.0))
+        
+        let scale = maxFromDim/maxToDim //maxToDim / maxFromDim
+        
+        let filter = CIFilter(name: "CILanczosScaleTransform")!
+        filter.setValue(image, forKey: "inputImage")
+        filter.setValue(scale, forKey: "inputScale")
+        filter.setValue(1.0, forKey: "inputAspectRatio")
+        let outputImage = filter.value(forKey: "outputImage") as! CIImage
+        
+        guard let colorBufferImage = tools.convertCIImageToCGImage(inputImage: outputImage) else {
+            return nil
+        }
+        
+        return colorBufferImage.pixelBuffer()
+    }
+    
+    func upSampleDepthMap() -> CVPixelBuffer?{
+        
+        //this function will will upsample the depth buffer to match the image
+        let ciDepthDataMapImage = CIImage(cvPixelBuffer: depthDataMap!)
+        
+        //we need to scale the depth map because the depth map is not the same size as the image
+        let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
+        let maxFromDim = max((depthDataMapImage?.size.width ?? 1.0), (depthDataMapImage?.size.height ?? 1.0))
+        
+        let scale = maxToDim / maxFromDim
+        
+        let filter = CIFilter(name: "CILanczosScaleTransform")!
+        filter.setValue(ciDepthDataMapImage, forKey: "inputImage")
+        filter.setValue(scale, forKey: "inputScale")
+        filter.setValue(1.0, forKey: "inputAspectRatio")
+        let outputImage = filter.value(forKey: "outputImage") as! CIImage
+        
+        guard let depthBufferImage = tools.convertCIImageToCGImage(inputImage: outputImage) else {
+            return nil
+        }
+        
+        let depthBuffer = depthBufferImage.pixelBuffer()
+        
+        return depthBuffer
+        
+        //let context = CIContext(options: [kCIContextUseSoftwareRenderer: false])
+        //let scaledImage = UIImage(CGImage: self.context.createCGImage(outputImage, fromRect: outputImage.extent()))
+    }
+    
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             // we got back an error!
@@ -191,6 +250,21 @@ extension EditorViewController {
             self.SliderB.isHidden = status ? false:true
             self.progressView.isHidden = status ? true:false;
         }
+    }
+    
+    func addPCMJSON(frame: CloudFrame) {
+        //create a referene to the database
+        self.ref = Database.database().reference()
+        
+        //convert cloudframe to data
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(frame)
+        let fstring: String = String(data: data, encoding: String.Encoding.utf8)!
+        let pcmString = fstring.toBase64()
+        
+        //update our records to include the user's picture
+        let uid: String = UserId!
+        self.ref?.child("Users").child(uid).child("Moments").childByAutoId().setValue(pcmString)
     }
     
     func updateUserRecord(fileName: String){
