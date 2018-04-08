@@ -30,4 +30,12 @@ class tools{
         
         return result
     }
+    
+    public static func convertCIImageToCGImage(inputImage: CIImage) -> CGImage! {
+        let context = CIContext(options: nil)
+        guard let cgImage = context.createCGImage(inputImage, from: inputImage.extent) else {
+            return nil
+        }
+        return cgImage
+    }
 }

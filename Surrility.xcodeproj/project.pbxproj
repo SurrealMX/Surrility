@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		006D12CA9E9BB2F1409CF7AC /* Pods_SurrilityTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C435756E84887141337AC5 /* Pods_SurrilityTests.framework */; };
+		C30AB4FA206DFA86009F149B /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30AB4F9206DFA86009F149B /* DoubleExtension.swift */; };
+		C315FACD20721856003364FA /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315FACC20721856003364FA /* StringExtension.swift */; };
 		C31A03CD204AB5EF003CDFEC /* DepthImageFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31A03CC204AB5EF003CDFEC /* DepthImageFilters.swift */; };
 		C31A03CF204BB123003CDFEC /* FloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31A03CE204BB123003CDFEC /* FloatExtension.swift */; };
 		C360B1C8203FC97800802AED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B1C7203FC97800802AED /* AppDelegate.swift */; };
@@ -62,6 +64,8 @@
 		8872D04EDECD2624C5EB4523 /* Pods-Surrility.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Surrility.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Surrility/Pods-Surrility.debug.xcconfig"; sourceTree = "<group>"; };
 		A487F25766140AE215E0DE6F /* Pods-SurrilityUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurrilityUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SurrilityUITests/Pods-SurrilityUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A85D50720F3AEE1F72EBDD40 /* Pods_SurrilityUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurrilityUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C30AB4F9206DFA86009F149B /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
+		C315FACC20721856003364FA /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		C31A03CC204AB5EF003CDFEC /* DepthImageFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthImageFilters.swift; sourceTree = "<group>"; };
 		C31A03CE204BB123003CDFEC /* FloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatExtension.swift; sourceTree = "<group>"; };
 		C360B1C4203FC97800802AED /* Surrility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Surrility.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +221,8 @@
 				C360B1FC203FC9A100802AED /* UIImageExtension.swift */,
 				C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */,
 				C31A03CE204BB123003CDFEC /* FloatExtension.swift */,
+				C30AB4F9206DFA86009F149B /* DoubleExtension.swift */,
+				C315FACC20721856003364FA /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -556,9 +562,11 @@
 				C360B213203FCA0800802AED /* PhotoCaptureDelegate.swift in Sources */,
 				C360B1C8203FC97800802AED /* AppDelegate.swift in Sources */,
 				C360B206203FC9A600802AED /* SimpleVector.swift in Sources */,
+				C30AB4FA206DFA86009F149B /* DoubleExtension.swift in Sources */,
 				C360B205203FC9A600802AED /* CloudFrame.swift in Sources */,
 				C3D6B1F52047FAAB00D02602 /* LoginViewController.swift in Sources */,
 				C360B1FD203FC9A100802AED /* CGImageExtension.swift in Sources */,
+				C315FACD20721856003364FA /* StringExtension.swift in Sources */,
 				C360B1FF203FC9A100802AED /* CVPixelBufferExtension.swift in Sources */,
 				C3D6B1F0204536AE00D02602 /* UIDeviceOrientationExtention.swift in Sources */,
 			);

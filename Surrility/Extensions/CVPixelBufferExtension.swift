@@ -99,9 +99,10 @@ extension CVPixelBuffer {
         return params
     }
     
-    func filterDepthData(with BoundA: Float, and BoundB: Float){
+    func filterMapData(with BoundA: Float, and BoundB: Float){
         let width = CVPixelBufferGetWidth(self)
         let height = CVPixelBufferGetHeight(self)
+        let bytesPerRow = CVPixelBufferGetBytesPerRow(self)
         
         CVPixelBufferLockBaseAddress(self, CVPixelBufferLockFlags(rawValue: 0))
         let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(self), to: UnsafeMutablePointer<Float>.self)
@@ -129,30 +130,6 @@ extension CVPixelBuffer {
         }
         
         CVPixelBufferUnlockBaseAddress(self, CVPixelBufferLockFlags(rawValue: 0))
-    }
-    
-    func extractFloats(with params: [Float]) -> [Float] {
-        let width = CVPixelBufferGetWidth(self)
-        let height = CVPixelBufferGetHeight(self)
-        
-        CVPixelBufferLockBaseAddress(self, CVPixelBufferLockFlags(rawValue: 0))
-        let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(self), to: UnsafeMutablePointer<Float>.self)
-        
-        var z: [Float] = []
-        
-        let minPixel = params[0]
-        //let maxPixel = params[1]
-        let Range = params[2]
-        
-        for y in 0 ..< height {
-            for x in 0 ..< width {
-                z.append(floatBuffer[y * width + x]*Range + minPixel)
-            }
-        }
-        
-        CVPixelBufferUnlockBaseAddress(self, CVPixelBufferLockFlags(rawValue: 0))
-        
-        return z
     }
     
     func extractFloats() -> [Float] {

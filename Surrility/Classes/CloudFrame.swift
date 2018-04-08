@@ -12,12 +12,12 @@ import SceneKit
 
 class CloudFrame : Codable {
     var t: Float
-    var p: [Float]
+    var p: [Double]//[Float]
     var height: Int
     var width: Int
     var pSize: Float
     
-    init(time: Float, vals: [Float], height: Int, width: Int, pSize: Float){
+    init(time: Float, vals: [Double], height: Int, width: Int, pSize: Float){
         self.t = time
         self.height = height
         self.width = width
@@ -28,14 +28,45 @@ class CloudFrame : Codable {
 
 extension CloudFrame {
     
-    static func compileFrame(CVBuffer: CVPixelBuffer, time: Float, pixelSize: Float, with parameters: [Float]) -> CloudFrame? {
-        let vals = CVBuffer.extractFloats(with: parameters)
-        let height = CVPixelBufferGetHeight(CVBuffer)
-        let width = CVPixelBufferGetWidth(CVBuffer)
+    static func compileFrame(DepthBuffer: CVPixelBuffer, ColorBuffer: CVPixelBuffer, time: Float, pixelSize: Float) -> CloudFrame? {
         
-        let normalizedVals = normalize(vals: vals, height: height, width: width, and: parameters)
+        var Depthvals: [Float] = DepthBuffer.extractFloats()
+        var Colorvals: [Float] = ColorBuffer.extractFloats()
         
-        return CloudFrame(time: time, vals: normalizedVals, height: height, width: width, pSize: pixelSize)
+        let depthHeight = CVPixelBufferGetHeight(DepthBuffer)
+        let depthWidth = CVPixelBufferGetWidth(DepthBuffer)
+        let colorHeight = CVPixelBufferGetHeight(ColorBuffer)
+        let colorWidth = CVPixelBufferGetWidth(ColorBuffer)
+        
+        if((colorHeight == depthHeight) && (colorWidth == depthWidth)) {
+            let height = depthHeight
+            let width = depthWidth
+            var vals: [Double] = []
+            var i = 0;
+            for y in 0 ..< height {
+                for x in 0 ..< width {
+                    let idx = y * width + x
+                    
+                    var aDepthVals: [UInt8] = Depthvals[idx].toBytes()
+                    let aColorVals: [UInt8] = Colorvals[idx].toBytes()
+                    
+                    for i in 0 ..< aColorVals.count {
+                        aDepthVals.append(aColorVals[i])
+                    }
+                    
+                    let aVal: Double = Double(aDepthVals)!
+                    if(aVal != 0.0){
+                        i = i + 1
+                    }
+                    vals.append(aVal)
+                    
+                }
+            }
+            print(i)
+            return CloudFrame(time: time, vals: vals, height: height, width: width, pSize: pixelSize)
+        } else {
+            return nil
+        }
     }
     
     static func compileFrame(CVBuffer: CVPixelBuffer, time: Float, pixelSize: Float) -> CloudFrame? {
@@ -43,8 +74,14 @@ extension CloudFrame {
         let height = CVPixelBufferGetHeight(CVBuffer)
         let width = CVPixelBufferGetWidth(CVBuffer)
         
+        var Dvals: [Double] = []
+        for x in 0 ..< width{
+            for y in 0 ..< height{
+                Dvals.append(Double(vals[x+width*y]))
+            }
+        }
         
-        return CloudFrame(time: time, vals: vals, height: height, width: width, pSize: pixelSize)
+        return CloudFrame(time: time, vals: Dvals, height: height, width: width, pSize: pixelSize)
     }
     
     private static func normalize(vals: [Float], height: Int, width: Int, and parameters: [Float]) -> [Float] {
@@ -60,7 +97,7 @@ extension CloudFrame {
         return normalizedVals
     }
     
-    public func getDepths() -> [Float]? {
+    public func getDepths() -> [Double]? {
         return self.p
     }
     
@@ -129,7 +166,7 @@ extension CloudFrame {
         
         for x in 0 ..< width {
             for y in 0 ..< height {
-                let avector = SCNVector3Make(Float(x)*pSize, Float(y)*pSize, p[y * width + x])
+                let avector = SCNVector3Make(Float(x)*pSize, Float(y)*pSize, Float(p[y * width + x]))
                 vectors.append(avector)
             }
         }
