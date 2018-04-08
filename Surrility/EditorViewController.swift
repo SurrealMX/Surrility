@@ -44,12 +44,6 @@ class EditorViewController: UIViewController {
     
         //disable the extract button so you cant hit it twice
         extractButton.isEnabled = false
-        
-        //filter the depthDataMap baed on the user selected bounds
-        depthDataMap?.filterMapData(with: SliderA.value, and: SliderB.value)
-        
-        //filter the colorDataMap based on the slider value in preparation for the cloudFrame
-        colorDataMap?.filterMapData(with: SliderA.value, and: SliderB.value)
     
         //let cameraCalibrationData = capturedPhoto?.cameraCalibrationData
         //print(cameraCalibrationData as Any)
@@ -57,6 +51,12 @@ class EditorViewController: UIViewController {
         print(pSize)
         
         DispatchQueue.global(qos: .userInitiated).async {
+            //filter the depthDataMap baed on the user selected bounds
+            self.depthDataMap?.filterMapData(with: self.SliderA.value, and: self.SliderB.value)
+            
+            //filter the colorDataMap based on the slider value in preparation for the cloudFrame
+            self.colorDataMap?.filterMapData(with: 0, and: 1)
+            
             //get the frame
             guard let frame: CloudFrame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorBuffer: self.colorDataMap!, time: 0.0, pixelSize: pSize) else {
                     print("couldn't create frame... upload failed")
@@ -64,8 +64,8 @@ class EditorViewController: UIViewController {
             }
             
             //add the frame to the cloud
-            self.addPCMJSON(frame: frame)
-            //self.addPCM(frame: frame)
+            //self.addPCMJSON(frame: frame)
+            self.addPCM(frame: frame)
         }
     }
     
@@ -109,7 +109,8 @@ class EditorViewController: UIViewController {
         picView.image = UIImage(data: imageData!, scale: 1.0)//UIImage(ciImage: depthMapImage, scale: 1.0, orientation: orientation!)  //UIImage(ciImage: depthDataMapImage)
         picView.contentMode = .scaleAspectFill
         
-        depthDataMap = upSampleDepthMap()
+        //depthDataMap = upSampleDepthMap()
+        
         colorDataMap = grabColorData()
         
         //set the filtered image
@@ -169,30 +170,34 @@ extension EditorViewController {
     }
     
     func grabColorData() -> CVPixelBuffer? {
+        
         guard let ciOrigImage = CIImage(image: origImage) else{
             return nil
         }
-        let cgOrigImage = tools.convertCIImageToCGImage(inputImage: ciOrigImage)
         
-        //guard let colorMap = downSampleColorMapimage(image: cgOrigImage!) else {
-          //  return nil
-        //}
-        return cgOrigImage?.pixelBuffer()
+        guard let colorMap = downSampleColorMapimage(image: ciOrigImage) else {
+            return nil
+        }
+        
+        return colorMap
+        //return cgOrigImage?.pixelBuffer()
     }
     
-    func downSampleColorMapimage(image: CGImage) -> CVPixelBuffer?{
+    func downSampleColorMapimage(image: CIImage) -> CVPixelBuffer?{
 
         //we need to scale the depth map because the depth map is not the same size as the image
         let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
         let maxFromDim = max((depthDataMapImage?.size.width ?? 1.0), (depthDataMapImage?.size.height ?? 1.0))
         
-        let scale = maxFromDim/maxToDim //maxToDim / maxFromDim
+        let scale: Float = Float(maxFromDim/maxToDim) //maxToDim / maxFromDim
         
         let filter = CIFilter(name: "CILanczosScaleTransform")!
         filter.setValue(image, forKey: "inputImage")
         filter.setValue(scale, forKey: "inputScale")
         filter.setValue(1.0, forKey: "inputAspectRatio")
         let outputImage = filter.value(forKey: "outputImage") as! CIImage
+        
+        //let outputImage = filter.value(forKey: "outputImage") as! CIImage
         
         guard let colorBufferImage = tools.convertCIImageToCGImage(inputImage: outputImage) else {
             return nil
@@ -265,15 +270,25 @@ extension EditorViewController {
         //update our records to include the user's picture
         let uid: String = UserId!
         self.ref?.child("Users").child(uid).child("Moments").childByAutoId().setValue(pcmString)
+        
+        self.moveAction()
     }
     
-    func updateUserRecord(fileName: String){
+    func updateUserRecord(downloadURL: String){
         //create a referene to the database
         self.ref = Database.database().reference()
         
+        //get the serverTimeStamp
+        let timeStamp = Firebase.ServerValue.timestamp()
+        
         //update our records to include the user's picture
         let uid: String = UserId!
-        self.ref?.child("Users").child(uid).childByAutoId().setValue(fileName)
+        let tempRef = self.ref?.child(uid).childByAutoId().childByAutoId().parent
+        tempRef?.child("Path").setValue(downloadURL)
+        //setup likes
+        tempRef?.child("likes").setValue(0)
+        //add timestamp
+        tempRef?.child("TimeStamp").setValue(timeStamp)
     }
     
     func moveAction(){
@@ -292,8 +307,6 @@ extension EditorViewController {
         //ImagesRef now points to "images"
         let pcmStorageRef = storageRef.child("pcms").child(UserId!)
         
-        //Child References can also take paths delimited by '/'
-        //spaceRef now points to 'pcms'
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         dateformatter.timeZone = NSTimeZone(name: "UTC")! as TimeZone
@@ -307,17 +320,30 @@ extension EditorViewController {
         //convert cloudframe to data
         let encoder = JSONEncoder()
         let data = try! encoder.encode(frame)
+        
         //let fstring: String = String(data: data, encoding: String.Encoding.utf8)!
+        //let pcmString = fstring.toBase64()
         
         let uploadTask = spaceRef.putData(data, metadata: uploadMetaData) { (metadata, error) in
             if(error != nil) {
                 print("ERROR BILL ROBINSON \(String(describing: error))")
             } else {
                 print ("Upload complete! \(String(describing: metadata))")
-                //update the database with what just happened
-                self.updateUserRecord(fileName: fileName)
-                //move back to the camera for next picture
-                self.moveAction()
+                
+                // Fetch the download URL
+                storageRef.child("pcms").child(UserId!).child(fileName).downloadURL(completion: { (FileName_url, error) in
+                    if (error != nil) {
+                        print("Error getting Download Url")
+                        return
+                    } else {
+                        // Get the download URL for 'images/stars.jpg'
+                        print(FileName_url?.absoluteString)
+                        //put the download url for the record in the real-time database
+                        self.updateUserRecord(downloadURL: (FileName_url?.absoluteString)!)
+                        //move back to the camera for next picture
+                        self.moveAction()
+                    }
+                })
             }
         }
         
