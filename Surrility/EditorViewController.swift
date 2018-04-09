@@ -257,23 +257,6 @@ extension EditorViewController {
         }
     }
     
-    func addPCMJSON(frame: CloudFrame) {
-        //create a referene to the database
-        self.ref = Database.database().reference()
-        
-        //convert cloudframe to data
-        let encoder = JSONEncoder()
-        let data = try! encoder.encode(frame)
-        let fstring: String = String(data: data, encoding: String.Encoding.utf8)!
-        let pcmString = fstring.toBase64()
-        
-        //update our records to include the user's picture
-        let uid: String = UserId!
-        self.ref?.child("Users").child(uid).child("Moments").childByAutoId().setValue(pcmString)
-        
-        self.moveAction()
-    }
-    
     func updateUserRecord(downloadURL: String){
         //create a referene to the database
         self.ref = Database.database().reference()
@@ -283,8 +266,11 @@ extension EditorViewController {
         
         //update our records to include the user's picture
         let uid: String = UserId!
-        let tempRef = self.ref?.child(uid).childByAutoId().childByAutoId().parent
+        let tempRef = self.ref?.child("Posts").childByAutoId().childByAutoId().parent
+        //add download url
         tempRef?.child("Path").setValue(downloadURL)
+        //add who posted me
+        tempRef?.child("UID").setValue(uid)
         //setup likes
         tempRef?.child("likes").setValue(0)
         //add timestamp

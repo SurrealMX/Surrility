@@ -92,7 +92,27 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             }
             print("Successfully Logged on to Firebase with user from FB: ", user ?? "")
             UserId = user?.uid
+            self.updateUserRecord()
         }
+    }
+    
+    func updateUserRecord(){
+        //create a referene to the database
+        let ref = Database.database().reference()
+        
+        //get the serverTimeStamp
+        let timeStamp = Firebase.ServerValue.timestamp()
+        
+        //update our records to show the user logged on
+        let tempRef = ref.child("Users").child(UserId!).childByAutoId().parent  //get reference to user
+        //add Name
+        tempRef?.child("Name").setValue(UserName)
+        //add email
+        tempRef?.child("Email").setValue(UserEmail)
+        //setup likes
+        tempRef?.child("likes").setValue(0)
+        //update the last time the user logged on
+        tempRef?.child("Last_Logon").setValue(timeStamp)
     }
     
     override func didReceiveMemoryWarning() {
