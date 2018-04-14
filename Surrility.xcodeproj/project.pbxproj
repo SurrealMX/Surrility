@@ -32,6 +32,7 @@
 		C360B214203FCA0800802AED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C360B20D203FCA0700802AED /* LaunchScreen.storyboard */; };
 		C360B215203FCA0800802AED /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B20E203FCA0800802AED /* PreviewView.swift */; };
 		C360B217203FCCA600802AED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C360B216203FCCA600802AED /* GoogleService-Info.plist */; };
+		C3A985EF20825237005597A0 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A985EE20825237005597A0 /* PostViewController.swift */; };
 		C3D6B1F0204536AE00D02602 /* UIDeviceOrientationExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */; };
 		C3D6B1F52047FAAB00D02602 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */; };
 		D9A722A5C25E92791FE2D841 /* Pods_Surrility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C01860FACF6B6088BA2CADF /* Pods_Surrility.framework */; };
@@ -93,6 +94,7 @@
 		C360B20D203FCA0700802AED /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C360B20E203FCA0800802AED /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		C360B216203FCCA600802AED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C3A985EE20825237005597A0 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceOrientationExtention.swift; sourceTree = "<group>"; };
 		C3D6B1F32047C18600D02602 /* Surrility.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Surrility.entitlements; sourceTree = "<group>"; };
 		C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				C360B20C203FCA0700802AED /* PhotoCaptureDelegate.swift */,
 				C360B20E203FCA0800802AED /* PreviewView.swift */,
 				C360B216203FCCA600802AED /* GoogleService-Info.plist */,
+				C3A985EE20825237005597A0 /* PostViewController.swift */,
 			);
 			path = Surrility;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				C31A03CF204BB123003CDFEC /* FloatExtension.swift in Sources */,
 				C360B1D0203FC97800802AED /* Surrility.xcdatamodeld in Sources */,
 				C360B20F203FCA0800802AED /* CameraViewController.swift in Sources */,
+				C3A985EF20825237005597A0 /* PostViewController.swift in Sources */,
 				C31A03CD204AB5EF003CDFEC /* DepthImageFilters.swift in Sources */,
 				C360B200203FC9A100802AED /* UIImageExtension.swift in Sources */,
 				C360B207203FC9A600802AED /* tools.swift in Sources */,
