@@ -16,7 +16,7 @@ class tools{
         return UInt8(temp)
     }
     
-    public static func convertArrayofUint8ToUInt64( number: [UInt8], R: UInt8, G: UInt8, B: UInt8, A: UInt8 )  -> [UInt8] {
+    public static func convertArrayofUint8ToUInt64( number: [UInt8], R: UInt8, G: UInt8, B: UInt8, A: UInt8 )  -> UInt64 {
         var result: [UInt8] = Array()
         
         //first add the float UInts
@@ -28,7 +28,10 @@ class tools{
         result.append(B)
         result.append(A)
         
-        return result
+        let data = Data(bytes: result)
+        let aVal = UInt64(bigEndian: data.withUnsafeBytes { $0.pointee })
+        
+        return aVal
     }
     
     public static func convertCIImageToCGImage(inputImage: CIImage) -> CGImage! {

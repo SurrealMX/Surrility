@@ -70,7 +70,7 @@ class EditorViewController: UIViewController {
             extract()
             let DestinationViewController : PostViewController = segue.destination as! PostViewController
             
-            DestinationViewController.image = self.downSampledImage
+            DestinationViewController.image = UIImage(ciImage: self.filterImage)
             DestinationViewController.frame = self.frame
         }
 

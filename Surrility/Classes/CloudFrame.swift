@@ -12,12 +12,12 @@ import SceneKit
 
 class CloudFrame : Codable {
     var t: Float
-    var p: [Double]//[Float]
+    var p: [UInt64]//[Float]
     var height: Int
     var width: Int
     var pSize: Float
     
-    init(time: Float, vals: [Double], height: Int, width: Int, pSize: Float){
+    init(time: Float, vals: [UInt64], height: Int, width: Int, pSize: Float){
         self.t = time
         self.height = height
         self.width = width
@@ -38,11 +38,16 @@ extension CloudFrame {
         let colorHeight = CVPixelBufferGetHeight(ColorBuffer)
         let colorWidth = CVPixelBufferGetWidth(ColorBuffer)
         
+        //test tools
+            var val: Float = 0.9
+            let number:[UInt8] = val.toBytes()
+            let converted: UInt64 = tools.convertArrayofUint8ToUInt64(number: number, R: 0, G: 0, B: 0, A: 0)
+        
         if((colorHeight == depthHeight) && (colorWidth == depthWidth)) {
             let height = depthHeight
             let width = depthWidth
-            var vals: [Double] = []
-            var i = 0;
+            var vals: [UInt64] = []
+            
             for y in 0 ..< height {
                 for x in 0 ..< width {
                     let idx = y * width + x
@@ -54,15 +59,14 @@ extension CloudFrame {
                         aDepthVals.append(aColorVals[i])
                     }
                     
-                    let aVal: Double = Double(aDepthVals)!
-                    if(aVal != 0.0){
-                        i = i + 1
-                    }
+                    //let aVal: Double = Double(aDepthVals)!
+                    let data = Data(bytes: aDepthVals)
+                    let aVal = UInt64(bigEndian: data.withUnsafeBytes { $0.pointee })
+
                     vals.append(aVal)
                     
                 }
             }
-            print(i)
             return CloudFrame(time: time, vals: vals, height: height, width: width, pSize: pixelSize)
         } else {
             return nil
@@ -70,14 +74,19 @@ extension CloudFrame {
     }
     
     static func compileFrame(CVBuffer: CVPixelBuffer, time: Float, pixelSize: Float) -> CloudFrame? {
-        let vals = CVBuffer.extractFloats()
+        var vals = CVBuffer.extractFloats()
         let height = CVPixelBufferGetHeight(CVBuffer)
         let width = CVPixelBufferGetWidth(CVBuffer)
         
-        var Dvals: [Double] = []
+        var Dvals: [UInt64] = []
         for x in 0 ..< width{
             for y in 0 ..< height{
-                Dvals.append(Double(vals[x+width*y]))
+                let idx = y * width + x
+                
+                let data = Data(bytes: vals[idx].toBytes())
+                let aVal = UInt64(bigEndian: data.withUnsafeBytes { $0.pointee })
+                Dvals.append(aVal)
+                //Dvals.append(Double(vals[x+width*y]))
             }
         }
         
@@ -97,7 +106,7 @@ extension CloudFrame {
         return normalizedVals
     }
     
-    public func getDepths() -> [Double]? {
+    public func getDepths() -> [UInt64]? {
         return self.p
     }
     
