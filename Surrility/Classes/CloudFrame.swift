@@ -38,10 +38,23 @@ extension CloudFrame {
         let colorHeight = CVPixelBufferGetHeight(ColorBuffer)
         let colorWidth = CVPixelBufferGetWidth(ColorBuffer)
         
+        /*
         //test tools
-            var val: Float = 0.9
-            let number:[UInt8] = val.toBytes()
-            let converted: UInt64 = tools.convertArrayofUint8ToUInt64(number: number, R: 0, G: 0, B: 0, A: 0)
+        
+        var testVal: Float = 0.9;
+        var val = testVal.toBytes()
+        let valR: CGFloat = 0.6;
+        let valG: CGFloat = 0.4;
+        let valB: CGFloat = 0.2;
+        let valA: CGFloat = 1.0;
+
+        val.append(tools.convertCGFloat2UInt8(val: valR))
+        val.append(tools.convertCGFloat2UInt8(val: valG))
+        val.append(tools.convertCGFloat2UInt8(val: valB))
+        val.append(tools.convertCGFloat2UInt8(val: valA))
+        
+        let data = Data(bytes: val)
+        let aVal = UInt64(bigEndian: data.withUnsafeBytes { $0.pointee }) */
         
         if((colorHeight == depthHeight) && (colorWidth == depthWidth)) {
             let height = depthHeight
@@ -72,6 +85,38 @@ extension CloudFrame {
             return nil
         }
     }
+    
+    static func compileFrame(DepthBuffer: CVPixelBuffer, ColorMap: [UInt32], time: Float, pixelSize: Float) -> CloudFrame? {
+        var Depthvals: [Float] = DepthBuffer.extractFloats()
+        
+        let depthHeight = CVPixelBufferGetHeight(DepthBuffer)
+        let depthWidth = CVPixelBufferGetWidth(DepthBuffer)
+        
+        let height = depthHeight
+        let width = depthWidth
+        var vals: [UInt64] = []
+        
+        for y in 0 ..< height {
+            for x in 0 ..< width {
+                let idx = y * width + x
+                
+                var aDepthVal: [UInt8] = Depthvals[idx].toBytes()
+                var aColorVal: [UInt8] = tools.splitUint32(number: ColorMap[idx])
+                
+                for i in 0..<4 {
+                    aDepthVal.append(aColorVal[i])
+                }
+                
+                //let aVal: Double = Double(aDepthVals)!
+                let data = Data(bytes: aDepthVal)
+                let aVal = UInt64(bigEndian: data.withUnsafeBytes { $0.pointee })
+                
+                vals.append(aVal)
+            }
+        }
+        return CloudFrame(time: time, vals: vals, height: height, width: width, pSize: pixelSize)
+    }
+
     
     static func compileFrame(CVBuffer: CVPixelBuffer, time: Float, pixelSize: Float) -> CloudFrame? {
         var vals = CVBuffer.extractFloats()

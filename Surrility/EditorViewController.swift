@@ -28,7 +28,7 @@ class EditorViewController: UIViewController {
     var downSampledImage: UIImage?
     var frame: CloudFrame?
     var depthDataMap: CVPixelBuffer?
-    var colorDataMap: CVPixelBuffer?
+    var colorDataMap: [UInt32]?
     var depthFilter: DepthImageFilters?
     var origImage: UIImage?
     var filterImage: CIImage?
@@ -51,18 +51,12 @@ class EditorViewController: UIViewController {
         let pSize: Float = 0.025 //(cameraCalibrationData?.pixelSize)!/1000.0 //pixelSize is in millimeters
         print(pSize)
         
-        //filter the depthDataMap baed on the user selected bounds
+        //filter the depthDataMap baed on the user selected bounds and turn into [float]
         self.depthDataMap?.filterMapData(with: self.SliderA.value, and: self.SliderB.value)
             
-        //filter the colorDataMap based on the slider value in preparation for the cloudFrame
-        self.colorDataMap?.filterMapData(with: 0, and: 1)
-            
         //get the frame
-        self.frame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorBuffer: self.colorDataMap!, time: 0.0, pixelSize: pSize)
-            
-            //add the frame to the cloud
-            //self.addPCMJSON(frame: frame)
-            //self.addPCM(frame: frame)
+        self.frame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorMap: self.colorDataMap!, time: 0.0, pixelSize: pSize)
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -165,7 +159,7 @@ extension EditorViewController {
         self.depthDataMap?.normalize()
     }
     
-    func grabColorData() -> CVPixelBuffer? {
+    func grabColorData() -> [UInt32]? {
         
         guard let ciOrigImage = CIImage(image: origImage) else{
             return nil
@@ -179,7 +173,7 @@ extension EditorViewController {
         //return cgOrigImage?.pixelBuffer()
     }
     
-    func downSampleColorMapimage(image: CIImage) -> CVPixelBuffer?{
+    func downSampleColorMapimage(image: CIImage) -> [UInt32]? {
 
         //we need to scale the depth map because the depth map is not the same size as the image
         let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
@@ -195,11 +189,9 @@ extension EditorViewController {
         
         self.downSampledImage = UIImage(ciImage: outputImage, scale: 1.0, orientation: (origImage?.imageOrientation)!) //ToDostore for later use in segue
         
-        guard let colorBufferImage = tools.convertCIImageToCGImage(inputImage: outputImage) else {
-            return nil
-        }
+        let colorBufferImage = UIImage(ciImage: outputImage)
         
-        return colorBufferImage.pixelBuffer()
+        return colorBufferImage.getColors()
     }
     
     func upSampleDepthMap() -> CVPixelBuffer?{
@@ -294,15 +286,17 @@ extension EditorViewController {
             //case .blur:
             finalImage = depthFilter?.blur(image: filterImage, mask: mask, orientation: orientation)
             self.updateSliders(status: true)  //show the sliders
+            self.extractButton.isHidden = false; //show the update butten
         case 1:
             //case depth map
             self.extractButton.isHidden = true //hide the extract button
+            self.updateSliders(status: false)  //hide the sliders
             guard let cgImage = context.createCGImage(mask, from: mask.extent),
                 let origImage = origImage else {
                     return
             }
             finalImage = UIImage(cgImage: cgImage, scale: 1.0, orientation: origImage.imageOrientation)
-            self.updateSliders(status: false)  //hide the sliders
+
         default:
             return
         }
