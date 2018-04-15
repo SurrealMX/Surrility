@@ -10,25 +10,33 @@ import UIKit
 import Photos
 import Firebase
 
-class PostViewController: UIViewController {
+class PostViewController: UIViewController, UITextViewDelegate{
     
     @IBOutlet weak var ImagePreviewPlane: UIImageView!
     @IBOutlet weak var Caption: UITextView!
-    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet var progressView: UIProgressView!
     
     
     var ref: DatabaseReference!
     let storage = Storage.storage()
     var frame: CloudFrame?
+    var image: UIImage?
     
-    @IBAction func PostButtonClicked(_ sender: UIBarButtonItem) {
-        self.addPCM(frame: frame!)
+    var defaultText: String = "Write Caption..."
+
+    @IBAction func iShare(_ sender: Any) {
+        self.addPCM(frame: self.frame!)
+        //moveAction();
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        //updateSliders(status: true)
+        ImagePreviewPlane.image = image
+        Caption.text = defaultText;
+        progressView.progress = 0.5;
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,14 +63,13 @@ class PostViewController: UIViewController {
         //add timestamp
         tempRef?.child("TimeStamp").setValue(timeStamp)
         //add description
-        tempRef?.child("Caption").setValue(Caption.text)
+        if(Caption.text != defaultText){  //if the user forgot to add text oh well... we're not adding the default
+            tempRef?.child("Caption").setValue(Caption.text)
+        }
     }
     
     func moveAction(){
-        //make sure this is alwas performed on the UI thread otherwise we'll get rando results
-        DispatchQueue.main.async {
-            self.navigationController?.popViewController(animated: true)
-        }
+        performSegue(withIdentifier: "postedSegue", sender: self)
     }
     
     func updateSliders(status: Bool){
@@ -72,6 +79,7 @@ class PostViewController: UIViewController {
     }
     
     func addPCM(frame: CloudFrame){
+        updateSliders(status: false);
         
         //create a storage reference from our storage service
         let storageRef = storage.reference()
@@ -110,7 +118,6 @@ class PostViewController: UIViewController {
                         return
                     } else {
                         // Get the download URL for 'images/stars.jpg'
-                        print(FileName_url?.absoluteString)
                         //put the download url for the record in the real-time database
                         self.updateUserRecord(downloadURL: (FileName_url?.absoluteString)!)
                         //move back to the camera for next picture
@@ -119,15 +126,12 @@ class PostViewController: UIViewController {
                 })
             }
         }
-        
-        DispatchQueue.main.async {
             //update progress bar
             uploadTask.observe(.progress) { [weak self] (snapshot) in
                 guard let strongSelf = self else {return}
                 guard let progress = snapshot.progress else { return}
-                strongSelf.progressView.progress = Float(progress.fractionCompleted)
+                let test = self?.progressView.progress
+                self?.progressView.progress = Float(progress.fractionCompleted)
             }
-        }
     }
-
 }

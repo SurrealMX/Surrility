@@ -38,7 +38,7 @@ class EditorViewController: UIViewController {
     var ref: DatabaseReference!
     let storage = Storage.storage()
     
-    @IBAction func extractButton(_ sender: UIButton) {
+    func extract() {
         
         //hide the slider, updating is done
         self.updateSliders(status: false)
@@ -51,32 +51,29 @@ class EditorViewController: UIViewController {
         let pSize: Float = 0.025 //(cameraCalibrationData?.pixelSize)!/1000.0 //pixelSize is in millimeters
         print(pSize)
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            //filter the depthDataMap baed on the user selected bounds
-            self.depthDataMap?.filterMapData(with: self.SliderA.value, and: self.SliderB.value)
+        //filter the depthDataMap baed on the user selected bounds
+        self.depthDataMap?.filterMapData(with: self.SliderA.value, and: self.SliderB.value)
             
-            //filter the colorDataMap based on the slider value in preparation for the cloudFrame
-            self.colorDataMap?.filterMapData(with: 0, and: 1)
+        //filter the colorDataMap based on the slider value in preparation for the cloudFrame
+        self.colorDataMap?.filterMapData(with: 0, and: 1)
             
-            //get the frame
-            guard let frame: CloudFrame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorBuffer: self.colorDataMap!, time: 0.0, pixelSize: pSize) else {
-                    print("couldn't create frame... upload failed")
-                    return
-            }
-            
-            self.frame = frame  //store the frame for segue
+        //get the frame
+        self.frame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorBuffer: self.colorDataMap!, time: 0.0, pixelSize: pSize)
             
             //add the frame to the cloud
             //self.addPCMJSON(frame: frame)
             //self.addPCM(frame: frame)
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let DestinationViewController : PostViewController = segue.destination as! PostViewController
-        
-        DestinationViewController.ImagePreviewPlane.image = downSampledImage
-        DestinationViewController.frame = self.frame
+        if(segue.identifier == "showShare"){
+            extract()
+            let DestinationViewController : PostViewController = segue.destination as! PostViewController
+            
+            DestinationViewController.image = self.downSampledImage
+            DestinationViewController.frame = self.frame
+        }
+
     }
     
     @IBAction func UISelectedChanged(_ sender: Any) {
@@ -196,7 +193,7 @@ extension EditorViewController {
         filter.setValue(1.0, forKey: "inputAspectRatio")
         let outputImage = filter.value(forKey: "outputImage") as! CIImage
         
-        self.downSampledImage = UIImage(ciImage: outputImage) //store for later use in segue
+        self.downSampledImage = UIImage(ciImage: outputImage, scale: 1.0, orientation: (origImage?.imageOrientation)!) //ToDostore for later use in segue
         
         guard let colorBufferImage = tools.convertCIImageToCGImage(inputImage: outputImage) else {
             return nil
@@ -295,17 +292,17 @@ extension EditorViewController {
         switch selectedFilter {
         case 0:
             //case .blur:
-            self.updateSliders(status: true)  //show the sliders
             finalImage = depthFilter?.blur(image: filterImage, mask: mask, orientation: orientation)
+            self.updateSliders(status: true)  //show the sliders
         case 1:
             //case depth map
-            self.updateSliders(status: false)  //hide the sliders
             self.extractButton.isHidden = true //hide the extract button
             guard let cgImage = context.createCGImage(mask, from: mask.extent),
                 let origImage = origImage else {
                     return
             }
             finalImage = UIImage(cgImage: cgImage, scale: 1.0, orientation: origImage.imageOrientation)
+            self.updateSliders(status: false)  //hide the sliders
         default:
             return
         }
