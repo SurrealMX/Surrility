@@ -9,8 +9,8 @@
 import Foundation
 
 extension FloatingPoint {
-    init?(_ bytes: [UInt8]) {
-        
+    
+    init?(_ bytes: [UInt8]) {  //convert from byte array to double
         guard bytes.count == MemoryLayout<Self>.size else { return nil }
         
         self = bytes.withUnsafeBytes {

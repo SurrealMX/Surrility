@@ -234,13 +234,17 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Classes/CloudFrame.swift"
+<<<<<<< HEAD
             timestampString = "545637316.546662"
+=======
+            timestampString = "545530235.033541"
+>>>>>>> updatesToStorageProcess
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
             endingLineNumber = "33"
-            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:pixelSize:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -250,13 +254,22 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Classes/CloudFrame.swift"
+<<<<<<< HEAD
             timestampString = "545637316.54722"
+=======
+            timestampString = "545530235.0340869"
+>>>>>>> updatesToStorageProcess
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
             endingLineNumber = "68"
+<<<<<<< HEAD
             landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:pixelSize:)"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> updatesToStorageProcess
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -330,13 +343,22 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Classes/CloudFrame.swift"
+<<<<<<< HEAD
             timestampString = "545637316.5475529"
+=======
+            timestampString = "545530235.035571"
+>>>>>>> updatesToStorageProcess
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "83"
             endingLineNumber = "83"
+<<<<<<< HEAD
             landmarkName = "compileFrame(CVBuffer:time:pixelSize:)"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> updatesToStorageProcess
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -346,12 +368,37 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Classes/CloudFrame.swift"
+<<<<<<< HEAD
             timestampString = "545637316.547815"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
             endingLineNumber = "81"
             landmarkName = "compileFrame(CVBuffer:time:pixelSize:)"
+=======
+            timestampString = "545530235.035978"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Surrility/Extensions/CVPixelBufferExtension.swift"
+            timestampString = "544838818.603832"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "filterMapData(with:and:)"
+>>>>>>> updatesToStorageProcess
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -361,6 +408,7 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "Surrility/Extensions/CVPixelBufferExtension.swift"
             timestampString = "544838818.603832"
             startingColumnNumber = "9223372036854775807"
@@ -377,6 +425,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+=======
+>>>>>>> updatesToStorageProcess
             filePath = "Surrility/EditorViewController.swift"
             timestampString = "545530235.036406"
             startingColumnNumber = "9223372036854775807"
@@ -714,13 +764,22 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Classes/CloudFrame.swift"
+<<<<<<< HEAD
             timestampString = "545637316.548404"
+=======
+            timestampString = "545530235.04045"
+>>>>>>> updatesToStorageProcess
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
             endingLineNumber = "76"
+<<<<<<< HEAD
             landmarkName = "compileFrame(CVBuffer:time:pixelSize:)"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> updatesToStorageProcess
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -730,13 +789,22 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Classes/CloudFrame.swift"
+<<<<<<< HEAD
             timestampString = "545637316.5486619"
+=======
+            timestampString = "545530235.040859"
+>>>>>>> updatesToStorageProcess
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
             endingLineNumber = "59"
+<<<<<<< HEAD
             landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:pixelSize:)"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> updatesToStorageProcess
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

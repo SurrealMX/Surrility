@@ -102,7 +102,7 @@ extension CVPixelBuffer {
     func filterMapData(with BoundA: Float, and BoundB: Float){
         let width = CVPixelBufferGetWidth(self)
         let height = CVPixelBufferGetHeight(self)
-        let bytesPerRow = CVPixelBufferGetBytesPerRow(self)
+        //let bytesPerRow = CVPixelBufferGetBytesPerRow(self)
         
         CVPixelBufferLockBaseAddress(self, CVPixelBufferLockFlags(rawValue: 0))
         let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(self), to: UnsafeMutablePointer<Float>.self)
