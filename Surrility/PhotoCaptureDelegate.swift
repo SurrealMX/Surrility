@@ -67,14 +67,12 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate, AVCaptureDepthDa
         if let error = error {
             print("Error capturing photo: \(error)")
         } else {
-            let capturedPhoto = photo
-            photoData = photo.fileDataRepresentation()
+            let capturedPhoto = imageBuffer(UIImage(data: photo.fileDataRepresentation()))
+            
             
             //now move to the next view for exit and store
             let vc = initialView?.storyboard?.instantiateViewController(withIdentifier: "Editor") as! EditorViewController
             vc.capturedPhoto = capturedPhoto  //sends the current photo to the next view controller for editing
-            //initialView?.show(vc, sender: initialView)  //go to the second view controller
-            //initialView?.present(vc, animated: true, completion: nil)
             initialView?.navigationController?.pushViewController(vc, animated: true)
         }
     }

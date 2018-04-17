@@ -99,19 +99,11 @@ class EditorViewController: UIViewController {
         let imageData = capturedPhoto?.fileDataRepresentation()
         origImage = UIImage(data: imageData!)!
         
-        //let cgImage = context.createCGImage(ciImage, from: ciImage.extent)
-        
-        //let cgOrigImage: CGImage = capturedPhoto?.cgImageRepresentation() as! CGImage
-        //pixelBuffer = cgOrigImage.pixelBuffer()
-        
-        //let orientation = origImage?.imageOrientation
         let ciDepthDataMapImage = CIImage(cvPixelBuffer: depthDataMap!)
         depthDataMapImage = UIImage(ciImage: ciDepthDataMapImage) //UIImage(ciImage: imageData)
         picView.image = UIImage(data: imageData!, scale: 1.0)//UIImage(ciImage: depthMapImage, scale: 1.0, orientation: orientation!)  //UIImage(ciImage: depthDataMapImage)
         picView.contentMode = .scaleAspectFill
-        
-        //depthDataMap = upSampleDepthMap()
-        
+
         colorDataMap = grabColorData()
         
         //set the filtered image
@@ -150,7 +142,9 @@ extension EditorViewController {
     
     func grabDepthData(){
         //let photoData = photo.fileDataRepresentation()
-        let depthData = (capturedPhoto?.depthData as AVDepthData!).converting(toDepthDataType: kCVPixelFormatType_DepthFloat32)
+        guard let depthData = (capturedPhoto?.depthData)?.converting(toDepthDataType: kCVPixelFormatType_DepthFloat32) else {
+            return
+        }
         
         //this depthDataMap is the one that is the depth data associated with the image
         self.depthDataMap = depthData.depthDataMap //AVDepthData -> CVPixelBuffer
