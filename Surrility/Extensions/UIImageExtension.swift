@@ -28,6 +28,8 @@
  * THE SOFTWARE.
  */
 
+//https://stackoverflow.com/questions/33768066/get-pixel-data-as-array-from-uiimage-cgimage-in-swift/41640262
+
 import UIKit
 
 extension UIImage {
@@ -41,35 +43,22 @@ extension UIImage {
     self.init(ciImage: ciImage)
   }
     
-    func getColors() -> [UInt32]? {
-        let pixelsWide = Int(self.size.width)
-        let pixelsHigh = Int(self.size.height)
+    func pixelData() -> [UInt8]? {
+        let size = self.size
+        let dataSize = size.width * size.height * 4
+        var pixelData = [UInt8](repeating: 0, count: Int(dataSize))
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let context = CGContext(data: &pixelData,
+                                width: Int(size.width),
+                                height: Int(size.height),
+                                bitsPerComponent: 8,
+                                bytesPerRow: 4 * Int(size.width),
+                                space: colorSpace,
+                                bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue)
+        guard let cgImage = self.cgImage else { return nil }
+        context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         
-        guard let pixelData = self.cgImage?.dataProvider?.data else { return [] }
-        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
-        
-        var imageColors: [UInt32] = []
-        
-        for x in 0..<pixelsWide {
-            for y in 0..<pixelsHigh {
-                let point = CGPoint(x: x, y: y)
-                let pixelInfo: Int = ((pixelsWide * Int(point.y)) + Int(point.x)) * 4
-                
-                //r, g, b, a
-                let red: UInt8 = data[pixelInfo]
-                let green: UInt8 = data[pixelInfo + 1]
-                let blue: UInt8 = data[pixelInfo + 2]
-                let alpha: UInt8 = data[pixelInfo + 3]
-                
-                let color: [UInt8] = [red, green, blue, alpha]
-                
-                let data = Data(bytes: color)
-                let aVal = UInt32(bigEndian: data.withUnsafeBytes { $0.pointee })  //converted array of uint8s into one uint32
-
-                imageColors.append(aVal)
-            }
-        }
-        return imageColors
+        return pixelData
     }
 }
 
