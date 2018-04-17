@@ -22,7 +22,7 @@ class EditorViewController: UIViewController {
     @IBOutlet weak var UISelector: UISegmentedControl!
     
     //segue variables
-    var capturedPhoto: AVCapturePhoto?
+    var capturedPhoto: imageBuffer?
     
     //internal variables
     var downSampledImage: UIImage?
@@ -96,8 +96,7 @@ class EditorViewController: UIViewController {
         grabDepthData()
         
         // Do any additional setup after loading the view.
-        let imageData = capturedPhoto?.fileDataRepresentation()
-        origImage = UIImage(data: imageData!)!
+        origImage = 
         
         let ciDepthDataMapImage = CIImage(cvPixelBuffer: depthDataMap!)
         depthDataMapImage = UIImage(ciImage: ciDepthDataMapImage) //UIImage(ciImage: imageData)
@@ -142,15 +141,9 @@ extension EditorViewController {
     
     func grabDepthData(){
         //let photoData = photo.fileDataRepresentation()
-        guard let depthData = (capturedPhoto?.depthData)?.converting(toDepthDataType: kCVPixelFormatType_DepthFloat32) else {
+        guard let depthData = capturedPhoto?.getDepthData() else {
             return
         }
-        
-        //this depthDataMap is the one that is the depth data associated with the image
-        self.depthDataMap = depthData.depthDataMap //AVDepthData -> CVPixelBuffer
-        
-        //normalize the depth datamap -- this depth datamap is only used for filtering the image
-        self.depthDataMap?.normalize()
     }
     
     func grabColorData() -> [UInt32]? {
@@ -165,56 +158,6 @@ extension EditorViewController {
         
         return colorMap
         //return cgOrigImage?.pixelBuffer()
-    }
-    
-    func downSampleColorMapimage(image: CIImage) -> [UInt32]? {
-
-        //we need to scale the depth map because the depth map is not the same size as the image
-        let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
-        let maxFromDim = max((depthDataMapImage?.size.width ?? 1.0), (depthDataMapImage?.size.height ?? 1.0))
-        
-        let scale: Float = Float(maxFromDim/maxToDim) //maxToDim / maxFromDim
-        
-        let filter = CIFilter(name: "CILanczosScaleTransform")!
-        filter.setValue(image, forKey: "inputImage")
-        filter.setValue(scale, forKey: "inputScale")
-        filter.setValue(1.0, forKey: "inputAspectRatio")
-        let outputImage = filter.value(forKey: "outputImage") as! CIImage
-        
-        self.downSampledImage = UIImage(ciImage: outputImage, scale: 1.0, orientation: (origImage?.imageOrientation)!) //ToDostore for later use in segue
-        
-        let colorBufferImage = UIImage(ciImage: outputImage)
-        
-        return colorBufferImage.getColors()
-    }
-    
-    func upSampleDepthMap() -> CVPixelBuffer?{
-        
-        //this function will will upsample the depth buffer to match the image
-        let ciDepthDataMapImage = CIImage(cvPixelBuffer: depthDataMap!)
-        
-        //we need to scale the depth map because the depth map is not the same size as the image
-        let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
-        let maxFromDim = max((depthDataMapImage?.size.width ?? 1.0), (depthDataMapImage?.size.height ?? 1.0))
-        
-        let scale = maxToDim / maxFromDim
-        
-        let filter = CIFilter(name: "CILanczosScaleTransform")!
-        filter.setValue(ciDepthDataMapImage, forKey: "inputImage")
-        filter.setValue(scale, forKey: "inputScale")
-        filter.setValue(1.0, forKey: "inputAspectRatio")
-        let outputImage = filter.value(forKey: "outputImage") as! CIImage
-        
-        guard let depthBufferImage = tools.convertCIImageToCGImage(inputImage: outputImage) else {
-            return nil
-        }
-        
-        let depthBuffer = depthBufferImage.pixelBuffer()
-        
-        return depthBuffer
-        
-        //let context = CIContext(options: [kCIContextUseSoftwareRenderer: false])
-        //let scaledImage = UIImage(CGImage: self.context.createCGImage(outputImage, fromRect: outputImage.extent()))
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
