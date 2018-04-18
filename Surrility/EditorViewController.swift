@@ -25,12 +25,10 @@ class EditorViewController: UIViewController {
     var capturedPhoto: imageBuffer?
     
     //internal variables
-    var downSampledImage: UIImage?
     var frame: CloudFrame?
     var depthDataMap: CVPixelBuffer?
     var colorDataMap: [UInt32]?
     var depthFilter: DepthImageFilters?
-    var origImage: UIImage?
     var filterImage: CIImage?
     var depthDataMapImage: UIImage?
     let context = CIContext()
@@ -92,21 +90,15 @@ class EditorViewController: UIViewController {
         //setup the depthfilters object with the context
         depthFilter = DepthImageFilters(context: context)
         
-        //grabDepthDataMap
-        grabDepthData()
+        //grab and store the depthmap and the colormap locally
+        self.colorDataMap = capturedPhoto?.getColorMap()
+        self.depthDataMap = capturedPhoto?.getDepthDataBuffer()
         
-        // Do any additional setup after loading the view.
-        origImage = 
-        
-        let ciDepthDataMapImage = CIImage(cvPixelBuffer: depthDataMap!)
-        depthDataMapImage = UIImage(ciImage: ciDepthDataMapImage) //UIImage(ciImage: imageData)
-        picView.image = UIImage(data: imageData!, scale: 1.0)//UIImage(ciImage: depthMapImage, scale: 1.0, orientation: orientation!)  //UIImage(ciImage: depthDataMapImage)
+        picView.image = capturedPhoto?.getUIImage()
         picView.contentMode = .scaleAspectFill
-
-        colorDataMap = grabColorData()
         
         //set the filtered image
-        filterImage = CIImage(image: origImage)
+        filterImage = capturedPhoto?.getCIImage()
     
         //show the sliders
         self.updateSliders(status: true)
@@ -138,27 +130,7 @@ class EditorViewController: UIViewController {
 }
 extension EditorViewController {
     // MARK: Helper Functions
-    
-    func grabDepthData(){
-        //let photoData = photo.fileDataRepresentation()
-        guard let depthData = capturedPhoto?.getDepthData() else {
-            return
-        }
-    }
-    
-    func grabColorData() -> [UInt32]? {
-        
-        guard let ciOrigImage = CIImage(image: origImage) else{
-            return nil
-        }
-        
-        guard let colorMap = downSampleColorMapimage(image: ciOrigImage) else {
-            return nil
-        }
-        
-        return colorMap
-        //return cgOrigImage?.pixelBuffer()
-    }
+
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         if let error = error {
@@ -194,23 +166,28 @@ extension EditorViewController {
         
         let selectedFilter = UISelector.selectedSegmentIndex
         
+        let origImage = capturedPhoto?.getUIImage()
+        guard let depthDataMapImage = capturedPhoto?.getDepthMapImage() else {
+            return
+        }
+        
         //create the filtered image = this is the one we are gonna change
         filterImage = CIImage(image: origImage)
         
         //convert depth image to ciimage
-        guard let depthImage = depthDataMapImage?.ciImage else {
+        guard let depthImage = CIImage(image: depthDataMapImage) else {
             return
         }
         
         //we need to scale the depth map because the depth map is not the same size as the image
         let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
-        let maxFromDim = max((depthDataMapImage?.size.width ?? 1.0), (depthDataMapImage?.size.height ?? 1.0))
+        let maxFromDim = max((depthDataMapImage.size.width ?? 1.0), (depthDataMapImage.size.height ?? 1.0))
         
         let scale = maxToDim / maxFromDim
         
         guard let mask = depthFilter?.createMask(for: depthImage, withFocus: CGFloat(SliderA.value), andWithFocus: CGFloat(SliderB.value), andScale: scale),
             let filterImage = filterImage,
-            let orientation = origImage?.imageOrientation 
+            let orientation = origImage?.imageOrientation
             else {
                 return
         }

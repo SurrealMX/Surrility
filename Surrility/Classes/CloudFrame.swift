@@ -94,27 +94,31 @@ extension CloudFrame {
         
         let height = depthHeight
         let width = depthWidth
-        var vals: [UInt64] = []
         
-        for y in 0 ..< height {
-            for x in 0 ..< width {
-                let idx = y * width + x
-                
-                var aDepthVal: [UInt8] = Depthvals[idx].toBytes()
-                var aColorVal: [UInt8] = tools.splitUint32(number: ColorMap[idx])
-                
-                for i in 0..<4 {
-                    aDepthVal.append(aColorVal[i])
+        if(height*width == ColorMap.count){
+            var vals: [UInt64] = []
+            for y in 0 ..< height {
+                for x in 0 ..< width {
+                    let idx = y * width + x
+                    
+                    var aDepthVal: [UInt8] = Depthvals[idx].toBytes()
+                    var aColorVal: [UInt8] = tools.splitUint32(number: ColorMap[idx])
+                    
+                    for i in 0..<4 {
+                        aDepthVal.append(aColorVal[i])
+                    }
+                    
+                    //let aVal: Double = Double(aDepthVals)!
+                    let data = Data(bytes: aDepthVal)
+                    let aVal = UInt64(bigEndian: data.withUnsafeBytes { $0.pointee })
+                    
+                    vals.append(aVal)
                 }
-                
-                //let aVal: Double = Double(aDepthVals)!
-                let data = Data(bytes: aDepthVal)
-                let aVal = UInt64(bigEndian: data.withUnsafeBytes { $0.pointee })
-                
-                vals.append(aVal)
             }
+            return CloudFrame(time: time, vals: vals, height: height, width: width, pSize: pixelSize)
+        } else {
+            return nil
         }
-        return CloudFrame(time: time, vals: vals, height: height, width: width, pSize: pixelSize)
     }
 
     

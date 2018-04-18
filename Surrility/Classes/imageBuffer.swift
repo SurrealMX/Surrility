@@ -24,40 +24,91 @@ class imageBuffer {
         colorsPerRow = 4
     }
     
-    func getDepthData() -> AVDepthData? {
+    func getAVDepthData() -> AVDepthData? {
+        guard let image = getCIImage() else {
+            return nil
+        }
+        return image.depthData
+    }
+    
+    func getCalibrationData() -> matrix_float3x3? {
+        guard let depthData = self.getAVDepthData() else {
+            return nil
+        }
+        return (depthData.cameraCalibrationData?.intrinsicMatrix)!
+    }
+    
+    func getDepthDataBuffer() -> CVPixelBuffer? {
         
         guard let depthData = getCIImage()?.depthData?.converting(toDepthDataType: kCVPixelFormatType_DepthFloat32) else {
             return nil
         }
         
         //this depthDataMap is the one that is the depth data associated with the image
-        self.depthDataMap = depthData.depthDataMap //AVDepthData -> CVPixelBuffer
+        let depthDataMap = depthData.depthDataMap //AVDepthData -> CVPixelBuffer
         
         //normalize the depth datamap -- this depth datamap is only used for filtering the image
-        self.depthDataMap?.normalize()
+        depthDataMap.normalize()
         
-        return depthData
+        return depthDataMap
     }
     
-    func getColorMap() -> [UInt32]? {
+    func getDepthMapImage() -> UIImage? {
+        let CIdepthMapImage = CIImage(cvImageBuffer: getDepthDataBuffer()!)
         
+        return UIImage(ciImage: CIdepthMapImage)
+        
+    }
+    
+    func getDepthMap() -> [UInt8]? {
+        let depthDataBuffer = getDepthDataBuffer()
+        
+        guard var depthDataFloats = depthDataBuffer?.extractFloats() else {
+            return nil
+        }
+        
+        var depthByteBuffer: [UInt8] = []
+        for i in stride(from: 0, to: depthDataFloats.count, by: 4) {
+            let bytes = depthDataFloats[i].toBytes()
+            //bytes should have 4 uint8s
+            depthByteBuffer.append(contentsOf: bytes)
+        }
+        return depthByteBuffer
+    }
+    
+    private func getColorMapByteArray() -> [UInt8]? {
+
         //we need to scale the depth map because the depth map is not the same size as the image
         let maxToDim = max((getUIImage()?.size.width ?? 1.0), (getUIImage()?.size.height ?? 1.0))
-        let maxFromDim = max((depthDataMapImage?.size.width ?? 1.0), (depthDataMapImage?.size.height ?? 1.0))
+        let maxFromDim = max((getDepthMapImage()?.size.width ?? 1.0), (getDepthMapImage()?.size.height ?? 1.0))
+        
+        guard let ciImage = getCIImage() else {
+            return nil
+        }
         
         let scale: Float = Float(maxFromDim/maxToDim) //maxToDim / maxFromDim
         
         let filter = CIFilter(name: "CILanczosScaleTransform")!
-        filter.setValue(image, forKey: "inputImage")
+        filter.setValue(ciImage, forKey: "inputImage")
         filter.setValue(scale, forKey: "inputScale")
         filter.setValue(1.0, forKey: "inputAspectRatio")
         let outputImage = filter.value(forKey: "outputImage") as! CIImage
         
-        self.downSampledImage = UIImage(ciImage: outputImage, scale: 1.0, orientation: (origImage?.imageOrientation)!) //ToDostore for later use in segue
+        let downSampledImage = UIImage(ciImage: outputImage, scale: 1.0, orientation: (getUIImage()!.imageOrientation)) //ToDostore for later use in segue
         
-        let colorBufferImage = UIImage(ciImage: outputImage)
-        
-        return colorBufferImage.getColors()
+        return downSampledImage.pixelData()
+    }
+    
+    func getColorMap() -> [UInt32]? {
+        guard let colormapByteArray = getColorMapByteArray() else {
+            return nil
+        }
+        var colorMap: [UInt32] = []
+        for i in stride(from: 0, to: colormapByteArray.count, by: 4) {
+            let colormap32 = tools.convertBytearrayToUInt32(byteArray: [colormapByteArray[i], colormapByteArray[i+1], colormapByteArray[i+2], colormapByteArray[i+3]])
+            colorMap.append(colormap32)
+        }
+        return colorMap
     }
     
     func getCIImage() -> CIImage? {
@@ -76,13 +127,6 @@ class imageBuffer {
         return width!
     }
     
-    private func getPixelData() -> [UInt8]? {
-        guard let pixelData = UIImage(data: imageData!)?.pixelData() else {
-            return nil
-        }
-        return pixelData
-    }
-    
     func getColorsPerRow() -> Int? {
         return colorsPerRow
     }
@@ -94,15 +138,30 @@ class imageBuffer {
         return uiImage
     }
     
-    func getUInt32() -> [UInt32]? {
-        var pixelBuffer: [UInt32] = []
-        guard let pixelData = self.getPixelData() else {
+    func getCombinedData() -> [UInt64]? {
+        var imageBuffer: [UInt64] = []
+        
+        guard let colorUIntBuffer = self.getColorMapByteArray() else {
             return nil
         }
-        for i in stride(from: 0, to: pixelData.count, by: 4) {
-            let tempBuffer: [UInt8] = [pixelData[i], pixelData[i+1], pixelData[i+2], pixelData[i+3]]
-            pixelBuffer.append(tools.convertBytearrayToUInt32(byteArray: tempBuffer))
+        
+        guard let depthUIntBuffer = self.getDepthMap() else {
+            return nil
         }
-        return pixelBuffer
+        
+        if(colorUIntBuffer.count == depthUIntBuffer.count) {
+            for i in stride(from: 0, to: colorUIntBuffer.count, by: 4) {
+                let tempColorBuffer: [UInt8] = [colorUIntBuffer[i], colorUIntBuffer[i+1], colorUIntBuffer[i+2], colorUIntBuffer[i+3]]
+                let tempDepthBuffer: [UInt8] = [depthUIntBuffer[i], depthUIntBuffer[i+1], depthUIntBuffer[i+2], depthUIntBuffer[i+3]]
+                var tempBuffer: [UInt8] = []
+                tempBuffer.append(contentsOf: tempDepthBuffer)
+                tempBuffer.append(contentsOf: tempColorBuffer)
+                
+                imageBuffer.append(tools.convertBytearrayToUInt64(byteArray: tempBuffer))
+            }
+            return imageBuffer
+        } else {
+            return nil
+        }
     }
 }
