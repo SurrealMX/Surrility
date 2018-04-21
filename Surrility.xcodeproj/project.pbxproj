@@ -33,7 +33,6 @@
 		C360B215203FCA0800802AED /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B20E203FCA0800802AED /* PreviewView.swift */; };
 		C360B217203FCCA600802AED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C360B216203FCCA600802AED /* GoogleService-Info.plist */; };
 		C3A985EF20825237005597A0 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A985EE20825237005597A0 /* PostViewController.swift */; };
-		C3A985F1208449EA005597A0 /* imageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A985F0208449EA005597A0 /* imageBuffer.swift */; };
 		C3D6B1F0204536AE00D02602 /* UIDeviceOrientationExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */; };
 		C3D6B1F52047FAAB00D02602 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */; };
 		D9A722A5C25E92791FE2D841 /* Pods_Surrility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C01860FACF6B6088BA2CADF /* Pods_Surrility.framework */; };
@@ -96,7 +95,6 @@
 		C360B20E203FCA0800802AED /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		C360B216203FCCA600802AED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3A985EE20825237005597A0 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		C3A985F0208449EA005597A0 /* imageBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageBuffer.swift; sourceTree = "<group>"; };
 		C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceOrientationExtention.swift; sourceTree = "<group>"; };
 		C3D6B1F32047C18600D02602 /* Surrility.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Surrility.entitlements; sourceTree = "<group>"; };
 		C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -239,7 +237,6 @@
 				C360B202203FC9A600802AED /* CloudFrame.swift */,
 				C360B203203FC9A600802AED /* SimpleVector.swift */,
 				C360B204203FC9A600802AED /* tools.swift */,
-				C3A985F0208449EA005597A0 /* imageBuffer.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -566,7 +563,6 @@
 				C360B207203FC9A600802AED /* tools.swift in Sources */,
 				C360B210203FCA0800802AED /* EditorViewController.swift in Sources */,
 				C360B1FE203FC9A100802AED /* CIImageExtension.swift in Sources */,
-				C3A985F1208449EA005597A0 /* imageBuffer.swift in Sources */,
 				C360B213203FCA0800802AED /* PhotoCaptureDelegate.swift in Sources */,
 				C360B1C8203FC97800802AED /* AppDelegate.swift in Sources */,
 				C360B206203FC9A600802AED /* SimpleVector.swift in Sources */,

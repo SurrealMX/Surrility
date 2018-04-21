@@ -11,6 +11,7 @@
 import Foundation
 
 extension Float {
+    
     public mutating func toBytes() -> [UInt8] {
         var value = self.bitPattern.bigEndian  //when i transfer over network convention is to convert the data to bigEndian
         let data = Data(buffer: UnsafeBufferPointer(start: &value, count: 1))

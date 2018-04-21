@@ -101,11 +101,10 @@ extension CloudFrame {
                 let idx = y * width + x
                 
                 var aDepthVal: [UInt8] = Depthvals[idx].toBytes()
-                var aColorVal: [UInt8] = tools.splitUint32(number: ColorMap[idx])
+                let aColorVal: [UInt8] = tools.splitUint32(number: ColorMap[idx])
                 
-                for i in 0..<4 {
-                    aDepthVal.append(aColorVal[i])
-                }
+                aDepthVal.append(contentsOf: aColorVal)
+
                 
                 //let aVal: Double = Double(aDepthVals)!
                 let data = Data(bytes: aDepthVal)
@@ -116,7 +115,6 @@ extension CloudFrame {
         }
         return CloudFrame(time: time, vals: vals, height: height, width: width, pSize: pixelSize)
     }
-
     
     static func compileFrame(CVBuffer: CVPixelBuffer, time: Float, pixelSize: Float) -> CloudFrame? {
         var vals = CVBuffer.extractFloats()

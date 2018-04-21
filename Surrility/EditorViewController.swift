@@ -99,18 +99,11 @@ class EditorViewController: UIViewController {
         let imageData = capturedPhoto?.fileDataRepresentation()
         origImage = UIImage(data: imageData!)!
         
-        //let cgImage = context.createCGImage(ciImage, from: ciImage.extent)
-        
-        //let cgOrigImage: CGImage = capturedPhoto?.cgImageRepresentation() as! CGImage
-        //pixelBuffer = cgOrigImage.pixelBuffer()
-        
         //let orientation = origImage?.imageOrientation
         let ciDepthDataMapImage = CIImage(cvPixelBuffer: depthDataMap!)
         depthDataMapImage = UIImage(ciImage: ciDepthDataMapImage) //UIImage(ciImage: imageData)
         picView.image = UIImage(data: imageData!, scale: 1.0)//UIImage(ciImage: depthMapImage, scale: 1.0, orientation: orientation!)  //UIImage(ciImage: depthDataMapImage)
         picView.contentMode = .scaleAspectFill
-        
-        //depthDataMap = upSampleDepthMap()
         
         colorDataMap = grabColorData()
         
@@ -187,11 +180,10 @@ extension EditorViewController {
         filter.setValue(1.0, forKey: "inputAspectRatio")
         let outputImage = filter.value(forKey: "outputImage") as! CIImage
         
-        self.downSampledImage = UIImage(ciImage: outputImage, scale: 1.0, orientation: (origImage?.imageOrientation)!) //ToDostore for later use in segue
+        let CGoutputImage = tools.convertCIImageToCGImage(inputImage: outputImage)
         
-        let colorBufferImage = UIImage(ciImage: outputImage)
-        
-        return colorBufferImage.getColors()
+        let colorBuffer = CGoutputImage?.findColors()
+        return colorBuffer
     }
     
     func upSampleDepthMap() -> CVPixelBuffer?{
