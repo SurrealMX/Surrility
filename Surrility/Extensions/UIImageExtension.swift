@@ -41,6 +41,7 @@ extension UIImage {
     }
     
     self.init(ciImage: ciImage)
+    
   }
     
     func pixelData() -> [UInt8]? {

@@ -122,26 +122,6 @@ extension CloudFrame {
     }
 
     
-    static func compileFrame(CVBuffer: CVPixelBuffer, time: Float, pixelSize: Float) -> CloudFrame? {
-        var vals = CVBuffer.extractFloats()
-        let height = CVPixelBufferGetHeight(CVBuffer)
-        let width = CVPixelBufferGetWidth(CVBuffer)
-        
-        var Dvals: [UInt64] = []
-        for x in 0 ..< width{
-            for y in 0 ..< height{
-                let idx = y * width + x
-                
-                let data = Data(bytes: vals[idx].toBytes())
-                let aVal = UInt64(bigEndian: data.withUnsafeBytes { $0.pointee })
-                Dvals.append(aVal)
-                //Dvals.append(Double(vals[x+width*y]))
-            }
-        }
-        
-        return CloudFrame(time: time, vals: Dvals, height: height, width: width, pSize: pixelSize)
-    }
-    
     private static func normalize(vals: [Float], height: Int, width: Int, and parameters: [Float]) -> [Float] {
         
         var normalizedVals: [Float] = []

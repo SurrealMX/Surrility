@@ -91,8 +91,8 @@ class EditorViewController: UIViewController {
         depthFilter = DepthImageFilters(context: context)
         
         //grab and store the depthmap and the colormap locally
-        self.colorDataMap = capturedPhoto?.getColorMap()
         self.depthDataMap = capturedPhoto?.getDepthDataBuffer()
+        self.colorDataMap = capturedPhoto?.getColorMap()
         
         picView.image = capturedPhoto?.getUIImage()
         picView.contentMode = .scaleAspectFill

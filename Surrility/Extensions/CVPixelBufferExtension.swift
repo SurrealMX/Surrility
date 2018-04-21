@@ -50,7 +50,8 @@ extension CVPixelBuffer {
         
         for y in 0 ..< height {
             for x in 0 ..< width {
-                let pixel = floatBuffer[y * width + x]
+                let idx = y * width + x
+                let pixel = floatBuffer[idx]
                 minPixel = min(pixel, minPixel)
                 maxPixel = max(pixel, maxPixel)
             }

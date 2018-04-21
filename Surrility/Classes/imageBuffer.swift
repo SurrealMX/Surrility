@@ -11,24 +11,31 @@ import UIKit
 import AVFoundation
 
 class imageBuffer {
-    var imageData: Data?
+    var photo: AVCapturePhoto?
     var colorBuffer: [UInt8]?
     var height: Int?
     var width: Int?
     var colorsPerRow: Int?
     
-    init(filedatarepresentation: Data) {
-        let image = UIImage(data: filedatarepresentation)
-        height = Int((image?.size.height)!)
-        width = Int((image?.size.width)!)
-        colorsPerRow = 4
+    var depthBuffer: CVPixelBuffer?
+    
+    init(_photo: AVCapturePhoto) {
+        self.photo = _photo
+        
+        let image = UIImage(data: _photo.fileDataRepresentation()!)
+        self.height = Int((image?.size.height)!)
+        self.width = Int((image?.size.width)!)
+        self.colorsPerRow = 4
     }
     
-    func getAVDepthData() -> AVDepthData? {
-        guard let image = getCIImage() else {
+    private func getAVDepthData() -> AVDepthData? {
+        guard let depthData = self.photo?.depthData else {
             return nil
         }
-        return image.depthData
+        
+        depthData.converting(toDepthDataType: kCVPixelFormatType_DepthFloat32)
+        
+        return depthData
     }
     
     func getCalibrationData() -> matrix_float3x3? {
@@ -40,21 +47,32 @@ class imageBuffer {
     
     func getDepthDataBuffer() -> CVPixelBuffer? {
         
-        guard let depthData = getCIImage()?.depthData?.converting(toDepthDataType: kCVPixelFormatType_DepthFloat32) else {
-            return nil
+        if(depthBuffer == nil){
+            //this depthDataMap is the one that is the depth data associated with the image
+            guard let depthDataMap = getAVDepthData()?.depthDataMap else {
+                return nil
+            }
+            
+            //normalize the depth datamap -- this depth datamap is only used for filtering the image
+            depthDataMap.normalize()
+            
+            depthBuffer = depthDataMap
         }
         
-        //this depthDataMap is the one that is the depth data associated with the image
-        let depthDataMap = depthData.depthDataMap //AVDepthData -> CVPixelBuffer
-        
-        //normalize the depth datamap -- this depth datamap is only used for filtering the image
-        depthDataMap.normalize()
-        
-        return depthDataMap
+        return depthBuffer
     }
     
     func getDepthMapImage() -> UIImage? {
-        let CIdepthMapImage = CIImage(cvImageBuffer: getDepthDataBuffer()!)
+        
+        let depthDataBuffer: CVPixelBuffer
+        
+        if (depthBuffer == nil) {
+            depthDataBuffer = getDepthDataBuffer()!
+        } else {
+            depthDataBuffer = depthBuffer!
+        }
+        
+        let CIdepthMapImage = CIImage(cvImageBuffer: depthDataBuffer)
         
         return UIImage(ciImage: CIdepthMapImage)
         
@@ -112,7 +130,7 @@ class imageBuffer {
     }
     
     func getCIImage() -> CIImage? {
-        guard let ciImage = CIImage(data: imageData!) else {
+        guard let ciImage = CIImage(data: (photo?.fileDataRepresentation())!) else {
             return nil
         }
         
@@ -132,7 +150,7 @@ class imageBuffer {
     }
     
     func getUIImage() -> UIImage? {
-        guard let uiImage = UIImage(data: imageData!) else {
+        guard let uiImage = UIImage(data: (photo?.fileDataRepresentation())!) else {
             return nil
         }
         return uiImage
@@ -147,6 +165,36 @@ class imageBuffer {
         
         guard let depthUIntBuffer = self.getDepthMap() else {
             return nil
+        }
+        
+        if(colorUIntBuffer.count == depthUIntBuffer.count) {
+            for i in stride(from: 0, to: colorUIntBuffer.count, by: 4) {
+                let tempColorBuffer: [UInt8] = [colorUIntBuffer[i], colorUIntBuffer[i+1], colorUIntBuffer[i+2], colorUIntBuffer[i+3]]
+                let tempDepthBuffer: [UInt8] = [depthUIntBuffer[i], depthUIntBuffer[i+1], depthUIntBuffer[i+2], depthUIntBuffer[i+3]]
+                var tempBuffer: [UInt8] = []
+                tempBuffer.append(contentsOf: tempDepthBuffer)
+                tempBuffer.append(contentsOf: tempColorBuffer)
+                
+                imageBuffer.append(tools.convertBytearrayToUInt64(byteArray: tempBuffer))
+            }
+            return imageBuffer
+        } else {
+            return nil
+        }
+    }
+    
+    func getCombinedData(with filteredDepth: CVPixelBuffer) -> [UInt64]? {
+        var imageBuffer: [UInt64] = []
+        
+        guard let colorUIntBuffer = self.getColorMapByteArray() else {
+            return nil
+        }
+        
+        var floatDepthBuffer = filteredDepth.extractFloats()
+        
+        var depthUIntBuffer: [UInt8] = []
+        for i in 0 ..< floatDepthBuffer.count {
+            depthUIntBuffer.append(contentsOf: floatDepthBuffer[i].toBytes())
         }
         
         if(colorUIntBuffer.count == depthUIntBuffer.count) {

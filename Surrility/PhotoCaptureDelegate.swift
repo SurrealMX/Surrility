@@ -67,7 +67,7 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate, AVCaptureDepthDa
         if let error = error {
             print("Error capturing photo: \(error)")
         } else {
-            let capturedPhoto = imageBuffer(filedatarepresentation: photo.fileDataRepresentation()!)
+            let capturedPhoto = imageBuffer(_photo: photo)
             
             
             //now move to the next view for exit and store
