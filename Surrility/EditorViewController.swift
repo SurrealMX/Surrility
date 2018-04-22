@@ -94,9 +94,24 @@ class EditorViewController: UIViewController {
         self.depthDataMap = capturedPhoto?.getDepthDataBuffer()
         self.colorDataMap = capturedPhoto?.getColorMap()
         
+<<<<<<< HEAD
         picView.image = capturedPhoto?.getUIImage()
         picView.contentMode = .scaleAspectFill
         
+=======
+        // Do any additional setup after loading the view.
+        let imageData = capturedPhoto?.fileDataRepresentation()
+        origImage = UIImage(data: imageData!)!
+        
+        //let orientation = origImage?.imageOrientation
+        let ciDepthDataMapImage = CIImage(cvPixelBuffer: depthDataMap!)
+        depthDataMapImage = UIImage(ciImage: ciDepthDataMapImage) //UIImage(ciImage: imageData)
+        picView.image = UIImage(data: imageData!, scale: 1.0)//UIImage(ciImage: depthMapImage, scale: 1.0, orientation: orientation!)  //UIImage(ciImage: depthDataMapImage)
+        picView.contentMode = .scaleAspectFill
+        
+        colorDataMap = grabColorData()
+        
+>>>>>>> updatesToStorageProcess
         //set the filtered image
         filterImage = capturedPhoto?.getCIImage()
     
@@ -131,6 +146,55 @@ class EditorViewController: UIViewController {
 extension EditorViewController {
     // MARK: Helper Functions
 
+<<<<<<< HEAD
+=======
+        //we need to scale the depth map because the depth map is not the same size as the image
+        let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
+        let maxFromDim = max((depthDataMapImage?.size.width ?? 1.0), (depthDataMapImage?.size.height ?? 1.0))
+        
+        let scale: Float = Float(maxFromDim/maxToDim) //maxToDim / maxFromDim
+        
+        let filter = CIFilter(name: "CILanczosScaleTransform")!
+        filter.setValue(image, forKey: "inputImage")
+        filter.setValue(scale, forKey: "inputScale")
+        filter.setValue(1.0, forKey: "inputAspectRatio")
+        let outputImage = filter.value(forKey: "outputImage") as! CIImage
+        
+        let CGoutputImage = tools.convertCIImageToCGImage(inputImage: outputImage)
+        
+        let colorBuffer = CGoutputImage?.findColors()
+        return colorBuffer
+    }
+    
+    func upSampleDepthMap() -> CVPixelBuffer?{
+        
+        //this function will will upsample the depth buffer to match the image
+        let ciDepthDataMapImage = CIImage(cvPixelBuffer: depthDataMap!)
+        
+        //we need to scale the depth map because the depth map is not the same size as the image
+        let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
+        let maxFromDim = max((depthDataMapImage?.size.width ?? 1.0), (depthDataMapImage?.size.height ?? 1.0))
+        
+        let scale = maxToDim / maxFromDim
+        
+        let filter = CIFilter(name: "CILanczosScaleTransform")!
+        filter.setValue(ciDepthDataMapImage, forKey: "inputImage")
+        filter.setValue(scale, forKey: "inputScale")
+        filter.setValue(1.0, forKey: "inputAspectRatio")
+        let outputImage = filter.value(forKey: "outputImage") as! CIImage
+        
+        guard let depthBufferImage = tools.convertCIImageToCGImage(inputImage: outputImage) else {
+            return nil
+        }
+        
+        let depthBuffer = depthBufferImage.pixelBuffer()
+        
+        return depthBuffer
+        
+        //let context = CIContext(options: [kCIContextUseSoftwareRenderer: false])
+        //let scaledImage = UIImage(CGImage: self.context.createCGImage(outputImage, fromRect: outputImage.extent()))
+    }
+>>>>>>> updatesToStorageProcess
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         if let error = error {

@@ -49,7 +49,17 @@ class tools{
     
     public static func convertBytearrayToUInt64(byteArray: [UInt8]) -> UInt64 {
         let data = Data(byteArray)
-        return UInt64(bigEndian: data.withUnsafeBytes { $0.pointee })  //converted array of uint8s into one uint32
+        return UInt64(bigEndian: data.withUnsafeBytes { $0.pointee })  //converted array of uint8s into one uint64
+    }
+    
+    public static func float32TobyteArray(floatArray: [Float]) -> [UInt8]{
+        var floatBytes: [UInt8] = []
+        var array = floatArray
+        for i in 0 ..< floatArray.count {
+            let byteArray: [UInt8] = array[i].toBytes()
+            floatBytes.append(contentsOf: byteArray)
+        }
+        return floatBytes
     }
     
     public static func splitUint32(number: UInt32) -> [UInt8]{

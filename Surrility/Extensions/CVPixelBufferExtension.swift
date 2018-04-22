@@ -125,7 +125,7 @@ extension CVPixelBuffer {
                 if((pixel >= minPixel) && (pixel <= maxPixel)) {
                     floatBuffer[y * width + x] = pixel
                 } else {
-                    floatBuffer[y*width + x] = -1
+                    floatBuffer[y*width + x] = 0
                 }
             }
         }

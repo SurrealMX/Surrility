@@ -95,6 +95,7 @@ extension CloudFrame {
         let height = depthHeight
         let width = depthWidth
         
+<<<<<<< HEAD
         if(height*width == ColorMap.count){
             var vals: [UInt64] = []
             for y in 0 ..< height {
@@ -114,13 +115,29 @@ extension CloudFrame {
                     
                     vals.append(aVal)
                 }
+=======
+        for y in 0 ..< height {
+            for x in 0 ..< width {
+                let idx = y * width + x
+                
+                var aDepthVal: [UInt8] = Depthvals[idx].toBytes()
+                let aColorVal: [UInt8] = tools.splitUint32(number: ColorMap[idx])
+                
+                aDepthVal.append(contentsOf: aColorVal)
+
+                
+                //let aVal: Double = Double(aDepthVals)!
+                let data = Data(bytes: aDepthVal)
+                let aVal = UInt64(bigEndian: data.withUnsafeBytes { $0.pointee })
+                
+                vals.append(aVal)
+>>>>>>> updatesToStorageProcess
             }
             return CloudFrame(time: time, vals: vals, height: height, width: width, pSize: pixelSize)
         } else {
             return nil
         }
     }
-
     
     private static func normalize(vals: [Float], height: Int, width: Int, and parameters: [Float]) -> [Float] {
         
