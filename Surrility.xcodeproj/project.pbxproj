@@ -12,6 +12,7 @@
 		C315FACD20721856003364FA /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C315FACC20721856003364FA /* StringExtension.swift */; };
 		C31A03CD204AB5EF003CDFEC /* DepthImageFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31A03CC204AB5EF003CDFEC /* DepthImageFilters.swift */; };
 		C31A03CF204BB123003CDFEC /* FloatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C31A03CE204BB123003CDFEC /* FloatExtension.swift */; };
+		C34643F3208C2C9700F7FA2C /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = C34643F2208C2C9700F7FA2C /* cube.png */; };
 		C360B1C8203FC97800802AED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B1C7203FC97800802AED /* AppDelegate.swift */; };
 		C360B1D0203FC97800802AED /* Surrility.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C360B1CE203FC97800802AED /* Surrility.xcdatamodeld */; };
 		C360B1D2203FC97800802AED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C360B1D1203FC97800802AED /* Assets.xcassets */; };
@@ -27,7 +28,6 @@
 		C360B20F203FCA0800802AED /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B208203FCA0700802AED /* CameraViewController.swift */; };
 		C360B210203FCA0800802AED /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B209203FCA0700802AED /* EditorViewController.swift */; };
 		C360B211203FCA0800802AED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C360B20A203FCA0700802AED /* Main.storyboard */; };
-		C360B212203FCA0800802AED /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C360B20B203FCA0700802AED /* Info.plist */; };
 		C360B213203FCA0800802AED /* PhotoCaptureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B20C203FCA0700802AED /* PhotoCaptureDelegate.swift */; };
 		C360B214203FCA0800802AED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C360B20D203FCA0700802AED /* LaunchScreen.storyboard */; };
 		C360B215203FCA0800802AED /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B20E203FCA0800802AED /* PreviewView.swift */; };
@@ -69,6 +69,7 @@
 		C315FACC20721856003364FA /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		C31A03CC204AB5EF003CDFEC /* DepthImageFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthImageFilters.swift; sourceTree = "<group>"; };
 		C31A03CE204BB123003CDFEC /* FloatExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatExtension.swift; sourceTree = "<group>"; };
+		C34643F2208C2C9700F7FA2C /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cube.png; sourceTree = "<group>"; };
 		C360B1C4203FC97800802AED /* Surrility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Surrility.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C360B1C7203FC97800802AED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C360B1CF203FC97800802AED /* Surrility.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Surrility.xcdatamodel; sourceTree = "<group>"; };
@@ -152,6 +153,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C34643F1208C2C7700F7FA2C /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				C34643F2208C2C9700F7FA2C /* cube.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		C360B1BB203FC97800802AED = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +186,7 @@
 		C360B1C6203FC97800802AED /* Surrility */ = {
 			isa = PBXGroup;
 			children = (
+				C34643F1208C2C7700F7FA2C /* Assets */,
 				C3D6B1F32047C18600D02602 /* Surrility.entitlements */,
 				C360B1F8203FC9A100802AED /* Extensions */,
 				C360B201203FC9A600802AED /* Classes */,
@@ -313,7 +323,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = SurrealMX;
 				TargetAttributes = {
 					C360B1C3203FC97800802AED = {
@@ -364,9 +374,9 @@
 			files = (
 				C360B1D2203FC97800802AED /* Assets.xcassets in Resources */,
 				C360B214203FCA0800802AED /* LaunchScreen.storyboard in Resources */,
+				C34643F3208C2C9700F7FA2C /* cube.png in Resources */,
 				C360B217203FCCA600802AED /* GoogleService-Info.plist in Resources */,
 				C360B211203FCA0800802AED /* Main.storyboard in Resources */,
-				C360B212203FCA0800802AED /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,6 +632,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -629,6 +640,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -679,6 +691,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -686,6 +699,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

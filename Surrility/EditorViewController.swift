@@ -23,6 +23,7 @@ class EditorViewController: UIViewController {
     
     //segue variables
     var capturedPhoto: AVCapturePhoto?
+    var intrinsicMatrix: matrix_float3x3?
     
     //internal variables
     var downSampledImage: UIImage?
@@ -42,9 +43,6 @@ class EditorViewController: UIViewController {
         
         //hide the slider, updating is done
         self.updateSliders(status: false)
-    
-        //disable the extract button so you cant hit it twice
-        extractButton.isEnabled = false
     
         //let cameraCalibrationData = capturedPhoto?.cameraCalibrationData
         //print(cameraCalibrationData as Any)
@@ -103,7 +101,7 @@ class EditorViewController: UIViewController {
         let ciDepthDataMapImage = CIImage(cvPixelBuffer: depthDataMap!)
         depthDataMapImage = UIImage(ciImage: ciDepthDataMapImage) //UIImage(ciImage: imageData)
         picView.image = UIImage(data: imageData!, scale: 1.0)//UIImage(ciImage: depthMapImage, scale: 1.0, orientation: orientation!)  //UIImage(ciImage: depthDataMapImage)
-        picView.contentMode = .scaleAspectFill
+        picView.contentMode = .scaleAspectFit
         
         colorDataMap = grabColorData()
         
@@ -233,7 +231,7 @@ extension EditorViewController {
         DispatchQueue.main.async {
             self.SliderA.isHidden = status ? false:true
             self.SliderB.isHidden = status ? false:true
-            //self.progressView.isHidden = status ? true:false;
+            self.extractButton.isEnabled = status ? true:false
         }
     }
     

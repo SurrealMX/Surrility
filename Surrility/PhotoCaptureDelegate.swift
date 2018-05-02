@@ -69,12 +69,12 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate, AVCaptureDepthDa
         } else {
             let capturedPhoto = photo
             photoData = photo.fileDataRepresentation()
+            let matrix = capturedPhoto.depthData?.cameraCalibrationData?.intrinsicMatrix
             
             //now move to the next view for exit and store
             let vc = initialView?.storyboard?.instantiateViewController(withIdentifier: "Editor") as! EditorViewController
             vc.capturedPhoto = capturedPhoto  //sends the current photo to the next view controller for editing
-            //initialView?.show(vc, sender: initialView)  //go to the second view controller
-            //initialView?.present(vc, animated: true, completion: nil)
+            vc.intrinsicMatrix = matrix //sends the intrinsic matrix to the new view controller for editing
             initialView?.navigationController?.pushViewController(vc, animated: true)
         }
     }

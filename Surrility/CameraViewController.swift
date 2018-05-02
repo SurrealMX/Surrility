@@ -274,6 +274,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			photoOutput.isHighResolutionCaptureEnabled = true
 			//photoOutput.isLivePhotoCaptureEnabled = photoOutput.isLivePhotoCaptureSupported
             photoOutput.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
+
 			livePhotoMode = .off //photoOutput.isLivePhotoCaptureSupported ? .on : .off
             if(photoOutput.isDepthDataDeliverySupported) {
                 depthDataDeliveryMode = .on
@@ -364,7 +365,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 
                     DispatchQueue.main.async {
                         self.depthDataDeliveryButton.isHidden = false
-                        self.depthDataDeliveryButton.isEnabled = true
+                        self.depthDataDeliveryButton.isEnabled = false
                     }
                 }
 				
@@ -579,8 +580,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
             if self.depthDataDeliveryMode == .on && self.photoOutput.isDepthDataDeliverySupported {
                 photoSettings.isDepthDataDeliveryEnabled = true
                 photoSettings.isDepthDataFiltered = true
+                photoSettings.isCameraCalibrationDataDeliveryEnabled = self.photoOutput.isCameraCalibrationDataDeliverySupported;  //camera calibration
             } else {
                 photoSettings.isDepthDataDeliveryEnabled = false
+                photoSettings.isCameraCalibrationDataDeliveryEnabled = false
             }
 			
 			// Use a separate object for the photo capture delegate to isolate each capture life cycle.
@@ -843,6 +846,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			guard let isSessionRunning = change.newValue else { return }
 			//let isLivePhotoCaptureSupported = self.photoOutput.isLivePhotoCaptureSupported
 			//let isLivePhotoCaptureEnabled = self.photoOutput.isLivePhotoCaptureEnabled
+
 			let isDepthDeliveryDataSupported = self.photoOutput.isDepthDataDeliverySupported
 			let isDepthDeliveryDataEnabled = self.photoOutput.isDepthDataDeliveryEnabled
 			

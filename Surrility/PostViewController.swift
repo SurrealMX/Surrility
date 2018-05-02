@@ -35,8 +35,9 @@ class PostViewController: UIViewController, UITextViewDelegate{
         // Do any additional setup after loading the view.
         //updateSliders(status: true)
         ImagePreviewPlane.image = image
-        Caption.text = defaultText;
-        progressView.progress = 0.5;
+        Caption.text = defaultText
+        updateSliders(status: true)
+        progressView.progress = 0.0
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,7 +70,13 @@ class PostViewController: UIViewController, UITextViewDelegate{
     }
     
     func moveAction(){
-        performSegue(withIdentifier: "postedSegue", sender: self)
+        for vc in self.navigationController!.viewControllers as Array {
+            if vc.isKind(of: CameraViewController.self) {
+                self.navigationController!.popToViewController(vc, animated: true)
+                break
+            }
+        }
+        //performSegue(withIdentifier: "postedSegue", sender: self)
     }
     
     func updateSliders(status: Bool){
@@ -128,9 +135,7 @@ class PostViewController: UIViewController, UITextViewDelegate{
         }
             //update progress bar
             uploadTask.observe(.progress) { [weak self] (snapshot) in
-                guard let strongSelf = self else {return}
                 guard let progress = snapshot.progress else { return}
-                let test = self?.progressView.progress
                 self?.progressView.progress = Float(progress.fractionCompleted)
             }
     }
