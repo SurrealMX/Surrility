@@ -22,11 +22,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.679485"
+            timestampString = "547023510.530887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "image(_:didFinishSavingWithError:contextInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -38,11 +38,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.679561"
+            timestampString = "547023510.531553"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "didReceiveMemoryWarning()"
             landmarkType = "7">
          </BreakpointContent>
@@ -54,11 +54,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/PhotoCaptureDelegate.swift"
-            timestampString = "545431788.505555"
+            timestampString = "547023510.532087"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "photoOutput(_:didFinishProcessingPhoto:error:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -70,11 +70,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.679646"
+            timestampString = "547023510.532143"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "grabDepthData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -182,7 +182,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Extensions/CVPixelBufferExtension.swift"
-            timestampString = "546051447.679794"
+            timestampString = "547023510.532735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
@@ -198,11 +198,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.68013"
+            timestampString = "547023510.532788"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "updateImageView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -214,11 +214,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.680187"
+            timestampString = "547023510.533242"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "extract()"
             landmarkType = "7">
          </BreakpointContent>
@@ -230,12 +230,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Classes/CloudFrame.swift"
-            timestampString = "546051447.680252"
+            timestampString = "547023510.533703"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:pixelSize:)"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:intrinsicMatrix:depthParamers:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -246,12 +246,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Classes/CloudFrame.swift"
-            timestampString = "546051447.6803"
+            timestampString = "547023510.533756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:pixelSize:)"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:intrinsicMatrix:depthParamers:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -262,11 +262,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.680346"
+            timestampString = "547023510.533805"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "grabColorData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -278,11 +278,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.680397"
+            timestampString = "547023510.534259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "downSampleColorMapimage(image:)"
 >>>>>>> updatesToStorageProcess
             landmarkType = "7">
@@ -294,6 +294,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "Surrility/EditorViewController.swift"
 <<<<<<< HEAD
             timestampString = "545981464.194669"
@@ -323,13 +324,15 @@
             endingLineNumber = "88"
             landmarkName = "viewDidLoad()"
 =======
+=======
+>>>>>>> updatesToStorageProcess
             filePath = "Surrility/Classes/CloudFrame.swift"
-            timestampString = "546051447.680499"
+            timestampString = "547023510.5347019"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:pixelSize:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:intrinsicMatrix:depthParamers:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -340,12 +343,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Classes/CloudFrame.swift"
-            timestampString = "546051447.680545"
+            timestampString = "547023510.534753"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:pixelSize:)"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:intrinsicMatrix:depthParamers:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -356,11 +359,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Extensions/CVPixelBufferExtension.swift"
-            timestampString = "546051447.680591"
+            timestampString = "547023510.534802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "filterMapData(with:and:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -372,9 +375,10 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.68081"
+            timestampString = "547023510.53485"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "59"
             endingLineNumber = "59"
             landmarkName = "extract()"
@@ -403,6 +407,10 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "181"
             endingLineNumber = "181"
+=======
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+>>>>>>> updatesToStorageProcess
             landmarkName = "downSampleColorMapimage(image:)"
 >>>>>>> updatesToStorageProcess
             landmarkType = "7">
@@ -416,6 +424,7 @@
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
 <<<<<<< HEAD
+<<<<<<< HEAD
             timestampString = "545981464.195405"
 =======
             timestampString = "546051447.680913"
@@ -424,6 +433,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
             endingLineNumber = "94"
+=======
+            timestampString = "547023510.535301"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+>>>>>>> updatesToStorageProcess
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -439,11 +455,11 @@
             timestampString = "545982792.397652"
 =======
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.680964"
+            timestampString = "547023510.535764"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "grabColorData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -455,11 +471,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.681016"
+            timestampString = "547023510.536204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "extract()"
             landmarkType = "7">
          </BreakpointContent>
@@ -471,7 +487,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.681067"
+            timestampString = "547023510.536649"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
+            landmarkName = "upSampleDepthMap()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Surrility/EditorViewController.swift"
+            timestampString = "547023510.537091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "192"
@@ -487,11 +519,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.681127"
+            timestampString = "547023510.537529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "upSampleDepthMap()"
             landmarkType = "7">
          </BreakpointContent>
@@ -503,27 +535,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.681182"
+            timestampString = "547023510.53798"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
-            landmarkName = "upSampleDepthMap()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.681244"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "upSampleDepthMap()"
             landmarkType = "7">
          </BreakpointContent>
@@ -535,6 +551,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Extensions/CVPixelBufferExtension.swift"
+<<<<<<< HEAD
             timestampString = "546051447.681295"
 >>>>>>> updatesToStorageProcess
             startingColumnNumber = "9223372036854775807"
@@ -542,6 +559,14 @@
             startingLineNumber = "57"
             endingLineNumber = "57"
             landmarkName = "normalize()"
+=======
+            timestampString = "547023510.5384181"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "filterMapData(with:and:)"
+>>>>>>> updatesToStorageProcess
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -553,13 +578,17 @@
             continueAfterRunningActions = "No"
             filePath = "Surrility/Extensions/CVPixelBufferExtension.swift"
 <<<<<<< HEAD
+<<<<<<< HEAD
             timestampString = "545982792.398051"
 =======
             timestampString = "546051447.6815079"
+=======
+            timestampString = "547023510.538468"
+>>>>>>> updatesToStorageProcess
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "filterMapData(with:and:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -571,27 +600,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.681718"
+            timestampString = "547023510.538514"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "extract()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.681772"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "EditorViewController"
             landmarkType = "21">
          </BreakpointContent>
@@ -619,6 +632,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
+<<<<<<< HEAD
             timestampString = "546051447.681842"
 >>>>>>> updatesToStorageProcess
             startingColumnNumber = "9223372036854775807"
@@ -628,6 +642,13 @@
 <<<<<<< HEAD
             landmarkName = "normalize()"
 =======
+=======
+            timestampString = "547023510.53897"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+>>>>>>> updatesToStorageProcess
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -639,7 +660,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/PostViewController.swift"
-            timestampString = "545502401.475631"
+            timestampString = "546062986.13262"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -655,27 +676,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/PostViewController.swift"
-            timestampString = "545502401.477098"
+            timestampString = "546062986.132676"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "addPCM(frame:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Surrility/PostViewController.swift"
-            timestampString = "545502401.478377"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "addPCM(frame:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -687,12 +692,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Classes/CloudFrame.swift"
-            timestampString = "546051447.681939"
+            timestampString = "547023510.539453"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:pixelSize:)"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:intrinsicMatrix:depthParamers:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -703,12 +708,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Classes/CloudFrame.swift"
-            timestampString = "546051447.681986"
+            timestampString = "547023510.539505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:pixelSize:)"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "compileFrame(DepthBuffer:ColorBuffer:time:intrinsicMatrix:depthParamers:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -719,11 +724,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.682032"
+            timestampString = "547023510.539554"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "extract()"
             landmarkType = "7">
          </BreakpointContent>
@@ -735,12 +740,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/Classes/CloudFrame.swift"
-            timestampString = "546051447.682083"
+            timestampString = "547023510.539997"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "compileFrame(DepthBuffer:ColorMap:time:pixelSize:)"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "compileFrame(DepthBuffer:ColorMap:time:intrinsicMatrix:depthMapParamers:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -751,11 +756,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.6821409"
+            timestampString = "547023510.540046"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -767,11 +772,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.682196"
+            timestampString = "547023510.540493"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "grabColorData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -783,11 +788,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.6822571"
+            timestampString = "547023510.540933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "grabColorData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -799,12 +804,50 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Surrility/EditorViewController.swift"
-            timestampString = "546051447.682308"
+            timestampString = "547023510.541371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "downSampleColorMapimage(image:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Surrility/PhotoCaptureDelegate.swift"
+            timestampString = "547023510.541808"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "185"
             endingLineNumber = "185"
             landmarkName = "downSampleColorMapimage(image:)"
+>>>>>>> updatesToStorageProcess
+=======
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "photoOutput(_:didFinishProcessingPhoto:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Surrility/Classes/CloudFrame.swift"
+            timestampString = "547023510.541857"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "init(time:vals:height:width:matrix:parameters:)"
 >>>>>>> updatesToStorageProcess
             landmarkType = "7">
          </BreakpointContent>

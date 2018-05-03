@@ -1,9 +1,9 @@
 /*
-See LICENSE.txt for this sample’s licensing information.
-
-Abstract:
-Photo capture delegate.
-*/
+ See LICENSE.txt for this sample’s licensing information.
+ 
+ Abstract:
+ Photo capture delegate.
+ */
 
 import AVFoundation
 import Photos
@@ -12,45 +12,45 @@ import Photos
 
 class PhotoCaptureProcessor: NSObject {
     
-	private(set) var requestedPhotoSettings: AVCapturePhotoSettings
-	private let willCapturePhotoAnimation: () -> Void
-	private let livePhotoCaptureHandler: (Bool) -> Void
-	private let completionHandler: (PhotoCaptureProcessor) -> Void
-	private var photoData: Data?
+    private(set) var requestedPhotoSettings: AVCapturePhotoSettings
+    private let willCapturePhotoAnimation: () -> Void
+    private let livePhotoCaptureHandler: (Bool) -> Void
+    private let completionHandler: (PhotoCaptureProcessor) -> Void
+    private var photoData: Data?
     
-	
-	private var livePhotoCompanionMovieURL: URL?
-
-	init(with requestedPhotoSettings: AVCapturePhotoSettings,
-	     willCapturePhotoAnimation: @escaping () -> Void,
-	     livePhotoCaptureHandler: @escaping (Bool) -> Void,
-	     completionHandler: @escaping (PhotoCaptureProcessor) -> Void) {
-		self.requestedPhotoSettings = requestedPhotoSettings
-		self.willCapturePhotoAnimation = willCapturePhotoAnimation
-		self.livePhotoCaptureHandler = livePhotoCaptureHandler
-		self.completionHandler = completionHandler
-	}
-	
-	private func didFinish() {
-		if let livePhotoCompanionMoviePath = livePhotoCompanionMovieURL?.path {
-			if FileManager.default.fileExists(atPath: livePhotoCompanionMoviePath) {
-				do {
-					try FileManager.default.removeItem(atPath: livePhotoCompanionMoviePath)
-				} catch {
-					print("Could not remove file at url: \(livePhotoCompanionMoviePath)")
-				}
-			}
-		}
-		
-		completionHandler(self)
-	}
+    
+    private var livePhotoCompanionMovieURL: URL?
+    
+    init(with requestedPhotoSettings: AVCapturePhotoSettings,
+         willCapturePhotoAnimation: @escaping () -> Void,
+         livePhotoCaptureHandler: @escaping (Bool) -> Void,
+         completionHandler: @escaping (PhotoCaptureProcessor) -> Void) {
+        self.requestedPhotoSettings = requestedPhotoSettings
+        self.willCapturePhotoAnimation = willCapturePhotoAnimation
+        self.livePhotoCaptureHandler = livePhotoCaptureHandler
+        self.completionHandler = completionHandler
+    }
+    
+    private func didFinish() {
+        if let livePhotoCompanionMoviePath = livePhotoCompanionMovieURL?.path {
+            if FileManager.default.fileExists(atPath: livePhotoCompanionMoviePath) {
+                do {
+                    try FileManager.default.removeItem(atPath: livePhotoCompanionMoviePath)
+                } catch {
+                    print("Could not remove file at url: \(livePhotoCompanionMoviePath)")
+                }
+            }
+        }
+        
+        completionHandler(self)
+    }
     
 }
 
 extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate, AVCaptureDepthDataOutputDelegate {
     /*
      This extension includes all the delegate callbacks for AVCapturePhotoCaptureDelegate protocol
-    */
+     */
     
     func photoOutput(_ output: AVCapturePhotoOutput, willBeginCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
         if resolvedSettings.livePhotoMovieDimensions.width > 0 && resolvedSettings.livePhotoMovieDimensions.height > 0 {
@@ -67,12 +67,14 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate, AVCaptureDepthDa
         if let error = error {
             print("Error capturing photo: \(error)")
         } else {
-            let capturedPhoto = imageBuffer(_photo: photo)
-            
+            let capturedPhoto = photo
+            photoData = photo.fileDataRepresentation()
+            let matrix = capturedPhoto.depthData?.cameraCalibrationData?.intrinsicMatrix
             
             //now move to the next view for exit and store
             let vc = initialView?.storyboard?.instantiateViewController(withIdentifier: "Editor") as! EditorViewController
             vc.capturedPhoto = capturedPhoto  //sends the current photo to the next view controller for editing
+            vc.intrinsicMatrix = matrix //sends the intrinsic matrix to the new view controller for editing
             initialView?.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -116,13 +118,13 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate, AVCaptureDepthDa
                         creationRequest.addResource(with: .pairedVideo, fileURL: livePhotoCompanionMovieURL, options: livePhotoCompanionMovieFileResourceOptions)
                     }
                     
-                    }, completionHandler: { _, error in
-                        if let error = error {
-                            print("Error occurered while saving photo to photo library: \(error)")
-                        }
-                        
-                        self.didFinish()
+                }, completionHandler: { _, error in
+                    if let error = error {
+                        print("Error occurered while saving photo to photo library: \(error)")
                     }
+                    
+                    self.didFinish()
+                }
                 )
             } else {
                 self.didFinish()
@@ -130,3 +132,4 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate, AVCaptureDepthDa
         }
     }
 }
+

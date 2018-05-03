@@ -22,17 +22,21 @@ class EditorViewController: UIViewController {
     @IBOutlet weak var UISelector: UISegmentedControl!
     
     //segue variables
-    var capturedPhoto: imageBuffer?
+    var capturedPhoto: AVCapturePhoto?
+    var intrinsicMatrix: matrix_float3x3?
     
     //internal variables
+    var downSampledImage: UIImage?
     var frame: CloudFrame?
     var depthDataMap: CVPixelBuffer?
     var colorDataMap: [UInt32]?
     var depthFilter: DepthImageFilters?
+    var origImage: UIImage?
     var filterImage: CIImage?
     var depthDataMapImage: UIImage?
     let context = CIContext()
-
+    var depthMapParameters: [Float]?
+    
     var ref: DatabaseReference!
     let storage = Storage.storage()
     
@@ -40,10 +44,7 @@ class EditorViewController: UIViewController {
         
         //hide the slider, updating is done
         self.updateSliders(status: false)
-    
-        //disable the extract button so you cant hit it twice
-        extractButton.isEnabled = false
-    
+        
         //let cameraCalibrationData = capturedPhoto?.cameraCalibrationData
         //print(cameraCalibrationData as Any)
         let pSize: Float = 0.025 //(cameraCalibrationData?.pixelSize)!/1000.0 //pixelSize is in millimeters
@@ -51,10 +52,9 @@ class EditorViewController: UIViewController {
         
         //filter the depthDataMap baed on the user selected bounds and turn into [float]
         self.depthDataMap?.filterMapData(with: self.SliderA.value, and: self.SliderB.value)
-            
+        
         //get the frame
-        self.frame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorMap: self.colorDataMap!, time: 0.0, pixelSize: pSize)
-
+        self.frame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorMap: self.colorDataMap!, time: 0.0, intrinsicMatrix: self.intrinsicMatrix!, depthMapParamers: self.depthMapParameters!)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -65,7 +65,7 @@ class EditorViewController: UIViewController {
             DestinationViewController.image = UIImage(ciImage: self.filterImage)
             DestinationViewController.frame = self.frame
         }
-
+        
     }
     
     @IBAction func UISelectedChanged(_ sender: Any) {
@@ -90,15 +90,9 @@ class EditorViewController: UIViewController {
         //setup the depthfilters object with the context
         depthFilter = DepthImageFilters(context: context)
         
-        //grab and store the depthmap and the colormap locally
-        self.depthDataMap = capturedPhoto?.getDepthDataBuffer()
-        self.colorDataMap = capturedPhoto?.getColorMap()
+        //grabDepthDataMap
+        grabDepthData()
         
-<<<<<<< HEAD
-        picView.image = capturedPhoto?.getUIImage()
-        picView.contentMode = .scaleAspectFill
-        
-=======
         // Do any additional setup after loading the view.
         let imageData = capturedPhoto?.fileDataRepresentation()
         origImage = UIImage(data: imageData!)!
@@ -111,10 +105,9 @@ class EditorViewController: UIViewController {
         
         colorDataMap = grabColorData()
         
->>>>>>> updatesToStorageProcess
         //set the filtered image
-        filterImage = capturedPhoto?.getCIImage()
-    
+        filterImage = CIImage(image: origImage)
+        
         //show the sliders
         self.updateSliders(status: true)
         
@@ -124,7 +117,7 @@ class EditorViewController: UIViewController {
         //update the current view
         self.updateImageView()
     }
-
+    
     @IBAction func SliderA_ValueChanged(_ sender: UISlider) {
         DispatchQueue.global(qos: .userInitiated).async {
             self.updateImageView()
@@ -141,13 +134,41 @@ class EditorViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }
 extension EditorViewController {
     // MARK: Helper Functions
-
-<<<<<<< HEAD
-=======
+    
+    func grabDepthData(){
+        //let photoData = photo.fileDataRepresentation()
+        let depthData = (capturedPhoto?.depthData as AVDepthData?)?.converting(toDepthDataType: kCVPixelFormatType_DepthFloat32)
+        
+        //this depthDataMap is the one that is the depth data associated with the image
+        self.depthDataMap = depthData?.depthDataMap //AVDepthData -> CVPixelBuffer
+        
+        //grab parameters from depth data
+        depthMapParameters = self.depthDataMap?.getParams() //params = [minP, maxP, range]
+        
+        //normalize the depth datamap -- this depth datamap is only used for filtering the image
+        self.depthDataMap?.normalize()
+    }
+    
+    func grabColorData() -> [UInt32]? {
+        
+        guard let ciOrigImage = CIImage(image: origImage) else{
+            return nil
+        }
+        
+        guard let colorMap = downSampleColorMapimage(image: ciOrigImage) else {
+            return nil
+        }
+        
+        return colorMap
+        //return cgOrigImage?.pixelBuffer()
+    }
+    
+    func downSampleColorMapimage(image: CIImage) -> [UInt32]? {
+        
         //we need to scale the depth map because the depth map is not the same size as the image
         let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
         let maxFromDim = max((depthDataMapImage?.size.width ?? 1.0), (depthDataMapImage?.size.height ?? 1.0))
@@ -194,7 +215,6 @@ extension EditorViewController {
         //let context = CIContext(options: [kCIContextUseSoftwareRenderer: false])
         //let scaledImage = UIImage(CGImage: self.context.createCGImage(outputImage, fromRect: outputImage.extent()))
     }
->>>>>>> updatesToStorageProcess
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         if let error = error {
@@ -214,7 +234,7 @@ extension EditorViewController {
         DispatchQueue.main.async {
             self.SliderA.isHidden = status ? false:true
             self.SliderB.isHidden = status ? false:true
-            //self.progressView.isHidden = status ? true:false;
+            self.extractButton.isEnabled = status ? true:false
         }
     }
     
@@ -230,22 +250,17 @@ extension EditorViewController {
         
         let selectedFilter = UISelector.selectedSegmentIndex
         
-        let origImage = capturedPhoto?.getUIImage()
-        guard let depthDataMapImage = capturedPhoto?.getDepthMapImage() else {
-            return
-        }
-        
         //create the filtered image = this is the one we are gonna change
         filterImage = CIImage(image: origImage)
         
         //convert depth image to ciimage
-        guard let depthImage = CIImage(image: depthDataMapImage) else {
+        guard let depthImage = depthDataMapImage?.ciImage else {
             return
         }
         
         //we need to scale the depth map because the depth map is not the same size as the image
         let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
-        let maxFromDim = max((depthDataMapImage.size.width ?? 1.0), (depthDataMapImage.size.height ?? 1.0))
+        let maxFromDim = max((depthDataMapImage?.size.width ?? 1.0), (depthDataMapImage?.size.height ?? 1.0))
         
         let scale = maxToDim / maxFromDim
         
@@ -274,7 +289,7 @@ extension EditorViewController {
                     return
             }
             finalImage = UIImage(cgImage: cgImage, scale: 1.0, orientation: origImage.imageOrientation)
-
+            
         default:
             return
         }
@@ -289,3 +304,4 @@ extension EditorViewController {
         }
     }
 }
+
