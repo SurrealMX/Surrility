@@ -35,6 +35,7 @@ class EditorViewController: UIViewController {
     var filterImage: CIImage?
     var depthDataMapImage: UIImage?
     let context = CIContext()
+    var depthMapParameters: [Float]?
 
     var ref: DatabaseReference!
     let storage = Storage.storage()
@@ -53,8 +54,7 @@ class EditorViewController: UIViewController {
         self.depthDataMap?.filterMapData(with: self.SliderA.value, and: self.SliderB.value)
             
         //get the frame
-        self.frame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorMap: self.colorDataMap!, time: 0.0, pixelSize: pSize)
-
+        self.frame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorMap: self.colorDataMap!, time: 0.0, intrinsicMatrix: self.intrinsicMatrix!, depthMapParamers: self.depthMapParameters!)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -101,7 +101,7 @@ class EditorViewController: UIViewController {
         let ciDepthDataMapImage = CIImage(cvPixelBuffer: depthDataMap!)
         depthDataMapImage = UIImage(ciImage: ciDepthDataMapImage) //UIImage(ciImage: imageData)
         picView.image = UIImage(data: imageData!, scale: 1.0)//UIImage(ciImage: depthMapImage, scale: 1.0, orientation: orientation!)  //UIImage(ciImage: depthDataMapImage)
-        picView.contentMode = .scaleAspectFit
+        picView.contentMode = .scaleAspectFill
         
         colorDataMap = grabColorData()
         
@@ -141,10 +141,13 @@ extension EditorViewController {
     
     func grabDepthData(){
         //let photoData = photo.fileDataRepresentation()
-        let depthData = (capturedPhoto?.depthData as AVDepthData!).converting(toDepthDataType: kCVPixelFormatType_DepthFloat32)
+        let depthData = (capturedPhoto?.depthData as AVDepthData?)?.converting(toDepthDataType: kCVPixelFormatType_DepthFloat32)
         
         //this depthDataMap is the one that is the depth data associated with the image
-        self.depthDataMap = depthData.depthDataMap //AVDepthData -> CVPixelBuffer
+        self.depthDataMap = depthData?.depthDataMap //AVDepthData -> CVPixelBuffer
+        
+        //grab parameters from depth data
+        depthMapParameters = self.depthDataMap?.getParams() //params = [minP, maxP, range]
         
         //normalize the depth datamap -- this depth datamap is only used for filtering the image
         self.depthDataMap?.normalize()
