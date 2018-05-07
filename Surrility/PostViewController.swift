@@ -5,7 +5,6 @@
 //  Created by Administrator on 4/14/18.
 //  Copyright © 2018 SurrealMX. All rights reserved.
 //
-
 import UIKit
 import Photos
 import Firebase
@@ -23,7 +22,7 @@ class PostViewController: UIViewController, UITextViewDelegate{
     var image: UIImage?
     
     var defaultText: String = "Write Caption..."
-
+    
     @IBAction func iShare(_ sender: Any) {
         self.addPCM(frame: self.frame!)
         //moveAction();
@@ -31,7 +30,7 @@ class PostViewController: UIViewController, UITextViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         //updateSliders(status: true)
         ImagePreviewPlane.image = image
@@ -39,7 +38,7 @@ class PostViewController: UIViewController, UITextViewDelegate{
         updateSliders(status: true)
         progressView.progress = 0.0
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -133,10 +132,10 @@ class PostViewController: UIViewController, UITextViewDelegate{
                 })
             }
         }
-            //update progress bar
-            uploadTask.observe(.progress) { [weak self] (snapshot) in
-                guard let progress = snapshot.progress else { return}
-                self?.progressView.progress = Float(progress.fractionCompleted)
-            }
+        //update progress bar
+        uploadTask.observe(.progress) { [weak self] (snapshot) in
+            guard let progress = snapshot.progress else { return}
+            self?.progressView.progress = Float(progress.fractionCompleted)
+        }
     }
 }

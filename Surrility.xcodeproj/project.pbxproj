@@ -32,7 +32,11 @@
 		C360B214203FCA0800802AED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C360B20D203FCA0700802AED /* LaunchScreen.storyboard */; };
 		C360B215203FCA0800802AED /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360B20E203FCA0800802AED /* PreviewView.swift */; };
 		C360B217203FCCA600802AED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C360B216203FCCA600802AED /* GoogleService-Info.plist */; };
-		C3A985EF20825237005597A0 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A985EE20825237005597A0 /* PostViewController.swift */; };
+		C3A519D620A01A3B00C47AC0 /* Surrility-532018.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A519D520A01A3B00C47AC0 /* Surrility-532018.png */; };
+		C3A519DA20A0261C00C47AC0 /* icons8-edit-account-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A519D920A0261B00C47AC0 /* icons8-edit-account-50.png */; };
+		C3A519DC20A026C400C47AC0 /* icons8-login-as-user-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A519DB20A026C400C47AC0 /* icons8-login-as-user-50.png */; };
+		C3A519DE20A02B6A00C47AC0 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A519DD20A02B6A00C47AC0 /* PostViewController.swift */; };
+		C3A519E020A02D5D00C47AC0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A519DF20A02D5D00C47AC0 /* ProfileViewController.swift */; };
 		C3D6B1F0204536AE00D02602 /* UIDeviceOrientationExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */; };
 		C3D6B1F52047FAAB00D02602 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */; };
 		D9A722A5C25E92791FE2D841 /* Pods_Surrility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C01860FACF6B6088BA2CADF /* Pods_Surrility.framework */; };
@@ -95,7 +99,11 @@
 		C360B20D203FCA0700802AED /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C360B20E203FCA0800802AED /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		C360B216203FCCA600802AED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C3A985EE20825237005597A0 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		C3A519D520A01A3B00C47AC0 /* Surrility-532018.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Surrility-532018.png"; sourceTree = "<group>"; };
+		C3A519D920A0261B00C47AC0 /* icons8-edit-account-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-edit-account-50.png"; sourceTree = "<group>"; };
+		C3A519DB20A026C400C47AC0 /* icons8-login-as-user-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-login-as-user-50.png"; sourceTree = "<group>"; };
+		C3A519DD20A02B6A00C47AC0 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		C3A519DF20A02D5D00C47AC0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceOrientationExtention.swift; sourceTree = "<group>"; };
 		C3D6B1F32047C18600D02602 /* Surrility.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Surrility.entitlements; sourceTree = "<group>"; };
 		C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +164,9 @@
 		C34643F1208C2C7700F7FA2C /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C3A519D520A01A3B00C47AC0 /* Surrility-532018.png */,
+				C3A519DB20A026C400C47AC0 /* icons8-login-as-user-50.png */,
+				C3A519D920A0261B00C47AC0 /* icons8-edit-account-50.png */,
 				C34643F2208C2C9700F7FA2C /* cube.png */,
 			);
 			path = Assets;
@@ -199,10 +210,11 @@
 				C360B20D203FCA0700802AED /* LaunchScreen.storyboard */,
 				C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */,
 				C360B20A203FCA0700802AED /* Main.storyboard */,
+				C3A519DF20A02D5D00C47AC0 /* ProfileViewController.swift */,
+				C3A519DD20A02B6A00C47AC0 /* PostViewController.swift */,
 				C360B20C203FCA0700802AED /* PhotoCaptureDelegate.swift */,
 				C360B20E203FCA0800802AED /* PreviewView.swift */,
 				C360B216203FCCA600802AED /* GoogleService-Info.plist */,
-				C3A985EE20825237005597A0 /* PostViewController.swift */,
 			);
 			path = Surrility;
 			sourceTree = "<group>";
@@ -374,9 +386,12 @@
 			files = (
 				C360B1D2203FC97800802AED /* Assets.xcassets in Resources */,
 				C360B214203FCA0800802AED /* LaunchScreen.storyboard in Resources */,
+				C3A519D620A01A3B00C47AC0 /* Surrility-532018.png in Resources */,
+				C3A519DA20A0261C00C47AC0 /* icons8-edit-account-50.png in Resources */,
 				C34643F3208C2C9700F7FA2C /* cube.png in Resources */,
 				C360B217203FCCA600802AED /* GoogleService-Info.plist in Resources */,
 				C360B211203FCA0800802AED /* Main.storyboard in Resources */,
+				C3A519DC20A026C400C47AC0 /* icons8-login-as-user-50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,7 +582,7 @@
 				C31A03CF204BB123003CDFEC /* FloatExtension.swift in Sources */,
 				C360B1D0203FC97800802AED /* Surrility.xcdatamodeld in Sources */,
 				C360B20F203FCA0800802AED /* CameraViewController.swift in Sources */,
-				C3A985EF20825237005597A0 /* PostViewController.swift in Sources */,
+				C3A519DE20A02B6A00C47AC0 /* PostViewController.swift in Sources */,
 				C31A03CD204AB5EF003CDFEC /* DepthImageFilters.swift in Sources */,
 				C360B200203FC9A100802AED /* UIImageExtension.swift in Sources */,
 				C360B207203FC9A600802AED /* tools.swift in Sources */,
@@ -581,6 +596,7 @@
 				C3D6B1F52047FAAB00D02602 /* LoginViewController.swift in Sources */,
 				C360B1FD203FC9A100802AED /* CGImageExtension.swift in Sources */,
 				C315FACD20721856003364FA /* StringExtension.swift in Sources */,
+				C3A519E020A02D5D00C47AC0 /* ProfileViewController.swift in Sources */,
 				C360B1FF203FC9A100802AED /* CVPixelBufferExtension.swift in Sources */,
 				C3D6B1F0204536AE00D02602 /* UIDeviceOrientationExtention.swift in Sources */,
 			);
