@@ -16,6 +16,8 @@ var UserName: String? = nil
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
+    @IBOutlet weak var fbButton: FBSDKLoginButton!
+    
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if (error != nil) {
             print("login failed")
@@ -30,16 +32,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         // Do any additional setup after loading the view.
-        let loginButton = FBSDKLoginButton()
-        
-        view.addSubview(loginButton)
-        loginButton.center = view.center
-        
-        loginButton.delegate = self
-        loginButton.readPermissions = ["email", "public_profile"]
-        
+        fbButton.backgroundColor = UIColor.darkGray
+        fbButton.setTitle("Continue with Facebook", for: UIControlState.normal)
+        fbButton.readPermissions = ["email", "public_profile"]
+        fbButton.delegate = self
         //persistent login
         if (FBSDKAccessToken.current()) != nil {
             //well i was already logged in
