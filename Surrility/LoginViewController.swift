@@ -32,7 +32,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
         // Do any additional setup after loading the view.
         fbButton.backgroundColor = UIColor.darkGray
         fbButton.setTitle("Continue with Facebook", for: UIControlState.normal)
