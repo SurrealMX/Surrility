@@ -63,7 +63,7 @@ extension CVPixelBuffer {
             for x in 0 ..< width {
                 let pixel = floatBuffer[y * width + x]
                 floatBuffer[y * width + x] = (pixel - minPixel) / range  //normalizes the range
-                //floatBuffer[y * width + x] = (pixel/maxPixel) //(pixel-minPixel)/range
+                //floatBuffer[y * width + x] = (pixel/maxPixel) //normalize the values
             }
         }
         
@@ -126,7 +126,7 @@ extension CVPixelBuffer {
                 if((pixel >= minPixel) && (pixel <= maxPixel)) {
                     floatBuffer[y * width + x] = pixel
                 } else {
-                    floatBuffer[y*width + x] = 0
+                    floatBuffer[y*width + x] = -1.0
                 }
             }
         }

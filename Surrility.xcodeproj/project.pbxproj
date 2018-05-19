@@ -39,10 +39,11 @@
 		C3A519E020A02D5D00C47AC0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A519DF20A02D5D00C47AC0 /* ProfileViewController.swift */; };
 		C3D6B1F0204536AE00D02602 /* UIDeviceOrientationExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */; };
 		C3D6B1F52047FAAB00D02602 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */; };
+		C3D9EAF020AD2D69006A0903 /* icons8-cancel-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D9EAEF20AD2D67006A0903 /* icons8-cancel-50.png */; };
+		C3DC79F620A8FD00001D684B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC79F520A8FCFF001D684B /* UITextField.swift */; };
+		C3DC79F820A8FD14001D684B /* UIButtonExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC79F720A8FD13001D684B /* UIButtonExtention.swift */; };
 		D9A722A5C25E92791FE2D841 /* Pods_Surrility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C01860FACF6B6088BA2CADF /* Pods_Surrility.framework */; };
 		E02ED3D079CDC595EF8C0B76 /* Pods_SurrilityUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A85D50720F3AEE1F72EBDD40 /* Pods_SurrilityUITests.framework */; };
-		E979374320A6EF50006D04BC /* UIButtonExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979374020A6EF4F006D04BC /* UIButtonExtention.swift */; };
-		E979374420A6EF50006D04BC /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979374120A6EF4F006D04BC /* UITextField.swift */; };
 		E979374520A6EF50006D04BC /* FacebookLoginRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979374220A6EF50006D04BC /* FacebookLoginRound.swift */; };
 /* End PBXBuildFile section */
 
@@ -110,9 +111,10 @@
 		C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceOrientationExtention.swift; sourceTree = "<group>"; };
 		C3D6B1F32047C18600D02602 /* Surrility.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Surrility.entitlements; sourceTree = "<group>"; };
 		C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C3D9EAEF20AD2D67006A0903 /* icons8-cancel-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-cancel-50.png"; sourceTree = "<group>"; };
+		C3DC79F520A8FCFF001D684B /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		C3DC79F720A8FD13001D684B /* UIButtonExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtention.swift; sourceTree = "<group>"; };
 		E8FDC52F95A10F38A0FE01C5 /* Pods-SurrilityTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurrilityTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SurrilityTests/Pods-SurrilityTests.release.xcconfig"; sourceTree = "<group>"; };
-		E979374020A6EF4F006D04BC /* UIButtonExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIButtonExtention.swift; path = "../../../../Surrility-v2/Surrility/Extensions/UIButtonExtention.swift"; sourceTree = "<group>"; };
-		E979374120A6EF4F006D04BC /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITextField.swift; path = "../../../../Surrility-v2/Surrility/Extensions/UITextField.swift"; sourceTree = "<group>"; };
 		E979374220A6EF50006D04BC /* FacebookLoginRound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginRound.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +172,7 @@
 		C34643F1208C2C7700F7FA2C /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C3D9EAEF20AD2D67006A0903 /* icons8-cancel-50.png */,
 				C3A519D520A01A3B00C47AC0 /* Surrility-532018.png */,
 				C3A519DB20A026C400C47AC0 /* icons8-login-as-user-50.png */,
 				C3A519D920A0261B00C47AC0 /* icons8-edit-account-50.png */,
@@ -247,8 +250,8 @@
 			isa = PBXGroup;
 			children = (
 				E979374220A6EF50006D04BC /* FacebookLoginRound.swift */,
-				E979374020A6EF4F006D04BC /* UIButtonExtention.swift */,
-				E979374120A6EF4F006D04BC /* UITextField.swift */,
+				C3DC79F720A8FD13001D684B /* UIButtonExtention.swift */,
+				C3DC79F520A8FCFF001D684B /* UITextField.swift */,
 				C360B1F9203FC9A100802AED /* CGImageExtension.swift */,
 				C360B1FA203FC9A100802AED /* CIImageExtension.swift */,
 				C360B1FB203FC9A100802AED /* CVPixelBufferExtension.swift */,
@@ -400,6 +403,7 @@
 				C34643F3208C2C9700F7FA2C /* cube.png in Resources */,
 				C360B217203FCCA600802AED /* GoogleService-Info.plist in Resources */,
 				C360B211203FCA0800802AED /* Main.storyboard in Resources */,
+				C3D9EAF020AD2D69006A0903 /* icons8-cancel-50.png in Resources */,
 				C3A519DC20A026C400C47AC0 /* icons8-login-as-user-50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -588,13 +592,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C360B215203FCA0800802AED /* PreviewView.swift in Sources */,
+				C3DC79F620A8FD00001D684B /* UITextField.swift in Sources */,
 				C31A03CF204BB123003CDFEC /* FloatExtension.swift in Sources */,
-				E979374420A6EF50006D04BC /* UITextField.swift in Sources */,
 				C360B1D0203FC97800802AED /* Surrility.xcdatamodeld in Sources */,
 				C360B20F203FCA0800802AED /* CameraViewController.swift in Sources */,
 				C3A519DE20A02B6A00C47AC0 /* PostViewController.swift in Sources */,
 				C31A03CD204AB5EF003CDFEC /* DepthImageFilters.swift in Sources */,
-				E979374320A6EF50006D04BC /* UIButtonExtention.swift in Sources */,
 				C360B200203FC9A100802AED /* UIImageExtension.swift in Sources */,
 				C360B207203FC9A600802AED /* tools.swift in Sources */,
 				C360B210203FCA0800802AED /* EditorViewController.swift in Sources */,
@@ -606,6 +609,7 @@
 				C360B205203FC9A600802AED /* CloudFrame.swift in Sources */,
 				C3D6B1F52047FAAB00D02602 /* LoginViewController.swift in Sources */,
 				C360B1FD203FC9A100802AED /* CGImageExtension.swift in Sources */,
+				C3DC79F820A8FD14001D684B /* UIButtonExtention.swift in Sources */,
 				C315FACD20721856003364FA /* StringExtension.swift in Sources */,
 				C3A519E020A02D5D00C47AC0 /* ProfileViewController.swift in Sources */,
 				C360B1FF203FC9A100802AED /* CVPixelBufferExtension.swift in Sources */,
@@ -765,10 +769,10 @@
 				CODE_SIGN_ENTITLEMENTS = Surrility/Surrility.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3XUN845A55;
+				DEVELOPMENT_TEAM = NFKZ37HH3Y;
 				INFOPLIST_FILE = Surrility/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.manish.SurrealMX;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SurrealMX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -784,10 +788,10 @@
 				CODE_SIGN_ENTITLEMENTS = Surrility/Surrility.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3XUN845A55;
+				DEVELOPMENT_TEAM = NFKZ37HH3Y;
 				INFOPLIST_FILE = Surrility/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.manish.SurrealMX;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SurrealMX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;

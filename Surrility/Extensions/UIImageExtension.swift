@@ -43,5 +43,32 @@ extension UIImage {
     self.init(ciImage: ciImage)
     
   }
+    
+    /**
+     Creates the UIImageJPEGRepresentation out of an UIImage
+     @return Data
+     */
+    
+    func generateJPEGRepresentation() -> Data {
+        
+        let newImage = self.copyOriginalImage()
+        let newData = UIImageJPEGRepresentation(newImage, 0.75)
+        
+        return newData!
+    }
+    
+    /**
+     Copies Original Image which fixes the crash for extracting Data from UIImage
+     @return UIImage
+     */
+    
+    private func copyOriginalImage() -> UIImage {
+        UIGraphicsBeginImageContext(self.size);
+        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        
+        return newImage!
+    }
 }
 

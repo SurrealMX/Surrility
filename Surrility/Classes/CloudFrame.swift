@@ -17,8 +17,9 @@ class CloudFrame : Codable {
     var width: Int
     var fx, fy, x0, y0: Float
     var min, max, range: Float
+    var BoundA, BoundB: Float
     
-    init(time: Float, vals: [UInt64], height: Int, width: Int, matrix: matrix_float3x3, parameters: [Float]){
+    init(time: Float, vals: [UInt64], height: Int, width: Int, matrix: matrix_float3x3, parameters: [Float], BoundA: Float, BoundB: Float){
         self.t = time
         self.height = height
         self.width = width
@@ -36,6 +37,9 @@ class CloudFrame : Codable {
         self.fy = col2.y
         self.x0 = col3.x
         self.y0 = col3.y
+        
+        self.BoundA = BoundA
+        self.BoundB = BoundB
     }
 }
 
@@ -75,13 +79,13 @@ extension CloudFrame {
                     
                 }
             }
-            return CloudFrame(time: time, vals: vals, height: height, width: width, matrix: intrinsicMatrix, parameters: depthParamers)
+            return CloudFrame(time: time, vals: vals, height: height, width: width, matrix: intrinsicMatrix, parameters: depthParamers, BoundA: 0, BoundB: 1)
         } else {
             return nil
         }
     }
     
-    static func compileFrame(DepthBuffer: CVPixelBuffer, ColorMap: [UInt32], time: Float, intrinsicMatrix: matrix_float3x3, depthMapParamers: [Float]) -> CloudFrame? {
+    static func compileFrame(DepthBuffer: CVPixelBuffer, ColorMap: [UInt32], time: Float, intrinsicMatrix: matrix_float3x3, depthMapParamers: [Float], _BoundA: Float, _BoundB: Float) -> CloudFrame? {
         var Depthvals: [Float] = DepthBuffer.extractFloats()
         
         let depthHeight = CVPixelBufferGetHeight(DepthBuffer)
@@ -108,7 +112,7 @@ extension CloudFrame {
                 vals.append(aVal)
             }
         }
-        return CloudFrame(time: time, vals: vals, height: height, width: width, matrix: intrinsicMatrix, parameters: depthMapParamers)
+        return CloudFrame(time: time, vals: vals, height: height, width: width, matrix: intrinsicMatrix, parameters: depthMapParamers, BoundA: _BoundA, BoundB: _BoundB)
     }
     
     static func compileFrame(CVBuffer: CVPixelBuffer, time: Float, intrinsicMatrix: matrix_float3x3, depthMapParameters: [Float]) -> CloudFrame? {
@@ -128,7 +132,7 @@ extension CloudFrame {
             }
         }
         
-        return CloudFrame(time: time, vals: Dvals, height: height, width: width, matrix: intrinsicMatrix, parameters: depthMapParameters)
+        return CloudFrame(time: time, vals: Dvals, height: height, width: width, matrix: intrinsicMatrix, parameters: depthMapParameters, BoundA: 0, BoundB: 1)
     }
     
     private static func normalize(vals: [Float], height: Int, width: Int, and parameters: [Float]) -> [Float] {
