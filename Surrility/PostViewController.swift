@@ -27,6 +27,7 @@ class PostViewController: UIViewController, UITextViewDelegate{
     let storage = Storage.storage()
     var frame: CloudFrame?
     var image: UIImage?
+    var postID: String?
     
     var defaultText: String = "Write Caption..."
     
@@ -100,7 +101,7 @@ class PostViewController: UIViewController, UITextViewDelegate{
         }
     }
     
-    func updateUserRecord(downloadURL: String){
+    func updateRecords(name: String, downloadURL: String){
         //create a referene to the database
         self.ref = Database.database().reference()
         
@@ -122,6 +123,47 @@ class PostViewController: UIViewController, UITextViewDelegate{
         if(Caption.text != defaultText){  //if the user forgot to add text oh well... we're not adding the default
             tempRef?.child("Caption").setValue(Caption.text)
         }
+        //upload the thumbnail
+        addthumbnail(name: name, PID: (tempRef?.key)!)
+    }
+    
+    func addthumbnail(name: String, PID: String){
+        //create a storage reference from our storage service for upload
+        let storageRef = storage.reference()
+        //Create a child reference
+        //ImagesRef now points to "images"
+        let pngStorageRef = storageRef.child("thumbnails").child(UserId!)
+        
+        let filename = name + ".jpeg"
+        let spaceRef = pngStorageRef.child(filename)
+        let uploadMetaData = StorageMetadata()
+        uploadMetaData.contentType = "image/jpeg"
+        
+        if let data = UIImageJPEGRepresentation(image!, 0.3) {  //make sure we converted to dta correctly
+            let _ = spaceRef.putData(data, metadata: uploadMetaData) { (metadata, error) in
+                if(error != nil) {
+                    print("ERROR BILL ROBINSON \(String(describing: error))")  //there was an error while uploading
+                } else {
+                    print ("UPLOADED THUMBNAIL \(String(describing: metadata))")  //uploaded successfully
+                    // Fetch the download URL
+                    storageRef.child("thumbnails").child(UserId!).child(filename).downloadURL(completion: { (FileName_url, error) in
+                        if (error != nil) {
+                            print("Error getting thumbnail Download Url")
+                            return
+                        } else {
+                            //create a referene to the realtime database
+                            self.ref = Database.database().reference()
+                            //update our records to include the post thumbnail
+                            let uid: String = UserId!
+                            let tempRef = self.ref?.child("Users").child(uid).child("Posts").child(PID)
+                            tempRef?.setValue(FileName_url?.absoluteString)
+                            //move back to the camera for next picture
+                            self.moveAction()
+                        }
+                    })
+                }
+            }
+        }
     }
     
     func moveAction(){
@@ -137,44 +179,6 @@ class PostViewController: UIViewController, UITextViewDelegate{
     func updateSliders(status: Bool){
         DispatchQueue.main.async {
             self.progressView.isHidden = status ? true:false;
-        }
-    }
-    
-    func addthumbnail(name: String){
-        //create a storage reference from our storage service
-        let storageRef = storage.reference()
-        
-        //Create a child reference
-        //ImagesRef now points to "images"
-        let pngStorageRef = storageRef.child("thumbnails").child(UserId!)
-        
-        let filename = name + ".png"
-        let spaceRef = pngStorageRef.child(filename)
-        let uploadMetaData = StorageMetadata()
-        uploadMetaData.contentType = "image/png"
-        
-        if let data = UIImagePNGRepresentation(ImagePreviewPlane.image!) {
-            let uploadTask = spaceRef.putData(data, metadata: uploadMetaData) { (metadata, error) in
-            if(error != nil) {
-                print("ERROR BILL ROBINSON \(String(describing: error))")
-            } else {
-                print ("UPLOADED THUMBNAIL \(String(describing: metadata))")
-                
-                // Fetch the download URL
-                storageRef.child("thumbnails").child(UserId!).child(filename).downloadURL(completion: { (FileName_url, error) in
-                    if (error != nil) {
-                        print("Error getting thumbnail Download Url")
-                        return
-                    } else {
-                        //create a referene to the database
-                        self.ref = Database.database().reference()
-                        //update our records to include the user's picture
-                        let uid: String = UserId!
-                        let tempRef = self.ref?.child("Posts").childByAutoId().childByAutoId().parent
-                    }
-                })
-            }
-          }
         }
     }
     
@@ -216,9 +220,7 @@ class PostViewController: UIViewController, UITextViewDelegate{
                     } else {
                         // Get the download URL for 'images/stars.jpg'
                         //put the download url for the record in the real-time database
-                        self.updateUserRecord(downloadURL: (FileName_url?.absoluteString)!)
-                        //move back to the camera for next picture
-                        self.moveAction()
+                        self.updateRecords(name: now, downloadURL: (FileName_url?.absoluteString)!)
                     }
                 })
             }
