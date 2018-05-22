@@ -20,6 +20,8 @@ class PostViewController: UIViewController, UITextViewDelegate{
     @IBOutlet var rangeLabel: UILabel!
     @IBOutlet var lowerBoundLabel: UILabel!
     @IBOutlet var upperBoundLabel: UILabel!
+    @IBOutlet var widthLabel: UILabel!
+    @IBOutlet var heightLabel: UILabel!
     
     var ref: DatabaseReference!
     let storage = Storage.storage()
@@ -42,9 +44,9 @@ class PostViewController: UIViewController, UITextViewDelegate{
         let nf = NumberFormatter()
         nf.numberStyle = .decimal
         
-        maxLabel.text = nf.string(from: NSNumber(value: currentFrame.max))
-        minLabel.text = nf.string(from: NSNumber(value: currentFrame.min))
-        rangeLabel.text = nf.string(from: NSNumber(value: currentFrame.range))
+        maxLabel.text = currentFrame.max.format(f: ".2") //nf.string(from: NSNumber(value: currentFrame.max))
+        minLabel.text = currentFrame.min.format(f: ".2") //nf.string(from: NSNumber(value: currentFrame.min))
+        rangeLabel.text = currentFrame.range.format(f: ".2") //nf.string(from: NSNumber(value: currentFrame.range))
         
         var lowerBound: Float
         var upperBound: Float
@@ -56,8 +58,12 @@ class PostViewController: UIViewController, UITextViewDelegate{
             upperBound = currentFrame.BoundA
         }
         
-        lowerBoundLabel.text = nf.string(from: NSNumber(value: lowerBound))
-        upperBoundLabel.text = nf.string(from: NSNumber(value: upperBound))
+        lowerBoundLabel.text = lowerBound.format(f: ".2") //nf.string(from: NSNumber(value: lowerBound))
+        upperBoundLabel.text = upperBound.format(f: ".2") //nf.string(from: NSNumber(value: upperBound))
+        
+        widthLabel.text = nf.string(from: NSNumber(value: currentFrame.width))
+        
+        heightLabel.text = nf.string(from: NSNumber(value: currentFrame.height))
     }
     
     override func viewDidLoad() {

@@ -40,6 +40,7 @@
 		C3D6B1F0204536AE00D02602 /* UIDeviceOrientationExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */; };
 		C3D6B1F52047FAAB00D02602 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */; };
 		C3D9EAF020AD2D69006A0903 /* icons8-cancel-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D9EAEF20AD2D67006A0903 /* icons8-cancel-50.png */; };
+		C3D9EAF220AFF0BD006A0903 /* icons8-ellipsis-filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D9EAF120AFF0BB006A0903 /* icons8-ellipsis-filled-50.png */; };
 		C3DC79F620A8FD00001D684B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC79F520A8FCFF001D684B /* UITextField.swift */; };
 		C3DC79F820A8FD14001D684B /* UIButtonExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DC79F720A8FD13001D684B /* UIButtonExtention.swift */; };
 		D9A722A5C25E92791FE2D841 /* Pods_Surrility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C01860FACF6B6088BA2CADF /* Pods_Surrility.framework */; };
@@ -112,6 +113,7 @@
 		C3D6B1F32047C18600D02602 /* Surrility.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Surrility.entitlements; sourceTree = "<group>"; };
 		C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C3D9EAEF20AD2D67006A0903 /* icons8-cancel-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-cancel-50.png"; sourceTree = "<group>"; };
+		C3D9EAF120AFF0BB006A0903 /* icons8-ellipsis-filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-ellipsis-filled-50.png"; sourceTree = "<group>"; };
 		C3DC79F520A8FCFF001D684B /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		C3DC79F720A8FD13001D684B /* UIButtonExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtention.swift; sourceTree = "<group>"; };
 		E8FDC52F95A10F38A0FE01C5 /* Pods-SurrilityTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurrilityTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SurrilityTests/Pods-SurrilityTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				C3D9EAEF20AD2D67006A0903 /* icons8-cancel-50.png */,
+				C3D9EAF120AFF0BB006A0903 /* icons8-ellipsis-filled-50.png */,
 				C3A519D520A01A3B00C47AC0 /* Surrility-532018.png */,
 				C3A519DB20A026C400C47AC0 /* icons8-login-as-user-50.png */,
 				C3A519D920A0261B00C47AC0 /* icons8-edit-account-50.png */,
@@ -399,6 +402,7 @@
 				C360B1D2203FC97800802AED /* Assets.xcassets in Resources */,
 				C360B214203FCA0800802AED /* LaunchScreen.storyboard in Resources */,
 				C3A519D620A01A3B00C47AC0 /* Surrility-532018.png in Resources */,
+				C3D9EAF220AFF0BD006A0903 /* icons8-ellipsis-filled-50.png in Resources */,
 				C3A519DA20A0261C00C47AC0 /* icons8-edit-account-50.png in Resources */,
 				C34643F3208C2C9700F7FA2C /* cube.png in Resources */,
 				C360B217203FCCA600802AED /* GoogleService-Info.plist in Resources */,

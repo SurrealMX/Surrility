@@ -68,7 +68,7 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate, AVCaptureDepthDa
             print("Error capturing photo: \(error)")
         } else {
             let capturedPhoto = photo
-            photoData = photo.fileDataRepresentation()
+            //photoData = photo.fileDataRepresentation()
             let matrix = capturedPhoto.depthData?.cameraCalibrationData?.intrinsicMatrix
             
             //now move to the next view for exit and store

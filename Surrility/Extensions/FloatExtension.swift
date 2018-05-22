@@ -19,4 +19,8 @@ extension Float {
         let byteArray = [UInt8](data)
         return byteArray
     }
+    
+    func format(f: String) -> String {
+        return String(format: "%\(f)f", self)
+    }
 }
