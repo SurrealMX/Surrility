@@ -51,10 +51,16 @@ class EditorViewController: UIViewController {
         print(pSize)
         
         //filter the depthDataMap baed on the user selected bounds and turn into [float]
-        self.depthDataMap?.filterMapData(with: self.SliderA.value, and: self.SliderB.value)
+        //self.depthDataMap?.filterMapData(with: self.SliderA.value, and: self.SliderB.value)
         
         //get the frame
-        self.frame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorMap: self.colorDataMap!, time: 0.0, intrinsicMatrix: self.intrinsicMatrix!, depthMapParamers: self.depthMapParameters!)
+        self.frame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorMap: self.colorDataMap!, time: 0.0, intrinsicMatrix: self.intrinsicMatrix!, depthMapParamers: self.depthMapParameters!, _BoundA: self.SliderA.value, _BoundB: self.SliderB.value)
+    }
+    
+    @IBAction func CancellTapped(_ sender: UIButton) {
+        SliderA.setValue(0, animated: true)
+        SliderB.setValue(1, animated: true)
+        updateImageView()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -62,14 +68,14 @@ class EditorViewController: UIViewController {
             extract()
             let DestinationViewController : PostViewController = segue.destination as! PostViewController
             
-            DestinationViewController.image = UIImage(ciImage: self.filterImage)
+            DestinationViewController.image = picView.image
             DestinationViewController.frame = self.frame
         }
         
     }
     
     @IBAction func UISelectedChanged(_ sender: Any) {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             self.updateImageView()
         }
     }
@@ -86,6 +92,9 @@ class EditorViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
+        extractButton.layer.borderWidth = 0.5
+        extractButton.layer.borderColor = UIColor.black.cgColor
         
         //setup the depthfilters object with the context
         depthFilter = DepthImageFilters(context: context)
@@ -141,7 +150,7 @@ extension EditorViewController {
     
     func grabDepthData(){
         //let photoData = photo.fileDataRepresentation()
-        let depthData = (capturedPhoto?.depthData as AVDepthData?)?.converting(toDepthDataType: kCVPixelFormatType_DepthFloat32)
+        let depthData = (capturedPhoto?.depthData as AVDepthData?)?.converting(toDepthDataType: kCVPixelFormatType_DisparityFloat32)
         
         //this depthDataMap is the one that is the depth data associated with the image
         self.depthDataMap = depthData?.depthDataMap //AVDepthData -> CVPixelBuffer
@@ -276,14 +285,17 @@ extension EditorViewController {
         
         switch selectedFilter {
         case 0:
-            //case .blur:
+            // car colorhighlight
+            //finalImage = depthFilter?.colorHighlight(image: filterImage, mask: mask, orientation: orientation)
+            //case blur:
             finalImage = depthFilter?.blur(image: filterImage, mask: mask, orientation: orientation)
-            self.updateSliders(status: true)  //show the sliders
-            self.extractButton.isHidden = false; //show the update butten
+            
+            //self.updateSliders(status: true)  //show the sliders
+            self.extractButton.isHidden = false; //show the update button
         case 1:
             //case depth map
             self.extractButton.isHidden = true //hide the extract button
-            self.updateSliders(status: false)  //hide the sliders
+            //self.updateSliders(status: false)  //hide the sliders
             guard let cgImage = context.createCGImage(mask, from: mask.extent),
                 let origImage = origImage else {
                     return

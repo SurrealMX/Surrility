@@ -15,6 +15,13 @@ class PostViewController: UIViewController, UITextViewDelegate{
     @IBOutlet weak var Caption: UITextView!
     @IBOutlet var progressView: UIProgressView!
     
+    @IBOutlet var maxLabel: UILabel!
+    @IBOutlet var minLabel: UILabel!
+    @IBOutlet var rangeLabel: UILabel!
+    @IBOutlet var lowerBoundLabel: UILabel!
+    @IBOutlet var upperBoundLabel: UILabel!
+    @IBOutlet var widthLabel: UILabel!
+    @IBOutlet var heightLabel: UILabel!
     
     var ref: DatabaseReference!
     let storage = Storage.storage()
@@ -28,20 +35,69 @@ class PostViewController: UIViewController, UITextViewDelegate{
         //moveAction();
     }
     
+    func setupLabels() {
+        
+        guard let currentFrame = frame else {
+            return
+        }
+        
+        let nf = NumberFormatter()
+        nf.numberStyle = .decimal
+        
+        maxLabel.text = currentFrame.max.format(f: ".2") //nf.string(from: NSNumber(value: currentFrame.max))
+        minLabel.text = currentFrame.min.format(f: ".2") //nf.string(from: NSNumber(value: currentFrame.min))
+        rangeLabel.text = currentFrame.range.format(f: ".2") //nf.string(from: NSNumber(value: currentFrame.range))
+        
+        var lowerBound: Float
+        var upperBound: Float
+        if(currentFrame.BoundA < currentFrame.BoundB){
+            lowerBound = currentFrame.BoundA
+            upperBound = currentFrame.BoundB
+        } else {
+            lowerBound = currentFrame.BoundB
+            upperBound = currentFrame.BoundA
+        }
+        
+        lowerBoundLabel.text = lowerBound.format(f: ".2") //nf.string(from: NSNumber(value: lowerBound))
+        upperBoundLabel.text = upperBound.format(f: ".2") //nf.string(from: NSNumber(value: upperBound))
+        
+        widthLabel.text = nf.string(from: NSNumber(value: currentFrame.width))
+        
+        heightLabel.text = nf.string(from: NSNumber(value: currentFrame.height))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         //updateSliders(status: true)
         ImagePreviewPlane.image = image
-        Caption.text = defaultText
+        fixImageOrientation()
+        Caption.text = ""
         updateSliders(status: true)
+        setupLabels()
         progressView.progress = 0.0
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func fixImageOrientation() {
+        //check current orientation of original image
+        switch image?.imageOrientation {
+        case .down?, .downMirrored?:
+            ImagePreviewPlane.transform = CGAffineTransform(rotationAngle: .pi)
+        case .left?, .leftMirrored?:
+            ImagePreviewPlane.transform = CGAffineTransform(rotationAngle: .pi/2)
+        case .right?, .rightMirrored?:
+            ImagePreviewPlane.transform = CGAffineTransform(rotationAngle: -.pi/2)
+        case .up?, .upMirrored?:
+            break;
+        case .none:
+            break;
+        }
     }
     
     func updateUserRecord(downloadURL: String){
@@ -84,6 +140,44 @@ class PostViewController: UIViewController, UITextViewDelegate{
         }
     }
     
+    func addthumbnail(name: String){
+        //create a storage reference from our storage service
+        let storageRef = storage.reference()
+        
+        //Create a child reference
+        //ImagesRef now points to "images"
+        let pngStorageRef = storageRef.child("thumbnails").child(UserId!)
+        
+        let filename = name + ".png"
+        let spaceRef = pngStorageRef.child(filename)
+        let uploadMetaData = StorageMetadata()
+        uploadMetaData.contentType = "image/png"
+        
+        if let data = UIImagePNGRepresentation(ImagePreviewPlane.image!) {
+            let uploadTask = spaceRef.putData(data, metadata: uploadMetaData) { (metadata, error) in
+            if(error != nil) {
+                print("ERROR BILL ROBINSON \(String(describing: error))")
+            } else {
+                print ("UPLOADED THUMBNAIL \(String(describing: metadata))")
+                
+                // Fetch the download URL
+                storageRef.child("thumbnails").child(UserId!).child(filename).downloadURL(completion: { (FileName_url, error) in
+                    if (error != nil) {
+                        print("Error getting thumbnail Download Url")
+                        return
+                    } else {
+                        //create a referene to the database
+                        self.ref = Database.database().reference()
+                        //update our records to include the user's picture
+                        let uid: String = UserId!
+                        let tempRef = self.ref?.child("Posts").childByAutoId().childByAutoId().parent
+                    }
+                })
+            }
+          }
+        }
+    }
+    
     func addPCM(frame: CloudFrame){
         updateSliders(status: false);
         
@@ -107,9 +201,6 @@ class PostViewController: UIViewController, UITextViewDelegate{
         //convert cloudframe to data
         let encoder = JSONEncoder()
         let data = try! encoder.encode(frame)
-        
-        //let fstring: String = String(data: data, encoding: String.Encoding.utf8)!
-        //let pcmString = fstring.toBase64()
         
         let uploadTask = spaceRef.putData(data, metadata: uploadMetaData) { (metadata, error) in
             if(error != nil) {
