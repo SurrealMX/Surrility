@@ -8,6 +8,7 @@
 import UIKit
 import Photos
 import Firebase
+import Compression
 
 class PostViewController: UIViewController, UITextViewDelegate{
     
@@ -205,8 +206,12 @@ class PostViewController: UIViewController, UITextViewDelegate{
         //convert cloudframe to data
         let encoder = JSONEncoder()
         let data = try! encoder.encode(frame)
+        let base64Frame = data.base64EncodedData(options: Data.Base64EncodingOptions.lineLength64Characters)
+        guard let compressedData = data.compress(withAlgorithm: .ZLIB) else {
+            return
+        }
         
-        let uploadTask = spaceRef.putData(data, metadata: uploadMetaData) { (metadata, error) in
+        let uploadTask = spaceRef.putData(compressedData, metadata: uploadMetaData) { (metadata, error) in
             if(error != nil) {
                 print("ERROR BILL ROBINSON \(String(describing: error))")
             } else {

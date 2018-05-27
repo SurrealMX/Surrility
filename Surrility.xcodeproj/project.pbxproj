@@ -37,6 +37,7 @@
 		C3A519DC20A026C400C47AC0 /* icons8-login-as-user-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A519DB20A026C400C47AC0 /* icons8-login-as-user-50.png */; };
 		C3A519DE20A02B6A00C47AC0 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A519DD20A02B6A00C47AC0 /* PostViewController.swift */; };
 		C3A519E020A02D5D00C47AC0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A519DF20A02D5D00C47AC0 /* ProfileViewController.swift */; };
+		C3A7DC0320BB0B9E00335777 /* DataCompression.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7DC0220BB0B9E00335777 /* DataCompression.swift */; };
 		C3D6B1F0204536AE00D02602 /* UIDeviceOrientationExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */; };
 		C3D6B1F52047FAAB00D02602 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */; };
 		C3D9EAF020AD2D69006A0903 /* icons8-cancel-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D9EAEF20AD2D67006A0903 /* icons8-cancel-50.png */; };
@@ -109,6 +110,7 @@
 		C3A519DB20A026C400C47AC0 /* icons8-login-as-user-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-login-as-user-50.png"; sourceTree = "<group>"; };
 		C3A519DD20A02B6A00C47AC0 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		C3A519DF20A02D5D00C47AC0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C3A7DC0220BB0B9E00335777 /* DataCompression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCompression.swift; sourceTree = "<group>"; };
 		C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceOrientationExtention.swift; sourceTree = "<group>"; };
 		C3D6B1F32047C18600D02602 /* Surrility.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Surrility.entitlements; sourceTree = "<group>"; };
 		C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 		C360B201203FC9A600802AED /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C3A7DC0220BB0B9E00335777 /* DataCompression.swift */,
 				C31A03CC204AB5EF003CDFEC /* DepthImageFilters.swift */,
 				C360B202203FC9A600802AED /* CloudFrame.swift */,
 				C360B203203FC9A600802AED /* SimpleVector.swift */,
@@ -609,6 +612,7 @@
 				C360B213203FCA0800802AED /* PhotoCaptureDelegate.swift in Sources */,
 				C360B1C8203FC97800802AED /* AppDelegate.swift in Sources */,
 				C360B206203FC9A600802AED /* SimpleVector.swift in Sources */,
+				C3A7DC0320BB0B9E00335777 /* DataCompression.swift in Sources */,
 				C30AB4FA206DFA86009F149B /* DoubleExtension.swift in Sources */,
 				C360B205203FC9A600802AED /* CloudFrame.swift in Sources */,
 				C3D6B1F52047FAAB00D02602 /* LoginViewController.swift in Sources */,

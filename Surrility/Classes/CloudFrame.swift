@@ -45,31 +45,18 @@ class CloudFrame : Codable {
 
 extension CloudFrame {
     
-    static func compileFrame(DepthBuffer: CVPixelBuffer, ColorBuffer: CVPixelBuffer, time: Float, intrinsicMatrix: matrix_float3x3, depthParamers: [Float]) -> CloudFrame? {
+    static func compileFrame(DepthBuffer: [UInt32], ColorBuffer: [UInt32], time: Float, intrinsicMatrix: matrix_float3x3, depthMapParamers: [Float], height: Int, width: Int) -> CloudFrame? {
         
-        var Depthvals: [Float] = DepthBuffer.extractFloats()
-        var Colorvals: [Float] = ColorBuffer.extractFloats()
-        
-        let depthHeight = CVPixelBufferGetHeight(DepthBuffer)
-        let depthWidth = CVPixelBufferGetWidth(DepthBuffer)
-        let colorHeight = CVPixelBufferGetHeight(ColorBuffer)
-        let colorWidth = CVPixelBufferGetWidth(ColorBuffer)
-        
-        if((colorHeight == depthHeight) && (colorWidth == depthWidth)) {
-            let height = depthHeight
-            let width = depthWidth
             var vals: [UInt64] = []
             
             for y in 0 ..< height {
                 for x in 0 ..< width {
                     let idx = y * width + x
                     
-                    var aDepthVals: [UInt8] = Depthvals[idx].toBytes()
-                    let aColorVals: [UInt8] = Colorvals[idx].toBytes()
-                    
-                    for i in 0 ..< aColorVals.count {
-                        aDepthVals.append(aColorVals[i])
-                    }
+                    var aDepthVals: [UInt8] = tools.splitUint32(number: DepthBuffer[idx])
+                    let aColorVals: [UInt8] = tools.splitUint32(number: ColorBuffer[idx])
+
+                    aDepthVals.append(contentsOf: aColorVals)
                     
                     //let aVal: Double = Double(aDepthVals)!
                     let data = Data(bytes: aDepthVals)
@@ -79,10 +66,8 @@ extension CloudFrame {
                     
                 }
             }
-            return CloudFrame(time: time, vals: vals, height: height, width: width, matrix: intrinsicMatrix, parameters: depthParamers, BoundA: 0, BoundB: 1)
-        } else {
-            return nil
-        }
+        return CloudFrame(time: time, vals: vals, height: height, width: width, matrix: intrinsicMatrix, parameters: depthMapParamers, BoundA: 0, BoundB: 1)
+
     }
     
     static func compileFrame(DepthBuffer: CVPixelBuffer, ColorMap: [UInt32], time: Float, intrinsicMatrix: matrix_float3x3, depthMapParamers: [Float], _BoundA: Float, _BoundB: Float) -> CloudFrame? {
@@ -113,26 +98,6 @@ extension CloudFrame {
             }
         }
         return CloudFrame(time: time, vals: vals, height: height, width: width, matrix: intrinsicMatrix, parameters: depthMapParamers, BoundA: _BoundA, BoundB: _BoundB)
-    }
-    
-    static func compileFrame(CVBuffer: CVPixelBuffer, time: Float, intrinsicMatrix: matrix_float3x3, depthMapParameters: [Float]) -> CloudFrame? {
-        var vals = CVBuffer.extractFloats()
-        let height = CVPixelBufferGetHeight(CVBuffer)
-        let width = CVPixelBufferGetWidth(CVBuffer)
-        
-        var Dvals: [UInt64] = []
-        for x in 0 ..< width{
-            for y in 0 ..< height{
-                let idx = y * width + x
-                
-                let data = Data(bytes: vals[idx].toBytes())
-                let aVal = UInt64(bigEndian: data.withUnsafeBytes { $0.pointee })
-                Dvals.append(aVal)
-                //Dvals.append(Double(vals[x+width*y]))
-            }
-        }
-        
-        return CloudFrame(time: time, vals: Dvals, height: height, width: width, matrix: intrinsicMatrix, parameters: depthMapParameters, BoundA: 0, BoundB: 1)
     }
     
     private static func normalize(vals: [Float], height: Int, width: Int, and parameters: [Float]) -> [Float] {

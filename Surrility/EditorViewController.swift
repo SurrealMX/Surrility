@@ -45,16 +45,28 @@ class EditorViewController: UIViewController {
         //hide the slider, updating is done
         self.updateSliders(status: false)
         
-        //let cameraCalibrationData = capturedPhoto?.cameraCalibrationData
-        //print(cameraCalibrationData as Any)
-        let pSize: Float = 0.025 //(cameraCalibrationData?.pixelSize)!/1000.0 //pixelSize is in millimeters
-        print(pSize)
+        guard let highResDepthMap = upSampleDepthMap(lowResDepthMap: depthDataMap!) else {
+            return
+        }
+        
+        guard let height: Int = Int((origImage?.size.height)!) else {
+            return
+        }
+        guard let width: Int = Int((origImage?.size.width)!) else {
+            return
+        }
         
         //filter the depthDataMap baed on the user selected bounds and turn into [float]
         //self.depthDataMap?.filterMapData(with: self.SliderA.value, and: self.SliderB.value)
         
         //get the frame
-        self.frame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorMap: self.colorDataMap!, time: 0.0, intrinsicMatrix: self.intrinsicMatrix!, depthMapParamers: self.depthMapParameters!, _BoundA: self.SliderA.value, _BoundB: self.SliderB.value)
+        guard let aframe: CloudFrame = CloudFrame.compileFrame(DepthBuffer: highResDepthMap, ColorBuffer: colorDataMap!, time: 0.0, intrinsicMatrix: self.intrinsicMatrix!, depthMapParamers: self.depthMapParameters!, height: height, width: width) else {
+            return
+        }
+        
+        self.frame = aframe
+        
+        //self.frame = CloudFrame.compileFrame(DepthBuffer: self.depthDataMap!, ColorMap: self.colorDataMap!, time: 0.0, intrinsicMatrix: self.intrinsicMatrix!, depthMapParamers: self.depthMapParameters!, _BoundA: self.SliderA.value, _BoundB: self.SliderB.value)
     }
     
     @IBAction func CancellTapped(_ sender: UIButton) {
@@ -153,7 +165,14 @@ extension EditorViewController {
         let depthData = (capturedPhoto?.depthData as AVDepthData?)?.converting(toDepthDataType: kCVPixelFormatType_DisparityFloat32)
         
         //this depthDataMap is the one that is the depth data associated with the image
-        self.depthDataMap = depthData?.depthDataMap //AVDepthData -> CVPixelBuffer
+        guard let lowResDepthMap = depthData?.depthDataMap else { //AVDepthData -> CVPixelBuffer
+            return
+        }
+        
+        self.depthDataMap = lowResDepthMap
+        
+        //upsample dethph data
+        //self.depthDataMap = upSampleDepthMap(lowResDepthMap: lowResDepthMap)
         
         //grab parameters from depth data
         depthMapParameters = self.depthDataMap?.getParams() //params = [minP, maxP, range]
@@ -168,11 +187,18 @@ extension EditorViewController {
             return nil
         }
         
-        guard let colorMap = downSampleColorMapimage(image: ciOrigImage) else {
+        guard let CGoutputImage = tools.convertCIImageToCGImage(inputImage: ciOrigImage) else {
             return nil
         }
         
-        return colorMap
+        let colorBuffer = CGoutputImage.findColors()
+
+        
+        //guard let colorMap = downSampleColorMapimage(image: ciOrigImage) else {
+        //    return nil
+        //}
+        
+        return colorBuffer
         //return cgOrigImage?.pixelBuffer()
     }
     
@@ -196,10 +222,10 @@ extension EditorViewController {
         return colorBuffer
     }
     
-    func upSampleDepthMap() -> CVPixelBuffer?{
+    func upSampleDepthMap(lowResDepthMap: CVPixelBuffer) -> [UInt32]?{
         
         //this function will will upsample the depth buffer to match the image
-        let ciDepthDataMapImage = CIImage(cvPixelBuffer: depthDataMap!)
+        let ciDepthDataMapImage = CIImage(cvPixelBuffer: lowResDepthMap)
         
         //we need to scale the depth map because the depth map is not the same size as the image
         let maxToDim = max((origImage?.size.width ?? 1.0), (origImage?.size.height ?? 1.0))
@@ -217,7 +243,7 @@ extension EditorViewController {
             return nil
         }
         
-        let depthBuffer = depthBufferImage.pixelBuffer()
+        let depthBuffer = depthBufferImage.findColors()
         
         return depthBuffer
         
