@@ -1,11 +1,3 @@
-//
-//  EditorViewController.swift
-//  AVCam
-//
-//  Created by Administrator on 2/21/18.
-//  Copyright © 2018 Apple. All rights reserved.
-//
-
 import UIKit
 import AVFoundation
 import Photos
@@ -22,23 +14,23 @@ class EditorViewController: UIViewController {
     @IBOutlet weak var UISelector: UISegmentedControl!
     
     //segue variables
-    var capturedPhoto: AVCapturePhoto?
-    var intrinsicMatrix: matrix_float3x3?
+    var capturedPhoto: myAVCapturePhoto?
     
     //internal variables
-    var downSampledImage: UIImage?
-    var frame: CloudFrame?
-    var depthDataMap: CVPixelBuffer?
-    var colorDataMap: [UInt32]?
-    var depthFilter: DepthImageFilters?
-    var origImage: UIImage?
-    var filterImage: CIImage?
-    var depthDataMapImage: UIImage?
-    let context = CIContext()
-    var depthMapParameters: [Float]?
+    private var downSampledImage: UIImage?
+    private var frame: CloudFrame?
+    private var depthDataMap: CVPixelBuffer?
+    private var colorDataMap: [UInt32]?
+    private var depthFilter: DepthImageFilters?
+    private var origImage: UIImage?
+    private var filterImage: CIImage?
+    private var depthDataMapImage: UIImage?
+    private let context = CIContext()
+    private var depthMapParameters: [Float]?
+    private var intrinsicMatrix: matrix_float3x3?
     
-    var ref: DatabaseReference!
-    let storage = Storage.storage()
+    private var ref: DatabaseReference!
+    private let storage = Storage.storage()
     
     func extract() {
         
@@ -103,13 +95,13 @@ class EditorViewController: UIViewController {
         grabDepthData()
         
         // Do any additional setup after loading the view.
-        let imageData = capturedPhoto?.fileDataRepresentation()
-        origImage = UIImage(data: imageData!)!
+        origImage = capturedPhoto?.getUIImage()
+        intrinsicMatrix = capturedPhoto?.getIntrinsics()
         
-        //let orientation = origImage?.imageOrientation
+        let orientation = origImage?.imageOrientation
         let ciDepthDataMapImage = CIImage(cvPixelBuffer: depthDataMap!)
         depthDataMapImage = UIImage(ciImage: ciDepthDataMapImage) //UIImage(ciImage: imageData)
-        picView.image = UIImage(data: imageData!, scale: 1.0)//UIImage(ciImage: depthMapImage, scale: 1.0, orientation: orientation!)  //UIImage(ciImage: depthDataMapImage)
+        picView.image = origImage//UIImage(data: imageData!, scale: 1.0)//UIImage(ciImage: depthMapImage, scale: 1.0, orientation: orientation!)  //UIImage(ciImage: depthDataMapImage)
         picView.contentMode = .scaleAspectFill
         
         colorDataMap = grabColorData()
@@ -127,16 +119,12 @@ class EditorViewController: UIViewController {
         self.updateImageView()
     }
     
-    @IBAction func SliderA_ValueChanged(_ sender: UISlider) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.updateImageView()
-        }
+    @IBAction func SliderA_Changed(_ sender: Any) {
+        updateImageView()
     }
     
-    @IBAction func SliderB_ValueChanged(_ sender: UISlider) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.updateImageView()
-        }
+    @IBAction func SliderB_Changed(_ sender: Any) {
+        updateImageView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -240,11 +228,9 @@ extension EditorViewController {
     }
     
     func updateSliders(status: Bool){
-        DispatchQueue.main.async {
             self.SliderA.isHidden = status ? false:true
             self.SliderB.isHidden = status ? false:true
             self.extractButton.isEnabled = status ? true:false
-        }
     }
     
     func moveAction(){
@@ -316,4 +302,3 @@ extension EditorViewController {
         }
     }
 }
-

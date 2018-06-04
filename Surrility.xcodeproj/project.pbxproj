@@ -37,6 +37,9 @@
 		C3A519DC20A026C400C47AC0 /* icons8-login-as-user-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A519DB20A026C400C47AC0 /* icons8-login-as-user-50.png */; };
 		C3A519DE20A02B6A00C47AC0 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A519DD20A02B6A00C47AC0 /* PostViewController.swift */; };
 		C3A519E020A02D5D00C47AC0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A519DF20A02D5D00C47AC0 /* ProfileViewController.swift */; };
+		C3A7DC0520BBDF0800335777 /* ProfileEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7DC0420BBDF0800335777 /* ProfileEditorViewController.swift */; };
+		C3A7DC0720C4609900335777 /* myAVCapturePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7DC0620C4609900335777 /* myAVCapturePhoto.swift */; };
+		C3A7DC0920C4C22700335777 /* icons8-photo-gallery-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C3A7DC0820C4C22600335777 /* icons8-photo-gallery-50.png */; };
 		C3D6B1F0204536AE00D02602 /* UIDeviceOrientationExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */; };
 		C3D6B1F52047FAAB00D02602 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */; };
 		C3D9EAF020AD2D69006A0903 /* icons8-cancel-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C3D9EAEF20AD2D67006A0903 /* icons8-cancel-50.png */; };
@@ -109,6 +112,9 @@
 		C3A519DB20A026C400C47AC0 /* icons8-login-as-user-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-login-as-user-50.png"; sourceTree = "<group>"; };
 		C3A519DD20A02B6A00C47AC0 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		C3A519DF20A02D5D00C47AC0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C3A7DC0420BBDF0800335777 /* ProfileEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditorViewController.swift; sourceTree = "<group>"; };
+		C3A7DC0620C4609900335777 /* myAVCapturePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myAVCapturePhoto.swift; sourceTree = "<group>"; };
+		C3A7DC0820C4C22600335777 /* icons8-photo-gallery-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-photo-gallery-50.png"; sourceTree = "<group>"; };
 		C3D6B1EF204536AE00D02602 /* UIDeviceOrientationExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceOrientationExtention.swift; sourceTree = "<group>"; };
 		C3D6B1F32047C18600D02602 /* Surrility.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Surrility.entitlements; sourceTree = "<group>"; };
 		C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +182,7 @@
 			children = (
 				C3D9EAEF20AD2D67006A0903 /* icons8-cancel-50.png */,
 				C3D9EAF120AFF0BB006A0903 /* icons8-ellipsis-filled-50.png */,
+				C3A7DC0820C4C22600335777 /* icons8-photo-gallery-50.png */,
 				C3A519D520A01A3B00C47AC0 /* Surrility-532018.png */,
 				C3A519DB20A026C400C47AC0 /* icons8-login-as-user-50.png */,
 				C3A519D920A0261B00C47AC0 /* icons8-edit-account-50.png */,
@@ -222,6 +229,7 @@
 				C360B20D203FCA0700802AED /* LaunchScreen.storyboard */,
 				C3D6B1F42047FAAB00D02602 /* LoginViewController.swift */,
 				C360B20A203FCA0700802AED /* Main.storyboard */,
+				C3A7DC0420BBDF0800335777 /* ProfileEditorViewController.swift */,
 				C3A519DF20A02D5D00C47AC0 /* ProfileViewController.swift */,
 				C3A519DD20A02B6A00C47AC0 /* PostViewController.swift */,
 				C360B20C203FCA0700802AED /* PhotoCaptureDelegate.swift */,
@@ -274,6 +282,7 @@
 				C360B202203FC9A600802AED /* CloudFrame.swift */,
 				C360B203203FC9A600802AED /* SimpleVector.swift */,
 				C360B204203FC9A600802AED /* tools.swift */,
+				C3A7DC0620C4609900335777 /* myAVCapturePhoto.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -403,6 +412,7 @@
 				C360B214203FCA0800802AED /* LaunchScreen.storyboard in Resources */,
 				C3A519D620A01A3B00C47AC0 /* Surrility-532018.png in Resources */,
 				C3D9EAF220AFF0BD006A0903 /* icons8-ellipsis-filled-50.png in Resources */,
+				C3A7DC0920C4C22700335777 /* icons8-photo-gallery-50.png in Resources */,
 				C3A519DA20A0261C00C47AC0 /* icons8-edit-account-50.png in Resources */,
 				C34643F3208C2C9700F7FA2C /* cube.png in Resources */,
 				C360B217203FCCA600802AED /* GoogleService-Info.plist in Resources */,
@@ -602,8 +612,10 @@
 				C360B20F203FCA0800802AED /* CameraViewController.swift in Sources */,
 				C3A519DE20A02B6A00C47AC0 /* PostViewController.swift in Sources */,
 				C31A03CD204AB5EF003CDFEC /* DepthImageFilters.swift in Sources */,
+				C3A7DC0520BBDF0800335777 /* ProfileEditorViewController.swift in Sources */,
 				C360B200203FC9A100802AED /* UIImageExtension.swift in Sources */,
 				C360B207203FC9A600802AED /* tools.swift in Sources */,
+				C3A7DC0720C4609900335777 /* myAVCapturePhoto.swift in Sources */,
 				C360B210203FCA0800802AED /* EditorViewController.swift in Sources */,
 				C360B1FE203FC9A100802AED /* CIImageExtension.swift in Sources */,
 				C360B213203FCA0800802AED /* PhotoCaptureDelegate.swift in Sources */,

@@ -67,14 +67,27 @@ extension PhotoCaptureProcessor: AVCapturePhotoCaptureDelegate, AVCaptureDepthDa
         if let error = error {
             print("Error capturing photo: \(error)")
         } else {
-            let capturedPhoto = photo
-            //photoData = photo.fileDataRepresentation()
-            let matrix = capturedPhoto.depthData?.cameraCalibrationData?.intrinsicMatrix
+
+            photoData = photo.fileDataRepresentation()  //save a copy of the image to the user's device
+            
+            guard let image = UIImage(data: photoData!) else {
+                return
+            }
+            
+            guard let depthData = photo.depthData else {
+                return
+            }
+            
+            guard let matrix = photo.depthData?.cameraCalibrationData?.intrinsicMatrix else {
+                return
+            }
+            
+            let capturedPhoto = myAVCapturePhoto(image: image, depthData: depthData, intrinsicMatrix: matrix)
             
             //now move to the next view for exit and store
             let vc = initialView?.storyboard?.instantiateViewController(withIdentifier: "Editor") as! EditorViewController
             vc.capturedPhoto = capturedPhoto  //sends the current photo to the next view controller for editing
-            vc.intrinsicMatrix = matrix //sends the intrinsic matrix to the new view controller for editing
+            //vc.intrinsicMatrix = matrix //sends the intrinsic matrix to the new view controller for editing
             initialView?.navigationController?.pushViewController(vc, animated: true)
         }
     }

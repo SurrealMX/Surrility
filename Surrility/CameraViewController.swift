@@ -11,9 +11,68 @@ import Photos
 
 var initialView: CameraViewController? = nil
 
-class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
+class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	// MARK: View Controller Life Cycle
 	
+    @IBAction func getPicButton(_ sender: Any) {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        self.present(image, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let imageURL = info[UIImagePickerControllerImageURL] as! CFURL
+        
+        guard let source = CGImageSourceCreateWithURL(imageURL, nil) else {
+            return
+        }
+        
+        guard let auxDataInfo = CGImageSourceCopyAuxiliaryDataInfoAtIndex(source, 0, kCGImageAuxiliaryDataTypeDisparity) as? [AnyHashable : Any] else {
+            return
+        }
+    
+        // 4
+        var depthData: AVDepthData
+        
+        do {
+            // 5
+            depthData = try AVDepthData(fromDictionaryRepresentation: auxDataInfo)
+        } catch {
+            return
+        }
+        
+        // 6
+        if depthData.depthDataType != kCVPixelFormatType_DisparityFloat32 {
+            depthData = depthData.converting(toDepthDataType: kCVPixelFormatType_DisparityFloat32)
+        }
+        
+        //7
+        guard let matrix = depthData.cameraCalibrationData?.intrinsicMatrix else {
+            return
+        }
+        
+        //8
+        let image = CGImageSourceCreateImageAtIndex(source, 0, nil)
+        let capturedPhoto = myAVCapturePhoto(image: image!, depthData: depthData, intrinsicMatrix: matrix)
+        
+        //9 - now we want to move
+        
+        //now move to the next view for exit and store
+        let vc = initialView?.storyboard?.instantiateViewController(withIdentifier: "Editor") as! EditorViewController
+        vc.capturedPhoto = capturedPhoto  //sends the current photo to the next view controller for editing
+        //vc.intrinsicMatrix = matrix //sends the intrinsic matrix to the new view controller for editing
+        initialView?.navigationController?.pushViewController(vc, animated: true)
+        
+        //10 - now dimiss the image picker
+        dismiss(animated: true, completion: nil)
+
+    }
+    
     override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -545,14 +604,14 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			entering the session queue. We do this to ensure UI elements are accessed on
 			the main thread and session configuration is done on the session queue.
 		*/
-        //let videoPreviewLayerOrientation = previewView.videoPreviewLayer.connection?.videoOrientation
+        let videoPreviewLayerOrientation = previewView.videoPreviewLayer.connection?.videoOrientation
         let deviceOrientation = UIDevice.current.orientation  //retireive current orientation from device
         let videoOrientation = deviceOrientation.getAVCaptureVideoOrientationFromDevice()
         
 		sessionQueue.async {
 			// Update the photo output's connection to match the video orientation of the video preview layer.
             if let photoOutputConnection = self.photoOutput.connection(with: .video) {
-                //photoOutputConnection.videoOrientation = videoPreviewLayerOrientation!
+                photoOutputConnection.videoOrientation = videoPreviewLayerOrientation!
                 photoOutputConnection.videoOrientation = videoOrientation!  //update the photo's output connection to match the devices current orientation
             }
             

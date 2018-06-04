@@ -157,6 +157,9 @@ class PostViewController: UIViewController, UITextViewDelegate{
                             let uid: String = UserId!
                             let tempRef = self.ref?.child("Users").child(uid).child("Posts").child(PID)
                             tempRef?.setValue(FileName_url?.absoluteString)
+                            //set a reference in the post as well
+                            let PostRef = self.ref?.child("Posts").child(PID).child("Thumbnail")
+                            PostRef?.setValue(FileName_url?.absoluteString)
                             //move back to the camera for next picture
                             self.moveAction()
                         }
