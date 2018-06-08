@@ -626,7 +626,7 @@
                                 </state>
                                 <connections>
                                     <action selector="editProfileTapped:" destination="oGl-Qh-jQe" eventType="touchUpInside" id="CFJ-KB-7ul"/>
-                                    <segue destination="QoV-Ek-gra" kind="show" id="kQ8-Kg-7zf"/>
+                                    <segue destination="QoV-Ek-gra" kind="show" identifier="editProfile" id="kQ8-Kg-7zf"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfE-sa-Kah">
@@ -786,6 +786,9 @@
                                 <rect key="frame" x="169" y="594" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneButton:" destination="QoV-Ek-gra" eventType="touchUpInside" id="lvn-dv-0xO"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tXx-k9-5hh">
                                 <rect key="frame" x="109" y="50" width="156" height="205"/>
@@ -796,6 +799,12 @@
                         <viewLayoutGuide key="safeArea" id="gS1-km-kNi"/>
                     </view>
                     <toolbarItems/>
+                    <connections>
+                        <outlet property="myEmailTxt" destination="b6H-NN-OLt" id="gNo-Cg-9U4"/>
+                        <outlet property="myNameTxt" destination="tY2-bi-C7g" id="bhX-jB-Fyv"/>
+                        <outlet property="myUserNameTxt" destination="KIJ-jW-4hU" id="c3D-ou-0oB"/>
+                        <outlet property="profilePicView" destination="tXx-k9-5hh" id="WaO-df-6QM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uv2-vM-2ZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,26 +10,42 @@ import UIKit
 
 class ProfileEditorViewController: UIViewController {
 
+    var myData: Dictionary<String, AnyObject>?
+    
+    
+    @IBOutlet var myNameTxt: UITextField!
+    @IBOutlet var myUserNameTxt: UITextField!
+    @IBOutlet var myEmailTxt: UITextField!
+    @IBOutlet var profilePicView: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        populateViewFromSnapshot()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    private func populateViewFromSnapshot() {
+        for(info) in myData! {
+            if(info.key == "Name") {
+                myNameTxt.text = (info.value as! String)
+            }
+            if(info.key == "Email") {
+                myEmailTxt.text = info.value as? String
+            }
+            if(info.key == "UserName") {
+                myUserNameTxt.text = info.value as? String
+            }
+        }
     }
-    */
-
+    
+    @IBAction func doneButton(_ sender: Any) {
+    }
+    
 }

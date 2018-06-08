@@ -65,7 +65,20 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-
-
+    func moveAction(){
+        //make sure this is alwas performed on the UI thread otherwise we'll get rando results
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "editProfile"){
+            let DestinationViewController : ProfileEditorViewController = segue.destination as! ProfileEditorViewController
+            
+            DestinationViewController.myData = self.userData
+        }
+        
+    }
+    
 }
